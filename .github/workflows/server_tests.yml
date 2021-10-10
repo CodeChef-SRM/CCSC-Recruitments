@@ -28,6 +28,8 @@ jobs:
         TESTDB: ${{ secrets.TESTDB }}
         MONGO_URI: ${{ secrets.MONGO_URI }}
         DEBUG: ${{ secrets.DEBUG }}
+        EMAIL_ADDR: ${{ secrets.EMAIL_ADDR }}
+        EMAIL_PASSWD: ${{ secrets.EMAIL_PASSWD }}
 
       run: |
           . ./server_tests.sh || true
