@@ -57,3 +57,10 @@ class AuthenticationModel:
         user = self.db.users.find_one({"email": email_id})
         if user:
             return user
+
+    def update_password(self, password: str, email: str):
+        password = hashlib.sha256(password.encode()).hexdigest()
+        user = self.db.users.find_one_and_update(
+            {"email": email}, update={"$set": {"password": password}}
+        )
+        return user

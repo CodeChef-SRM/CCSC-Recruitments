@@ -19,3 +19,9 @@ def login(data: Dict[str, Union[str, int]]):
 
 def find_user(email_id: str):
     return auth_model.user_from_email(email_id)
+
+
+def update_password(data: Dict[str, str]):
+    user = auth_model.update_password(
+        password=data["new_password"], email=data["email"]
+    )

@@ -20,14 +20,11 @@ def authentication_schema(data: Dict[str, Union[str, int]], **kwargs):
 
 
 def reset_password(data: Dict[str, str], **kwargs):
-    reset = {
-        "email": And(str, lambda email: email.endswith("srmist.edu.in")),
-        "password": And(str, lambda password: len(password.strip()) > 0),
-    }
     if kwargs.get("forgot"):
-        reset.pop("password")
+        reset = {"email": And(str, lambda email: email.endswith("srmist.edu.in"))}
         schema = Schema(schema=reset)
     else:
+        reset = {"new_password": And(str, lambda password: len(password.strip()) > 0)}
         schema = Schema(schema=reset)
     try:
         return schema.validate(data)

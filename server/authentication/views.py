@@ -1,12 +1,14 @@
-from pymongo.common import validate
-from rest_framework.views import APIView
-from core.throttle import throttle
-from .checks import insert_user, login, find_user
-from .definitions import authentication_schema, reset_password
-from django.http.response import JsonResponse
-from authentication import keys
 from threading import Thread
+
 from core.email import service
+from core.throttle import throttle
+from django.http.response import JsonResponse
+from rest_framework.views import APIView
+
+from authentication import keys
+
+from .checks import find_user, insert_user, login, update_password
+from .definitions import authentication_schema, reset_password
 
 
 class Register(APIView):
@@ -60,7 +62,8 @@ class ForgotPassword(APIView):
         if user := find_user(validated["email"]):
             token = keys.generate_key(
                 get_refresh=False,
-                expiry=1,
+                hours=False,
+                expiry=5,
                 payload={"reset_password": True, "user": user["email"]},
             )
             Thread(
@@ -73,3 +76,24 @@ class ForgotPassword(APIView):
             ).start()
             return JsonResponse(data={"success": True}, status=200)
         return JsonResponse(data={"success": True}, status=200)
+
+
+class ResetPassword(APIView):
+    throttle_classes = [throttle]
+
+    def post(self, *args, **kwargs):
+        validated = reset_password(self.request.data)
+
+        if "error" in validated:
+            return JsonResponse(data={"error": str(validated["error"])})
+
+        if self.request.auth_user.get("reset_password"):
+            data = {
+                "email": self.request.auth_user["user"],
+                "new_password": validated["new_password"],
+            }
+            update_password(data=data)
+            return JsonResponse(
+                data={"success": "Password updated successfully"}, status=200
+            )
+        return JsonResponse(data={"error": "Invalid token"}, status=403)
