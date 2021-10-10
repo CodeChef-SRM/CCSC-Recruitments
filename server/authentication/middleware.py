@@ -6,7 +6,7 @@ from core.errorfactory import AuthenticationError
 class AuthMiddleWare:
     def __init__(self, view):
         self.view = view
-        self._protected = ["/apis/protected"]
+        self._protected = ["/apis/reset-password"]
 
     @staticmethod
     def _validate_tokentype(authorization: str):

@@ -19,12 +19,16 @@ class TokenAuth:
         payload: Dict[str, Union[str, int]],
         expiry: int = 24,
         get_refresh: bool = False,
+        hours: bool = True,
         **kwargs,
     ):
         from datetime import timedelta, datetime
 
         current_time = datetime.utcnow()
-        payload["exp"] = current_time + timedelta(hours=expiry)
+        if hours:
+            payload["exp"] = current_time + timedelta(hours=expiry)
+        else:
+            payload["exp"] = current_time + timedelta(minutes=expiry)
         access_token = jwt.encode(payload, key=self.signature)
 
         if get_refresh:
