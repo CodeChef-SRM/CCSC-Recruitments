@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from core.throttle import throttle
 from .checks import insert_user, login
-from .definitions import authentication_schema
+from .definitions import authentication_schema, reset_password
 from django.http.response import JsonResponse
 from authentication import keys
 
@@ -38,3 +38,10 @@ class Login(APIView):
         )
 
         return JsonResponse(token, status=200)
+
+
+class ForgotPassword(APIView):
+    throttle_classes = [throttle]
+
+    def post(self, *args, **kwargs):
+        ...
