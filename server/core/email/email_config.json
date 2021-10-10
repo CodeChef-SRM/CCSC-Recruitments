@@ -1,0 +1,3 @@
+{
+    "forgot-password": "./core/email/template/forgotPassword.html"
+}
