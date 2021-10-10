@@ -53,5 +53,7 @@ class AuthenticationModel:
             return user
         raise AuthenticationError("Invalid Credentials")
 
-    def reset_password(self, data: Dict[str, str]):
-        ...
+    def user_from_email(self, email_id: str):
+        user = self.db.users.find_one({"email": email_id})
+        if user:
+            return user

@@ -15,3 +15,7 @@ def login(data: Dict[str, Union[str, int]]):
         return auth_model.login(data=data)
     except AuthenticationError as e:
         return str(e)
+
+
+def find_user(email_id: str):
+    return auth_model.user_from_email(email_id)

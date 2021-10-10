@@ -21,7 +21,7 @@ def authentication_schema(data: Dict[str, Union[str, int]], **kwargs):
 
 def reset_password(data: Dict[str, str], **kwargs):
     reset = {
-        "email": And(str, lambda email: email.endswaith("srmist.edu.in")),
+        "email": And(str, lambda email: email.endswith("srmist.edu.in")),
         "password": And(str, lambda password: len(password.strip()) > 0),
     }
     if kwargs.get("forgot"):
