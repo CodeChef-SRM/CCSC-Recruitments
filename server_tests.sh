@@ -8,7 +8,7 @@ echo "$execution [SERVER-BOOT]"
 . ./run.sh
 
 sleep 4s
-
+cd server
 echo "$execution [STARTING SERVER TESTS]"
 
 var=$(python3 test_runner.py | grep "Failing" -c )

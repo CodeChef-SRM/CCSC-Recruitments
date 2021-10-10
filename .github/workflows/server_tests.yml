@@ -24,9 +24,10 @@ jobs:
 
     - name: Run Tests
       env:
+        secret_key: ${{ secrets.SECRET_KEY }}
         TESTDB: ${{ secrets.TESTDB }}
         MONGO_URI: ${{ secrets.MONGO_URI }}
         DEBUG: ${{ secrets.DEBUG }}
-        MAX_UNIT_ENTRY: ${{ secrets.MAX_UNIT_ENTRY }}
+
       run: |
-          . ./server_tests.sh || true
+          . ./server_tests.sh
