@@ -52,3 +52,6 @@ class AuthenticationModel:
         if user:
             return user
         raise AuthenticationError("Invalid Credentials")
+
+    def reset_password(self, data: Dict[str, str]):
+        ...

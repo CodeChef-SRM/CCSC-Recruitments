@@ -17,6 +17,7 @@ black = "^21.9b0"
 schema = "^0.7.4"
 PyJWT = "^2.2.0"
 requests = "^2.26.0"
+django-cors-headers = "^3.10.0"
 
 [tool.poetry.dev-dependencies]
 
