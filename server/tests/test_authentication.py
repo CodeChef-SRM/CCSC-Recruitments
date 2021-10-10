@@ -29,7 +29,7 @@ class TestAuthentication(unittest.TestCase):
             data=json.dumps(user),
         )
 
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 409)
 
     def test_login(self):
         user = get_user()

@@ -1,9 +1,11 @@
 import unittest
-from tests import test_authentication
+from tests import test_authentication, test_resetpassword
+
 
 def main():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(test_authentication.TestAuthentication))
+    suite.addTest(unittest.makeSuite(test_resetpassword.TestResetPassword))
     output = unittest.TextTestRunner(verbosity=2).run(suite)
     if output.errors or output.failures:
         print("Failing Tests")
