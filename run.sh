@@ -5,4 +5,6 @@ execution="\e[0;36m[INFO]\e[0m"
 
 
 echo "$execution [Starting Server]"
-cd server && gunicorn core.wsgi:application --bind 0.0.0.0:8000 &
+cd server
+gunicorn core.wsgi:application --bind 0.0.0.0:8000 &
+cd ..
