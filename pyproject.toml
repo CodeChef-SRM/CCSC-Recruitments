@@ -19,6 +19,7 @@ PyJWT = "^2.2.0"
 requests = "^2.26.0"
 django-cors-headers = "^3.10.0"
 Jinja2 = "^3.0.2"
+psutil = "^5.8.0"
 
 [tool.poetry.dev-dependencies]
 
