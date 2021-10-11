@@ -7,6 +7,9 @@ from jinja2 import Template
 
 class Service:
     def __init__(self):
+        self.connect()
+
+    def connect(self):
         self.client = smtplib.SMTP_SSL("smtp.gmail.com", 465)
         self.client.login(os.getenv("EMAIL_ADDR"), os.getenv("EMAIL_PASSWD"))
 
@@ -31,4 +34,8 @@ class Service:
         message["To"] = email_id
         if os.getenv("CI"):
             return
-        self.client.send_message(message)
+        try:
+            self.client.send_message(message)
+        except smtplib.SMTPServerDisconnected as e:
+            self.connect()
+            self.client.send_message(message)
