@@ -1,17 +1,14 @@
 import os
-import smtplib
 import json
-from email.message import EmailMessage
+import requests
 from jinja2 import Template
 
 
 class Service:
     def __init__(self):
-        self.connect()
-
-    def connect(self):
-        self.client = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-        self.client.login(os.getenv("EMAIL_ADDR"), os.getenv("EMAIL_PASSWD"))
+        self.client = requests.Session()
+        self.base_url = os.getenv("MAILGUN_BASE_URL")
+        self.auth = ("api", os.getenv("MAILGUN_API_KEY"))
 
     def send_mail(self, email_id: str, email_type: str, **kwargs):
         """Send email to users with appropriate templates
@@ -21,21 +18,19 @@ class Service:
             email_id (str): `To`
             email_type (str): Template to select
         """
-        message = EmailMessage()
-        message["From"] = os.getenv("EMAIL_ADDR")
         with open("./core/email/email_config.json") as f:
             f = json.loads(f.read())
 
-        with open(f[email_type]) as _file:
+        with open(f[email_type]["html"]) as _file:
             template = Template(_file.read())
             html = template.render(**kwargs)
 
-        message.add_alternative(html, subtype="html")
-        message["To"] = email_id
         if os.getenv("CI"):
             return
-        try:
-            self.client.send_message(message)
-        except smtplib.SMTPServerDisconnected as e:
-            self.connect()
-            self.client.send_message(message)
+        data = {
+            "from": "CodeChefSRM <codechefsrm@gmail.com>",
+            "to": [email_id],
+            "subject": f[email_type]["subject"],
+            "html": html,
+        }
+        self.client.post(url=self.base_url, auth=self.auth, data=data)

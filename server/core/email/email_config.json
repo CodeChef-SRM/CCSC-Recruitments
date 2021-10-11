@@ -1,3 +1,6 @@
 {
-    "forgot-password": "./core/email/template/forgotPassword.html"
+    "forgot-password": {
+        "html": "./core/email/template/forgotPassword.html",
+        "subject": "Forgot Password"
+    }
 }
