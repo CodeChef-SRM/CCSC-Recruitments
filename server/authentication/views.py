@@ -66,12 +66,14 @@ class ForgotPassword(APIView):
                 expiry=5,
                 payload={"reset_password": True, "user": user["email"]},
             )
+
             Thread(
                 target=service.send_mail,
                 kwargs={
                     "email_id": user["email"],
                     "email_type": "forgot-password",
                     "token": token,
+                    "user_name": user["name"]
                 },
             ).start()
             return JsonResponse(data={"success": True}, status=200)
