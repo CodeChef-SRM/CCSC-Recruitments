@@ -12,7 +12,7 @@ def authentication_schema(data: Dict[str, Union[str, int]], **kwargs):
         schema = Schema(schema=register)
     else:
         register.pop("name")
-        schema = Schema(schema=register)
+        schema = Schema(schema=register, error="Invalid data entry check inputs!")
     try:
         return schema.validate(data=data)
     except SchemaError as e:
@@ -25,7 +25,7 @@ def reset_password(data: Dict[str, str], **kwargs):
         schema = Schema(schema=reset)
     else:
         reset = {"new_password": And(str, lambda password: len(password.strip()) > 0)}
-        schema = Schema(schema=reset)
+        schema = Schema(schema=reset, error="Invalid data entry check inputs!")
     try:
         return schema.validate(data)
     except SchemaError as e:
