@@ -40,6 +40,10 @@ class TestRegistration(unittest.TestCase):
             "linkedin": "https://www.linkedin.com/in/aradhya-tripathi51/",
             "joining_details": "asssssssssssssssssssssssssssssssssslasmd;lmd;lamsd;malmsd;asmd",
             "reg_number": "RA1911004010185",
+            "domain_details": {
+                "tech": ["web", "app"],
+                "non-tech": ["content", "design"],
+            },
         }
 
         headers = self.headers.copy()
@@ -58,6 +62,26 @@ class TestRegistration(unittest.TestCase):
         )
         self.assertEqual(invalid_register_response.status_code, 409)
 
+    def test_non_tech_register(self):
+        registration_data = {
+            "github_id": "",
+            "linkedin": "https://www.linkedin.com/in/aradhya-tripathi51/",
+            "joining_details": "asssssssssssssssssssssssssssssssssslasmd;lmd;lamsd;malmsd;asmd",
+            "reg_number": "RA1911004010185",
+            "domain_details": {
+                "tech": ["web", "app"],
+                "non-tech": ["content", "design"],
+            },
+        }
+        headers = self.headers.copy()
+        headers.update({"Authorization": f"Bearer {self.access_token}"})
+        register_response = self.client.post(
+            self.base_url + "/apis/registration-details",
+            headers=headers,
+            data=json.dumps(registration_data),
+        )
+        self.assertEqual(register_response.status_code, 201)
+
     def test_forbidden_upload(self):
         headers = self.headers.copy()
         headers.update({"Authorization": "Bearer"})
@@ -66,6 +90,10 @@ class TestRegistration(unittest.TestCase):
             "linkedin": "https://www.linkedin.com/in/aradhya-tripathi51/",
             "joining_details": "asssssssssssssssssssssssssssssssssslasmd;lmd;lamsd;malmsd;asmd",
             "reg_number": "RA1911004010185",
+            "domain_details": {
+                "tech": ["web", "app"],
+                "non-tech": ["content", "design"],
+            },
         }
         invalid_register_response = self.client.post(
             self.base_url + "/apis/registration-details",

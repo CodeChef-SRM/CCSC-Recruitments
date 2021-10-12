@@ -9,7 +9,7 @@ const routes = [
   {
     path: "/getting-started",
     component: Form,
-    private: false,
+    private: true,
   },
   {
     path: "/forgot",

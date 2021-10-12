@@ -17,7 +17,7 @@ def check_github_id(github_id: str):
         response = session.get(_url)
 
         return response.status_code == 200
-    return False
+    return True
 
 
 def user_registration(data: Dict[str, str]):
@@ -29,6 +29,7 @@ def user_registration(data: Dict[str, str]):
         "github_id": And(str, lambda id: check_github_id(github_id=id)),
         "linkedin": And(str, lambda url: url_regex.fullmatch(url)),
         "joining_details": And(str, lambda joining: len(joining.strip()) > 30),
+        "domain_details": And(dict, lambda domain: len(domain) > 0),
     }
     try:
         return Schema(schema=details).validate(data)
