@@ -44,7 +44,7 @@ class TestRegistration(unittest.TestCase):
                 "tech": ["web", "app"],
                 "non-tech": ["content", "design"],
             },
-            "year": 2,
+            "year": "2",
             "branch": "ECE",
         }
 
@@ -74,7 +74,7 @@ class TestRegistration(unittest.TestCase):
                 "tech": ["web", "app"],
                 "non-tech": ["content", "design"],
             },
-            "year": 1,
+            "year": "1",
             "branch": "ECE",
         }
         headers = self.headers.copy()
@@ -98,7 +98,7 @@ class TestRegistration(unittest.TestCase):
                 "tech": ["web", "app"],
                 "non-tech": ["content", "design"],
             },
-            "year": 2,
+            "year": "2",
             "branch": "ECE",
         }
         invalid_register_response = self.client.post(
