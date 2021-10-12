@@ -7,7 +7,7 @@ from .utils import check_token
 class AuthMiddleWare:
     def __init__(self, view):
         self.view = view
-        self._protected = ["/apis/reset-password", "/me"]
+        self._protected = ["/apis/reset-password", "/me", "/apis/registration-details"]
 
     @staticmethod
     def _validate_tokentype(authorization: str):
