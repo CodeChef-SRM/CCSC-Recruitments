@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-    <link rel="stylesheet" href="./regis.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -49,5 +48,75 @@
         </div>
     </div>
 </body>
+<style>
+    * {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Roboto", sans-serif;
+}
+.flex__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex__vert {
+  flex-direction: column;
+}
+.header {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url("./images/main.jpeg");
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  max-width: 700px;
+  height: 300px;
+  padding: 20px;
+  color: #fff;
+  flex-direction: column;
+  text-align: center;
+}
+.header > img {
+  margin-bottom: 15px;
+}
+.body {
+  background: #fff;
+  width: 90%;
+  padding: 5%;
+  text-align: center;
+}
+.body p {
+  font-size: 25px;
+  width: 100%;
+  max-width: 700px;
+}
+.shapes img {
+  width: 25px;
+  padding: 10px;
+}
+.footer {
+  background: rgb(225, 68, 91);
+  display: flex;
+  width: 100%;
+  max-width: 700px;
+  padding: 20px 20px;
+}
+.footer img {
+  width: 25px;
+}
+.footer a {
+  margin: 10px;
+  text-decoration: none;
+  text-align: center;
+}
+.footer p {
+  margin-top: 20px;
+  text-align: center;
+}
+#email_link {
+  color: #000;
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
 
+</style>
 </html>
