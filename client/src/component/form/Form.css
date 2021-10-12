@@ -1,0 +1,45 @@
+.heading{
+    font-size: 3rem;
+    color: white;
+}
+
+.main {
+    font-family: SquidFont;
+    background-color: #000000ea;
+    /* background-image: url('./Asset\ 7.svg'); */
+    background-color: black;
+    color: #037a76;
+    height: 100%;
+    padding: 7rem;
+    text-align: center;
+    margin: auto;
+
+}
+
+.input-size{
+    margin: auto;
+    display: block;
+    width: 25rem;
+}
+
+.btn {
+    
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    color: white;
+}
+
+.recaptcha{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.spacing{
+    padding: 1rem;
+}
+
+
+
