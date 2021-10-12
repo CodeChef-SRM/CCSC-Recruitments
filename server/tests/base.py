@@ -20,7 +20,7 @@ def get_user(
 def clear_all():
     db.drop_collection("users")
     db.drop_collection("RegistrationDetails")
-
+    db.drop_collection("TaskSubmissions")
 
 DATABASE = {
     "Production": {
