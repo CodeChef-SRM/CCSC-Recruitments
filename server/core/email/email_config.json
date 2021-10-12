@@ -2,5 +2,9 @@
     "forgot-password": {
         "html": "./core/email/template/forgotPassword.html",
         "subject": "Forgot Password"
+    },
+    "Registration Confirmation": {
+        "html": "./core/email/template/RegistrationConfirmation.html",
+        "subject": "Details Submitted"
     }
 }

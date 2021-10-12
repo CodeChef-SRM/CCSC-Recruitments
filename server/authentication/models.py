@@ -8,6 +8,7 @@ from core.errorfactory import ExistingUser, AuthenticationError
 
 class AuthenticationModel:
     def __init__(self):
+        """API for user credentials."""
         client = pymongo.MongoClient(os.getenv("MONGO_URI"))
         if DEBUG or os.getenv("CI"):
             self.db = client[os.getenv("TESTDB")]
