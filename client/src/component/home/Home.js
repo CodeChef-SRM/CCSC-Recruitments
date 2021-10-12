@@ -1,69 +1,13 @@
 import React from "react";
 import "./Home.css";
 import image from "./Abc.png";
-import image1 from "./Artboard 1.png";
+import Navbar from "../navbar/Navbar";
+
 
 function Home() {
   return (
-    <div class="wrap">
-      <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="/">
-            <img src={image1} width="50" alt="squid" height="50" />
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto mr-auto">
-              <li class="nav-item">
-                <a class="nav-link active" data-scroll-nav="0" href="#home">
-                  <span style={{ color: "#ffffff" }}>Home</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-scroll-nav="1" href="#feat">
-                  <span style={{ color: "#ffffff" }}>Features</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" data-scroll-nav="2" href="#feat">
-                  <span style={{ color: "#ffffff" }}>Facts</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" data-scroll-nav="2" href="#Testimonials">
-                  <span style={{ color: "#ffffff" }}>Testimonials</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-scroll-nav="3" href="#Pricing">
-                  <span style={{ color: "#ffffff" }}>Pricing</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-scroll-nav="4" href="#Contact">
-                  <span style={{ color: "#ffffff" }}>Contact</span>
-                </a>
-              </li>
-            </ul>
-
-            <li>
-              <a href="/login" class="btn btn-2  button-spacing">
-                Get Started
-              </a>
-            </li>
-          </div>
-        </div>
-      </nav>
-
+    <div id='home-link' class="wrap">
+     <Navbar />
       <section
         class="home d-flex align-items-center"
         data-scroll-index="0"
