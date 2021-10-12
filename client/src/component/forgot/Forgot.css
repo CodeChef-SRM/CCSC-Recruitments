@@ -1,0 +1,65 @@
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+.main {
+  font-family: SquidFont;
+  background-color: #000000ea;
+  background-image: url("../assets/Asset\ 7.svg");
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+
+.form {
+  border-radius: 25px;
+}
+.btn {
+  background-color: #037a76;
+}
+
+.link {
+  color: #037a76;
+}
+
+.para-main {
+  color: #037a76;
+  text-align: center;
+  font-size: larger;
+}
+
+.form-label {
+  color: #037a76;
+  /* font-family: 'Poppins', sans-serif; */
+}
+.small {
+  color: white;
+}
+
+.form-control:focus {
+  border-color: #037a76;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset,
+    0px 0px 8px rgba(17, 115, 128, 0.692);
+}
+
+.form-control {
+  font-family: "Poppins", sans-serif;
+}
+
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
+@font-face {
+  font-family: "SquidFont";
+  src: local("SquidFont"),
+    url("../assets/the-shape-of-things.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap");
