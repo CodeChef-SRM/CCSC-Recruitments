@@ -24,6 +24,7 @@ jobs:
 
     - name: Run Tests
       env:
+        CI: true
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         TESTDB: ${{ secrets.TESTDB }}
         MONGO_URI: ${{ secrets.MONGO_URI }}
