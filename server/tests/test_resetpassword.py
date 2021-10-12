@@ -11,6 +11,9 @@ class TestResetPassword(unittest.TestCase):
         cls.base_url = "http://localhost:8000"
         cls.headers = {"Content-Type": "application/json"}
 
+    def setUp(self) -> None:
+        clear_all()
+
     def test_reset_password(self):
         user = get_user()
         response = self.client.post(

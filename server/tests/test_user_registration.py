@@ -13,6 +13,11 @@ class TestRegistration(unittest.TestCase):
 
     def setUp(self) -> None:
         clear_all()
+
+    def tearDown(self) -> None:
+        clear_all()
+
+    def test_registration(self):
         user = get_user()
         response = self.client.post(
             self.base_url + "/apis/register",
@@ -28,12 +33,7 @@ class TestRegistration(unittest.TestCase):
             data=json.dumps(login_data),
         )
 
-        self.access_token = response.json()["access_token"]
-
-    def tearDown(self) -> None:
-        clear_all()
-
-    def test_registration(self):
+        access_token = response.json()["access_token"]
 
         registration_data = {
             "github_id": "Aradhya-Tripathi",
@@ -44,10 +44,12 @@ class TestRegistration(unittest.TestCase):
                 "tech": ["web", "app"],
                 "non-tech": ["content", "design"],
             },
+            "year": "2",
+            "branch": "ECE",
         }
 
         headers = self.headers.copy()
-        headers.update({"Authorization": f"Bearer {self.access_token}"})
+        headers.update({"Authorization": f"Bearer {access_token}"})
         register_response = self.client.post(
             self.base_url + "/apis/registration-details",
             headers=headers,
@@ -63,6 +65,22 @@ class TestRegistration(unittest.TestCase):
         self.assertEqual(invalid_register_response.status_code, 409)
 
     def test_non_tech_register(self):
+        user = get_user()
+        response = self.client.post(
+            self.base_url + "/apis/register",
+            headers=self.headers,
+            data=json.dumps(user),
+        )
+        self.assertEqual(response.status_code, 201)
+
+        login_data = {"email": user["email"], "password": user["password"]}
+        response = self.client.post(
+            self.base_url + "/apis/login",
+            headers=self.headers,
+            data=json.dumps(login_data),
+        )
+
+        access_token = response.json()["access_token"]
         registration_data = {
             "github_id": "",
             "linkedin": "https://www.linkedin.com/in/aradhya-tripathi51/",
@@ -72,9 +90,11 @@ class TestRegistration(unittest.TestCase):
                 "tech": ["web", "app"],
                 "non-tech": ["content", "design"],
             },
+            "year": "1",
+            "branch": "ECE",
         }
         headers = self.headers.copy()
-        headers.update({"Authorization": f"Bearer {self.access_token}"})
+        headers.update({"Authorization": f"Bearer {access_token}"})
         register_response = self.client.post(
             self.base_url + "/apis/registration-details",
             headers=headers,
@@ -83,6 +103,22 @@ class TestRegistration(unittest.TestCase):
         self.assertEqual(register_response.status_code, 201)
 
     def test_forbidden_upload(self):
+        user = get_user()
+        response = self.client.post(
+            self.base_url + "/apis/register",
+            headers=self.headers,
+            data=json.dumps(user),
+        )
+        self.assertEqual(response.status_code, 201)
+
+        login_data = {"email": user["email"], "password": user["password"]}
+        response = self.client.post(
+            self.base_url + "/apis/login",
+            headers=self.headers,
+            data=json.dumps(login_data),
+        )
+
+        access_token = response.json()["access_token"]
         headers = self.headers.copy()
         headers.update({"Authorization": "Bearer"})
         registration_data = {
@@ -94,6 +130,8 @@ class TestRegistration(unittest.TestCase):
                 "tech": ["web", "app"],
                 "non-tech": ["content", "design"],
             },
+            "year": "2",
+            "branch": "ECE",
         }
         invalid_register_response = self.client.post(
             self.base_url + "/apis/registration-details",

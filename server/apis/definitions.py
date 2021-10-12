@@ -5,6 +5,10 @@ import re
 
 session = requests.Session()
 
+url_regex = re.compile(
+    "(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})"
+)
+
 
 def check_github_id(github_id: str):
     """Checks GitHub ID
@@ -21,17 +25,26 @@ def check_github_id(github_id: str):
 
 
 def user_registration(data: Dict[str, str]):
-    url_regex = re.compile(
-        "(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})"
-    )
     details = {
         "reg_number": And(str, lambda reg: len(reg.strip()) == 15),
         "github_id": And(str, lambda id: check_github_id(github_id=id)),
         "linkedin": And(str, lambda url: url_regex.fullmatch(url)),
         "joining_details": And(str, lambda joining: len(joining.strip()) > 30),
         "domain_details": And(dict, lambda domain: len(domain) > 0),
+        "year": And(str, lambda year: year in ["1", "2"]),
+        "branch": And(str, lambda branch: len(branch.strip()) > 0),
     }
     try:
-        return Schema(schema=details).validate(data)
+        return Schema(
+            schema=details, error="Invalid data entry check inputs!"
+        ).validate(data)
+    except SchemaError as e:
+        return {"error": str(e)}
+
+
+def task_submission(data: Dict[str, str]):
+    submission = {"task_link": And(str, lambda url: url_regex.fullmatch(url))}
+    try:
+        return Schema(schema=submission, error="Invalid url").validate(data)
     except SchemaError as e:
         return {"error": str(e)}
