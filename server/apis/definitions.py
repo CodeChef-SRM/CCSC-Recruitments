@@ -31,7 +31,7 @@ def user_registration(data: Dict[str, str]):
         "linkedin": And(str, lambda url: url_regex.fullmatch(url)),
         "joining_details": And(str, lambda joining: len(joining.strip()) > 30),
         "domain_details": And(dict, lambda domain: len(domain) > 0),
-        "year": And(int, lambda year: year in [1, 2]),
+        "year": And(str, lambda year: year in ["1", "2"]),
         "branch": And(str, lambda branch: len(branch.strip()) > 0),
     }
     try:
