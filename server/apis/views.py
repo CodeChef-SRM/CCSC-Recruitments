@@ -4,8 +4,8 @@ import os
 import time
 from core.throttle import throttle
 from django.http.response import JsonResponse
-from .checks import accept_entry
-from .definitions import user_registration
+from .checks import accept_entry, enter_task
+from .definitions import user_registration, task_submission
 from threading import Thread
 from core.email import service
 
@@ -44,5 +44,22 @@ class UserRegistration(APIView):
                 "user_name": self.request.auth_user["user_name"],
             },
         ).start()
+
+        return JsonResponse(data={"success": True}, status=201)
+
+
+class Tasks(APIView):
+    throttle_classes = [throttle]
+
+    def post(self, *args, **kwargs):
+        validated = task_submission(self.request.data)
+        if "error" in validated:
+            return JsonResponse({"error": validated["error"]}, status=400)
+
+        validated["email"] = self.request.auth_user["user"]
+        validated["user_name"] = self.request.auth_user["user_name"]
+
+        if error := enter_task(validated, self.request):
+            return JsonResponse({"error": error}, status=400)
 
         return JsonResponse(data={"success": True}, status=201)

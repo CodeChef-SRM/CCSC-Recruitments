@@ -32,3 +32,34 @@ class UserModel:
         if details:
             raise EntryExists("Details for user already exist!")
         self.db.RegistrationDetails.insert_one(doc)
+
+    def entry_task_details(self, doc: Dict[str, str], task_number: str):
+        """Enter task submission details
+
+        Args:
+            doc (Dict[str, str]): User details
+            task_number (str): submission for `task_number`
+
+        Raises:
+            EntryExists: Raised when `task_link` exists for `task_number`
+            and entered `email`
+        """
+        email = doc["email"]
+        user = doc["user_name"]
+        submission = self.db.TaskSubmissions.find_one(
+            {
+                "$and": [
+                    {"email": email},
+                    {f"task_number {task_number}": {"$exists": True}},
+                ]
+            }
+        )
+        if submission:
+            raise EntryExists(
+                f"Submission for Task {task_number} already exist for {user}"
+            )
+        self.db.TaskSubmissions.find_one_and_update(
+            filter={"email": email},
+            update={"$set": {f"task_number {task_number}": doc["task_link"]}},
+            upsert=True,
+        )
