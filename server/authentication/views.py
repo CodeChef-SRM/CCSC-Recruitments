@@ -97,3 +97,21 @@ class ResetPassword(APIView):
                 data={"success": "Password updated successfully"}, status=200
             )
         return JsonResponse(data={"error": "Invalid token"}, status=403)
+
+
+class Me(APIView):
+    throttle_classes = [throttle]
+
+    def get(self, *args, **kwargs):
+        """Verification route goes through authentication middleware
+        if authenticated attaches `request.auth_user` attribute to the request
+        else forbidden
+        """
+        return JsonResponse(
+            {
+                "success": True,
+                "email": self.request.auth_user["user"],
+                "user": self.request.auth_user["user_name"],
+            },
+            status=200,
+        )
