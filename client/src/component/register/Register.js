@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./Register.css";
 import axios from "axios";
 import { Redirect } from "react-router";
+import { useSnackbar } from "notistack";
 import { useSelector, useDispatch } from "react-redux";
 
 const Register = () => {
@@ -17,7 +18,7 @@ const Register = () => {
   // const handleChangeEmail = (e) => setEmail(e.target.value);
   // const handleChangePassword = (e) => setPassword(e.target.value);
   // const handleChangeName = (e) => setName(e.target.value);
-
+  const { enqueueSnackbar } = useSnackbar();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((state) => ({
@@ -51,14 +52,15 @@ const Register = () => {
 
     axios(config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         // const tok = res.data.token;
         // const decoded = jwt_decode(tok);
         // dispatch(signup({ token: tok, user: decoded }));
         setAuth(true);
+        enqueueSnackbar("Registered Successfully", { variant: "success" });
       })
       .catch((err) => {
-        alert("User already exists");
+        enqueueSnackbar("Registeration Failed", { variant: "error" });
         dispatch({
           type: "REGISTER_FAIL",
         });

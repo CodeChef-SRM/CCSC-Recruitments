@@ -11,7 +11,6 @@ const initialData = {
 const authReducer = (state = initialData, action) => {
   switch (action.type) {
     case "USER_LOADED":
-      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         isAuthenticated: true,
@@ -20,11 +19,16 @@ const authReducer = (state = initialData, action) => {
       };
     case "REGISTER":
     case "LOGIN":
-      localStorage.setItem("token", action.payload.token);
+      console.log("reducer", action.payload);
       return {
         ...state,
         ...action.payload,
         isAuthenticated: true,
+      };
+    case "SETAUTH":
+      return {
+        ...state,
+        isAuthenticated: action.payload.status,
       };
     case "AUTH_ERROR":
     case "LOGIN_FAIL":

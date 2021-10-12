@@ -1,7 +1,8 @@
 import { withRouter } from "react-router";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
+// import Recaptcha from "react-google-invisible-recaptcha";
 import axios from "axios";
 import "./Form.css";
 
@@ -9,15 +10,15 @@ const Form = () => {
   const [tech, techSet] = useState(false);
   const [corp, corpSet] = useState(false);
   const [creat, creatSet] = useState(false);
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
 
   const [alerts, setAlerts] = useState([]);
   const [subdomains, setSubdomains] = useState([]);
   const [form, setForm] = useState(false);
 
-  function onChange(value) {
-    setToken(value);
-  }
+  // function onChange(value) {
+  //   setToken(value);
+  // }
 
   const handleSelect = (e) => {
     setSubdomains((subdomains) => [...subdomains, e.target.value]);
@@ -70,7 +71,6 @@ const Form = () => {
 
     if (alerts.length === 0) {
       const formLoad = {
-        token: token,
         jwt: localStorage.getItem("token"),
         regno: target.regno.value,
         branch: target.branch.value,
@@ -93,7 +93,6 @@ const Form = () => {
           const tok = res.data.access_token;
           const decoded = jwt_decode(tok);
           console.log(decoded);
-          //   dispatch(login({ token: tok, user: decoded }));
           setForm(true);
         })
         .catch((err) => {
@@ -220,10 +219,15 @@ const Form = () => {
           <label htmlFor="ques2">Why should we choose you?</label>
           <input type="text" name="ques2" id="ques2" required></input>
         </div>
-        <ReCAPTCHA
+        {/* <ReCAPTCHA
           sitekey="6LfnrcIcAAAAANFfMbEjQFK9Ur41kSCqYFl9pk3P"
           onChange={onChange}
-        />
+        /> */}
+        {/* <Recaptcha
+          ref={(ref) => (this.recaptcha = ref)}
+          sitekey=""
+          onResolved={() => console.log("Human detected.")}
+        /> */}
         <button type="submit" id="form-btn">
           Submit
         </button>

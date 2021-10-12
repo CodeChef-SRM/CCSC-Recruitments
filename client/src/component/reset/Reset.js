@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./Reset.css";
 import axios from "axios";
+import { useSnackbar } from "notistack";
 
 function Reset() {
   const [data, setData] = useState({
     password: "",
   });
+
+  const { enqueueSnackbar } = useSnackbar();
   const [pass, setPass] = useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,13 +38,15 @@ function Reset() {
 
       axios(config)
         .then((res) => {
-          alert("Password has been reset");
+          enqueueSnackbar("Password has been reset", { variant: "success" });
         })
         .catch((err) => {
-          alert("Error while resetting password");
+          enqueueSnackbar("Error while resetting password", {
+            variant: "error",
+          });
         });
     } else {
-      alert("Password not matching");
+      enqueueSnackbar("Password not matching", { variant: "error" });
     }
   };
   return (
