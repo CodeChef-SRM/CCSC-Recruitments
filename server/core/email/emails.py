@@ -26,6 +26,7 @@ class Service:
             html = template.render(**kwargs)
 
         if os.getenv("CI"):
+            print("NOT SENDING EMAILS...")
             return
         data = {
             "from": "CodeChefSRM <codechefsrm@gmail.com>",
