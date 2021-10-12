@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./Forgot.css";
 import axios from "axios";
+import { useSnackbar } from "notistack";
 
 function Forgot() {
   const [data, setData] = useState({
     email: "",
   });
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,14 +42,14 @@ function Forgot() {
 
     axios(config)
       .then((res) => {
-        alert("Kindly check your mail");
+        enqueueSnackbar("Kindly check your mail", { variant: "success" });
         // const tok = res.data.token;
         // const decoded = jwt_decode(tok);
         // dispatch(signup({ token: tok, user: decoded }));
         // setAuth(true);
       })
       .catch((err) => {
-        alert("mail doesn't exist");
+        enqueueSnackbar("mail doesn't exist", { variant: "error" });
       });
   };
   return (

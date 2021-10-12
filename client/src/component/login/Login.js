@@ -1,22 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { login } from "../../flux/actions/authAction";
-import { Redirect } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
-// import { ToastContainer, toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useSnackbar } from "notistack";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 function Login() {
   const dispatch = useDispatch();
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  const [auth, setAuth] = useState(false);
-
+  let history = useHistory();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,10 +24,14 @@ function Login() {
       [name]: value,
     }));
   };
-  // const notify = (msg) => toast(msg);
-  //   const [msg, setMsg] = useState(null);
-  // const handleChangeEmail = (e) => setEmail(e.target.value);
-  // const handleChangePassword = (e) => setPassword(e.target.value);
+
+  const authenticated = useSelector((state) => state.auth.isAuthenticated);
+  useEffect(() => {
+    if (authenticated) {
+      history.push("/getting-started");
+    }
+    //eslint-disable-next-line
+  }, [authenticated]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -46,24 +49,23 @@ function Login() {
     axios
       .post("https://api.codechefsrm.in/apis/login", body, config)
       .then((res) => {
-        alert("Logged in");
         const tok = res.data.access_token;
         const decoded = jwt_decode(tok);
+        localStorage.setItem("token", tok);
         dispatch(login({ token: tok, user: decoded }));
-        setAuth(true);
+        // setAuth(true);
+        enqueueSnackbar("LogIn Successful", { variant: "success" });
+        // history.push("/getting-started");
       })
       .catch((err) => {
-        alert("Invalid Credentials");
-        console.log(err);
+        enqueueSnackbar("LogIn Failed", { variant: "error" });
+        // console.log(err);
         dispatch({
           type: "REGISTER_FAIL",
         });
+        // history.push("/login");
       });
   };
-  const authenticated = useSelector((state) => state.auth.isAuthenticated);
-  if (auth || authenticated) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <div>
