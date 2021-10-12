@@ -44,6 +44,8 @@ class TestRegistration(unittest.TestCase):
                 "tech": ["web", "app"],
                 "non-tech": ["content", "design"],
             },
+            "year": 2,
+            "branch": "ECE",
         }
 
         headers = self.headers.copy()
@@ -72,6 +74,8 @@ class TestRegistration(unittest.TestCase):
                 "tech": ["web", "app"],
                 "non-tech": ["content", "design"],
             },
+            "year": 1,
+            "branch": "ECE",
         }
         headers = self.headers.copy()
         headers.update({"Authorization": f"Bearer {self.access_token}"})
@@ -94,6 +98,8 @@ class TestRegistration(unittest.TestCase):
                 "tech": ["web", "app"],
                 "non-tech": ["content", "design"],
             },
+            "year": 2,
+            "branch": "ECE",
         }
         invalid_register_response = self.client.post(
             self.base_url + "/apis/registration-details",
