@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-
 import jwt_decode from "jwt-decode";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from "./component/PrivateRoute";
@@ -26,7 +25,7 @@ function App() {
       },
     };
     if (token) {
-      config.headers["Authorization"] = token;
+      config.headers["Authorization"] = `Bearer ${token}`;
       // axios
       //   .get("https://api.codechefsrm.in/apis/me", config)
       //   .then((res) => {
