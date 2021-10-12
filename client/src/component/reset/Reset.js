@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import "./Reset.css";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+// import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Reset() {
   const [data, setData] = useState({
     password: "",
   });
+
+  const { id } = useParams();
+  // console.log(id);
 
   const { enqueueSnackbar } = useSnackbar();
   const [pass, setPass] = useState("");
@@ -17,18 +22,23 @@ function Reset() {
       [name]: value,
     }));
   };
-
+  // const search = useLocation().search;
   const handleOnSubmit = (e) => {
     e.preventDefault();
+
+    // const token = new URLSearchParams(search).get("token");
+
     if (data.password === pass) {
       const body = JSON.stringify(data);
 
-      console.log(body);
+      // console.log(body);
+      // console.log(token);
       const config = {
         method: "post",
         url: "https://api.codechefsrm.in/apis/new_password",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${id}`,
         },
         data: body,
       };

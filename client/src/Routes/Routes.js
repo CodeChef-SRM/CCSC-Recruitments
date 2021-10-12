@@ -17,7 +17,7 @@ const routes = [
     private: false,
   },
   {
-    path: "/reset",
+    path: "/reset/:id",
     component: Reset,
     private: false,
   },

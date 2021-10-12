@@ -1,8 +1,9 @@
 import { withRouter } from "react-router";
 import { useState } from "react";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
+import { useSnackbar } from "notistack";
 import "./Form.css";
 
 const Form = () => {
@@ -11,22 +12,38 @@ const Form = () => {
   const [creat, creatSet] = useState(false);
   const [token, setToken] = useState("");
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const [alerts, setAlerts] = useState([]);
-  const [subdomains, setSubdomains] = useState([]);
+  // const [subdomains, setSubdomains] = useState([]);
+  const [gith, setGith] = useState("");
   const [form, setForm] = useState(false);
+  const tokenVal = localStorage.getItem("token");
+
+  const [subdom, setSubdom] = useState({
+    tech: [],
+    corp: [],
+    creat: [],
+  });
 
   function onChange(value) {
     setToken(value);
+    console.log(value);
   }
 
   const handleSelect = (e) => {
-    setSubdomains((subdomains) => [...subdomains, e.target.value]);
+    const { name, value } = e.target;
+    setSubdom((subdom) => ({
+      ...subdom,
+      [name]: [value],
+    }));
+    // setSubdomains((subdomains) => [...subdomains, e.target.value]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setAlerts([]);
-    setSubdomains([]);
+    // setSubdomains([]);
     const target = e.target.elements;
 
     if (target.branch.value === "--") {
@@ -70,20 +87,23 @@ const Form = () => {
 
     if (alerts.length === 0) {
       const formLoad = {
-        regno: target.regno.value,
-        branch: target.branch.value,
-        year: target.year.value,
+        reg_number: target.regno.value,
+        github_id: gith,
         linkedin: target.linkedin.value,
-        ques1: target.ques1.value,
-        ques2: target.ques2.value,
-        subdomains,
+        joining_details: target.ques1.value,
+        domain_details: subdom,
+        year: target.year.value,
+        branch: target.branch.value,
       };
+
       const body = JSON.stringify(formLoad);
+      console.log(body);
       const config = {
         headers: {
           // "":"",
           "Content-Type": "application/json",
           "X-RECAPTCHA-TOKEN": `${token}`,
+          Authorization: `Bearer ${tokenVal}`,
         },
       };
       axios
@@ -93,14 +113,17 @@ const Form = () => {
           config
         )
         .then((res) => {
-          const tok = res.data.access_token;
-          const decoded = jwt_decode(tok);
-          console.log(decoded);
+          // const tok = res.data.access_token;
+          // const decoded = jwt_decode(tok);
+          // console.log(decoded);
+          enqueueSnackbar("Kindly check your mail", { variant: "success" });
           setForm(true);
         })
         .catch((err) => {
           console.log(err);
-          alert("error while registration");
+          enqueueSnackbar("error while registration or already registered", {
+            variant: "error",
+          });
         });
 
       console.log(formLoad);
@@ -227,6 +250,16 @@ const Form = () => {
               <option value="app">App Dev</option>
               <option value="cp">CP</option>
             </select>
+            <input
+              className="form-control input-size"
+              type="text"
+              name="github"
+              placeholder="jhondoe"
+              onChange={(e) => setGith(e.target.value)}
+              value={gith}
+              id="github"
+              required
+            ></input>
           </div>
         )}
 
@@ -266,16 +299,16 @@ const Form = () => {
           ></textarea>
         </div>
         <br />
-        <div style={{ textAlign: "center" }}>
-          <div
+        <div style={{ textAlign: "center", display: "inline-block" }}>
+          {/* <div
             data-sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
             style={{ display: "inline-block" }}
-          >
-            <ReCAPTCHA
-              sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
-              onChange={onChange}
-            />
-          </div>
+          > */}
+          <ReCAPTCHA
+            sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+            onChange={onChange}
+          />
+          {/* </div> */}
         </div>
 
         <br />
