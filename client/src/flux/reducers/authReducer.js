@@ -19,7 +19,6 @@ const authReducer = (state = initialData, action) => {
       };
     case "REGISTER":
     case "LOGIN":
-      console.log("reducer", action.payload);
       return {
         ...state,
         ...action.payload,

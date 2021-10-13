@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "SquidFont";
+  src: local("SquidFont"),
+    url("../assets/the-shape-of-things.ttf") format("truetype");
+  font-weight: bold;
+}
+
+.thankyou-main {
+  padding-top: 20px;
+  background-color: #000000;
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  font-family: SquidFont;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.thankyou-heading {
+  color: #16e4e4;
+  padding: 4rem;
+  font-size: 4rem;
+}
+
+.thankyou-text {
+  font-size: 1.2rem;
+  color: white;
+  padding-top: 2rem;
+}

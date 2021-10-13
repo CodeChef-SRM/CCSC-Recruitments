@@ -1,0 +1,161 @@
+/*Navbar*/
+@media(max-width: 991px)
+{
+    .navbar-toggler{
+        background-color: #F44786 ;
+        box-shadow: var(--shadow-black-300);
+        color: #ffffff;
+        height: 34px;
+        width: 44px;
+        padding: 0;
+        font-size: 18px;
+
+    }
+
+    .navbar-nav{
+        background-color: #131313;
+        box-shadow: var(--shadow-black-300);
+
+    }
+
+    .navbar-nav .nav-item{
+        margin:0;
+        padding:5px 15px;
+    }
+
+    .navbar .nav-item .nav-link::before{
+        content:'';
+        position: absolute;
+        right: 90%;
+        
+        bottom: 0; 
+        height: 3px;
+        background-color: #F44786;
+        transition: all 0.5s ease;
+        transform: scale(0);
+    }
+    .navbar .nav-item .nav-link.active::before,
+.navbar .nav-item .nav-link:hover::before{
+    transform: scale(1);
+    
+}
+   
+
+    .navbar-nav2 .nav-item{
+        margin:0;
+        padding:5px 15px;
+    }
+        
+
+    .navbar.navbar-shrink .navbar-toggler 
+    {
+        background-color: #F44786;
+    }
+    .button-spacing{
+        margin: 10px;
+    
+    }
+    .btn-2{
+        display:none;
+    }
+.home-text h1{
+    font-size: 40px;
+  
+}
+
+.how-it-work-item.line-right::before{
+    opacity: 0;
+}
+}
+.cta-text span {
+     
+    font-size: 13px;
+   
+    }
+@media(max-width: 768px){
+    .section-padding{
+   
+        padding-top: 10px;
+        margin-bottom: 10px;
+       
+    }
+    .section-title h2{
+        font-size: 30px;
+    }
+    .eventitem{
+   
+       
+        padding: 20px;
+       
+      }
+      
+        
+    
+      .eventitem i{
+        font-size: 30px;
+      
+    }
+      
+      .eventitem h3{
+        
+        font-size: 18px;
+        margin: 20px 0;
+      }
+     
+  
+   .fun-facts-img{
+       display: none;
+   }
+
+
+.footer .about-company h3 {
+    color: white;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.footer .about-company p {
+   
+    font-size: 14px;
+   
+}
+
+.footer .location p{
+    color: white;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.footer .about-company p {
+   
+    font-size: 14px;
+   
+}
+
+.footer .about-company a:hover {
+    color: #F44786;
+}
+.footer .location i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+.footer .location  a{
+    text-decoration: none;
+    color: #fff;
+ 
+    
+}
+}
+
+
+@media(max-width: 575px){
+    .home-text h1{
+        font-size: 30px;
+    }
+
+    .home-text p{
+        font-size: 16px;
+    }
+
+
+}
