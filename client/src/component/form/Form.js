@@ -215,6 +215,7 @@ const Form = () => {
               </div>
             </div>
 
+
             {/* <div className="checkbox-inline">
               <label htmlFor="domain">Domain Choice </label>
               <div
@@ -276,6 +277,7 @@ const Form = () => {
               </div>
             )}
 
+
             {creat && (
               <div className="form-group">
                 <label htmlFor="creat">SubDomain Choice Creatives</label>
@@ -313,6 +315,7 @@ const Form = () => {
                 ></input>
               </div>
             )}
+
 
             <div className="form-group">
               <label htmlFor="linkedin">LinkedIn</label>
@@ -361,6 +364,7 @@ const Form = () => {
               />
               {/* </div> */}
             </div>
+
 
             <br />
             <button class="btn" type="submit" id="form-btn">
