@@ -9,7 +9,7 @@
 .main {
   font-family: SquidFont;
   background-color: #000000ea;
-  background-image: url("../assets/Asset\ 7.svg");
+  background-image: url("../home/pattern.svg");
 }
 .h-custom {
   height: calc(100% - 73px);

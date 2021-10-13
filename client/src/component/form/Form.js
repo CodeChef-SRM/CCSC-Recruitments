@@ -1,8 +1,9 @@
 import { withRouter } from "react-router";
 import { useState } from "react";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
+import { useSnackbar } from "notistack";
 import "./Form.css";
 
 const Form = () => {
@@ -11,22 +12,38 @@ const Form = () => {
   const [creat, creatSet] = useState(false);
   const [token, setToken] = useState("");
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const [alerts, setAlerts] = useState([]);
-  const [subdomains, setSubdomains] = useState([]);
+  // const [subdomains, setSubdomains] = useState([]);
+  const [gith, setGith] = useState("");
   const [form, setForm] = useState(false);
+  const tokenVal = localStorage.getItem("token");
+
+  const [subdom, setSubdom] = useState({
+    tech: [],
+    corp: [],
+    creat: [],
+  });
 
   function onChange(value) {
     setToken(value);
+    console.log(value);
   }
 
   const handleSelect = (e) => {
-    setSubdomains((subdomains) => [...subdomains, e.target.value]);
+    const { name, value } = e.target;
+    setSubdom((subdom) => ({
+      ...subdom,
+      [name]: [value],
+    }));
+    // setSubdomains((subdomains) => [...subdomains, e.target.value]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setAlerts([]);
-    setSubdomains([]);
+    // setSubdomains([]);
     const target = e.target.elements;
 
     if (target.branch.value === "--") {
@@ -70,35 +87,43 @@ const Form = () => {
 
     if (alerts.length === 0) {
       const formLoad = {
-        token: token,
-        jwt: localStorage.getItem("token"),
-        regno: target.regno.value,
-        branch: target.branch.value,
-        year: target.year.value,
+        reg_number: target.regno.value,
+        github_id: gith,
         linkedin: target.linkedin.value,
-        ques1: target.ques1.value,
-        ques2: target.ques2.value,
-        subdomains,
+        joining_details: target.ques1.value,
+        domain_details: subdom,
+        year: target.year.value,
+        branch: target.branch.value,
       };
+
       const body = JSON.stringify(formLoad);
+      console.log(body);
       const config = {
         headers: {
           // "":"",
           "Content-Type": "application/json",
+          "X-RECAPTCHA-TOKEN": `${token}`,
+          Authorization: `Bearer ${tokenVal}`,
         },
       };
       axios
-        .post("https://api.codechefsrm.in/apis/form", body, config)
+        .post(
+          "https://api.codechefsrm.in/apis/registration-details",
+          body,
+          config
+        )
         .then((res) => {
-          const tok = res.data.access_token;
-          const decoded = jwt_decode(tok);
-          console.log(decoded);
-          //   dispatch(login({ token: tok, user: decoded }));
+          // const tok = res.data.access_token;
+          // const decoded = jwt_decode(tok);
+          // console.log(decoded);
+          enqueueSnackbar("Kindly check your mail", { variant: "success" });
           setForm(true);
         })
         .catch((err) => {
           console.log(err);
-          alert("error while registration");
+          enqueueSnackbar("error while registration or already registered", {
+            variant: "error",
+          });
         });
 
       console.log(formLoad);
@@ -106,12 +131,14 @@ const Form = () => {
   };
 
   return (
-    <>
-      <p>This is the form page.</p>
+    <div className="main form-outline mb-4">
+      <p className="heading">Enter your details in this form</p>
+      <br />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="regno">Registration Number </label>
           <input
+            className="form-control input-size"
             type="text"
             name="regno"
             placeholder="RA21XXXXXXXXX"
@@ -121,7 +148,8 @@ const Form = () => {
         </div>
         <div className="form-group">
           <label htmlFor="branch">Choose Branch </label>
-          <select name="branch" id="branch">
+          <br />
+          <select className="form-control input-size" name="branch" id="branch">
             <option value="--">Select</option>
             <option value="cse">CSE</option>
             <option value="ece">ECE</option>
@@ -131,41 +159,65 @@ const Form = () => {
             <option value="civil">Civil</option>
           </select>
         </div>
-        <div className="form-group">
+        <div className="form-group input-size">
           <label htmlFor="year">Year </label>
-          <select name="year" id="year">
+          <br />
+          <select className="form-control" name="year" id="year">
             <option value="--">Select</option>
             <option value="1">1</option>
             <option value="2">2</option>
           </select>
         </div>
-        <div className="form-group">
+        <br />
+        <div className="form-group checkbox-inline">
           <label htmlFor="domain">Domain Choice </label>
-          <br />
-          <input
-            type="checkbox"
-            onClick={() => techSet(!tech)}
-            id="domain1"
-            value="domain1"
-            name="domain1"
-          ></input>
-          <label htmlFor="domain1"> Technical Domain</label>
-          <input
-            type="checkbox"
-            onClick={() => corpSet(!corp)}
-            id="domain2"
-            value="domain2"
-            name="domain2"
-          ></input>
-          <label htmlFor="domain2"> Corporate Domain</label>
-          <input
-            type="checkbox"
-            onClick={() => creatSet(!creat)}
-            id="domain3"
-            value="domain3"
-            name="domain3"
-          ></input>
-          <label htmlFor="domain3"> Creatives Domain</label>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div>
+              <input
+                type="checkbox"
+                onClick={() => techSet(!tech)}
+                id="domain1"
+                value="domain1"
+                name="domain1"
+              ></input>
+              <label className="spacing" htmlFor="domain1">
+                {" "}
+                Technical Domain
+              </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                onClick={() => corpSet(!corp)}
+                id="domain2"
+                value="domain2"
+                name="domain2"
+              ></input>
+              <label className="spacing" htmlFor="domain2">
+                {" "}
+                Corporate Domain
+              </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                onClick={() => creatSet(!creat)}
+                id="domain3"
+                value="domain3"
+                name="domain3"
+              ></input>
+              <label className="spacing" htmlFor="domain3">
+                {" "}
+                Creatives Domain
+              </label>
+            </div>
+          </div>
         </div>
         {corp && (
           <div className="form-group">
@@ -198,12 +250,24 @@ const Form = () => {
               <option value="app">App Dev</option>
               <option value="cp">CP</option>
             </select>
+            <input
+              className="form-control input-size"
+              type="text"
+              name="github"
+              placeholder="jhondoe"
+              onChange={(e) => setGith(e.target.value)}
+              value={gith}
+              id="github"
+              required
+            ></input>
           </div>
         )}
 
         <div className="form-group">
           <label htmlFor="linkedin">LinkedIn</label>
+          <br />
           <input
+            className="form-control input-size"
             type="text"
             name="linkedin"
             placeholder="https://www.linkedin.com/in/jhondoe/"
@@ -214,17 +278,41 @@ const Form = () => {
 
         <div className="form-group">
           <label htmlFor="ques1">Why do you want to join our club?</label>
-          <input type="text" name="ques1" id="ques1" required></input>
+          <br />
+          <textarea
+            className="form-control input-size"
+            type="text"
+            name="ques1"
+            id="ques1"
+            required
+          ></textarea>
         </div>
         <div className="form-group">
           <label htmlFor="ques2">Why should we choose you?</label>
-          <input type="text" name="ques2" id="ques2" required></input>
+          <br />
+          <textarea
+            className="form-control input-size"
+            type="text"
+            name="ques2"
+            id="ques2"
+            required
+          ></textarea>
         </div>
-        <ReCAPTCHA
-          sitekey="6LfnrcIcAAAAANFfMbEjQFK9Ur41kSCqYFl9pk3P"
-          onChange={onChange}
-        />
-        <button type="submit" id="form-btn">
+        <br />
+        <div style={{ textAlign: "center", display: "inline-block" }}>
+          {/* <div
+            data-sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+            style={{ display: "inline-block" }}
+          > */}
+          <ReCAPTCHA
+            sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+            onChange={onChange}
+          />
+          {/* </div> */}
+        </div>
+
+        <br />
+        <button class="btn" type="submit" id="form-btn">
           Submit
         </button>
       </form>
@@ -236,7 +324,7 @@ const Form = () => {
             </p>
           );
         })}
-    </>
+    </div>
   );
 };
 

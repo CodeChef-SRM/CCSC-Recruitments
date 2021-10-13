@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import "./Reset.css";
 import axios from "axios";
+import { useSnackbar } from "notistack";
+// import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Reset() {
   const [data, setData] = useState({
-    password: "",
+    new_password: "",
   });
+
+  const { id } = useParams();
+  // console.log(id);
+
+  const { enqueueSnackbar } = useSnackbar();
   const [pass, setPass] = useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -14,18 +22,23 @@ function Reset() {
       [name]: value,
     }));
   };
-
+  // const search = useLocation().search;
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    if (data.password === pass) {
+
+    // const token = new URLSearchParams(search).get("token");
+
+    if (data.new_password === pass) {
       const body = JSON.stringify(data);
 
-      console.log(body);
+      // console.log(body);
+      // console.log(token);
       const config = {
         method: "post",
-        url: "https://api.codechefsrm.in/apis/new_password",
+        url: "https://api.codechefsrm.in/apis/reset-password",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${id}`,
         },
         data: body,
       };
@@ -35,13 +48,15 @@ function Reset() {
 
       axios(config)
         .then((res) => {
-          alert("Password has been reset");
+          enqueueSnackbar("Password has been reset", { variant: "success" });
         })
         .catch((err) => {
-          alert("Error while resetting password");
+          enqueueSnackbar("Error while resetting password", {
+            variant: "error",
+          });
         });
     } else {
-      alert("Password not matching");
+      enqueueSnackbar("Password not matching", { variant: "error" });
     }
   };
   return (
@@ -59,9 +74,9 @@ function Reset() {
                   </label>
                   <input
                     type="password"
-                    name="password"
+                    name="new_password"
                     onChange={handleChange}
-                    value={data.password}
+                    value={data.new_password}
                     id="form3Example3"
                     class="form-control form-control-lg"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
