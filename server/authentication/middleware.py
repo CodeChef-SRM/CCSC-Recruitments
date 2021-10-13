@@ -58,11 +58,3 @@ class ReCaptcha:
 
             return JsonResponse(data={"error": "invalid recaptcha token"}, status=401)
         return self.view(request)
-
-
-class ReCaptchaMiddleWare:
-    def __init__(self, view):
-        self.view = view
-
-    def __call__(self, request):
-        return self.view(request)
