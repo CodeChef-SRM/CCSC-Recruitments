@@ -10,6 +10,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const key = process.env.REACT_APP_KEY;
   let history = useHistory();
   const [data, setData] = useState({
     name: "",
@@ -129,7 +130,8 @@ const Register = () => {
                 </div>
                 <div style={{ textAlign: "center", display: "inline-block" }}>
                   <ReCAPTCHA
-                    sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                    sitekey={key}
+                    size="invisible"
                     onChange={onChange}
                   />
                 </div>
