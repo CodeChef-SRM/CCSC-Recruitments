@@ -7,7 +7,7 @@ import Navbar from "../navbar/Navbar";
 function Home() {
   return (
     <div id='home-link' class="wrap">
-     <Navbar />
+      <Navbar />
       <section
         class="home d-flex align-items-center"
         data-scroll-index="0"
