@@ -19,7 +19,6 @@ const Form = () => {
   const [gith, setGith] = useState("");
   const [form, setForm] = useState(false);
   const tokenVal = localStorage.getItem("token");
-
   const [subdom, setSubdom] = useState({
     tech: [],
     corp: [],
@@ -131,92 +130,92 @@ const Form = () => {
   };
 
   return (
-    <div className="container form-outline mb-4">
-      <div className="title">Enter your details in this form</div>
-      <div className="content">
-        <form onSubmit={handleSubmit}>
-          <div className="user-details">
-            <div className="input-box-1">
-              <label htmlFor="details">Registration Number </label>
-              <input
-                className="form-control input-size"
-                type="text"
-                name="regno"
-                placeholder="RA21XXXXXXXXX"
-                id="regno"
-                required
-              ></input>
-            </div>
+    <div className="main__container">
 
-            <div className="input-box">
-              <label htmlFor="details">Choose Branch </label>
-              <br />
-              <select
-                className="form-control input-size"
-                name="branch"
-                id="branch"
-              >
-                <option value="--">Select</option>
-                <option value="cse">CSE</option>
-                <option value="ece">ECE</option>
-                <option value="aero">Aerospace</option>
-                <option value="biotech">Biotech</option>
-                <option value="mech">Mechanical</option>
-                <option value="civil">Civil</option>
-              </select>
-            </div>
-            <div className="input-box">
-              <label htmlFor="details">Year </label>
-              <br />
-              <select className="form-control" name="year" id="year">
-                <option value="--">Select</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
-            </div>
-            <div className="input-box">
-              <div className="gender-details">
+      <div className="container form-outline mb-4">
+        <div className="title">Enter your details in this form</div>
+        <div className="content">
+          <form onSubmit={handleSubmit}>
+            <div className="user-details">
+              <div className="input-box-1">
+                <label htmlFor="details">Registration Number </label>
                 <input
-                  type="radio"
-                  id="domain1"
-                  value="domain1"
-                  name="domain1"
-                  onClick={() => techSet(!tech)}
-                />
-                <input
-                  type="radio"
-                  id="domain2"
-                  value="domain2"
-                  name="domain2"
-                  onClick={() => corpSet(!corp)}
-                />
-                <input
-                  type="radio"
-                  onClick={() => creatSet(!creat)}
-                  id="domain3"
-                  value="domain3"
-                  name="domain3"
-                />
-                <span class="gender-title">Gender</span>
-                <div class="category">
-                  <label htmlFor="domain1">
-                    <span className="dot one"></span>
-                    <span className="gender">Male</span>
-                  </label>
-                  <label htmlFor="domain2">
-                    <span className="dot two"></span>
-                    <span className="gender">Female</span>
-                  </label>
-                  <label htmlFor="domain3">
-                    <span className="dot three"></span>
-                    <span className="gender">Prefer not to say</span>
-                  </label>
+                  className="form-control input-size"
+                  type="text"
+                  name="regno"
+                  placeholder="RA21XXXXXXXXX"
+                  id="regno"
+                  required
+                ></input>
+              </div>
+
+              <div className="input-box">
+                <label htmlFor="details">Choose Branch </label>
+                <br />
+                <select
+                  className="form-control input-size"
+                  name="branch"
+                  id="branch"
+                >
+                  <option value="--">Select</option>
+                  <option value="cse">CSE</option>
+                  <option value="ece">ECE</option>
+                  <option value="aero">Aerospace</option>
+                  <option value="biotech">Biotech</option>
+                  <option value="mech">Mechanical</option>
+                  <option value="civil">Civil</option>
+                </select>
+              </div>
+              <div className="input-box">
+                <label htmlFor="details">Year </label>
+                <br />
+                <select className="form-control" name="year" id="year">
+                  <option value="--">Select</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+              <div className="input-box">
+                <div className="gender-details">
+                  <input
+                    type="radio"
+                    id="domain1"
+                    value="domain1"
+                    name="domain1"
+                    onClick={() => { techSet(!tech); }}
+                  />
+                  <input
+                    type="radio"
+                    id="domain2"
+                    value="domain2"
+                    name="domain2"
+                    onClick={() => { corpSet(!corp); }}
+                  />
+                  <input
+                    type="radio"
+                    onClick={() => { creatSet(!creat); }}
+                    id="domain3"
+                    value="domain3"
+                    name="domain3"
+                  />
+                  <span class="gender-title">Domains</span>
+                  <div class="category">
+                    <label htmlFor="domain1">
+                      <span className={(tech) ? "dot one" : "dot"}></span>
+                      <span className="gender">Technical Domain</span>
+                    </label>
+                    <label htmlFor="domain2">
+                      <span className={(corp) ? "dot two" : "dot"}></span>
+                      <span className="gender">Corporate Domain</span>
+                    </label>
+                    <label htmlFor="domain3">
+                      <span className={(creat) ? "dot three" : "dot"}></span>
+                      <span className="gender">Creatives Domain</span>
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
-
-
-            {/* <div className="checkbox-inline">
+              {/* <div className="checkbox-inline">
               <label htmlFor="domain">Domain Choice </label>
               <div
                 style={{
@@ -266,32 +265,32 @@ const Form = () => {
                 </div>
               </div>
             </div> */}
-            {corp && (
-              <div className="input-box">
-                <label htmlFor="details">SubDomain Choice Corporate</label>
-                <select onChange={handleSelect} name="corp" id="corp">
-                  <option value="--">Select</option>
-                  <option value="manage">Management</option>
-                  <option value="spon">Sponsorship</option>
-                </select>
-              </div>
-            )}
+              {corp && (
+                <div className="input-box">
+                  <label htmlFor="details">SubDomain Choice Corporate</label>
+                  <select onChange={handleSelect} name="corp" id="corp">
+                    <option value="--">Select</option>
+                    <option value="manage">Management</option>
+                    <option value="spon">Sponsorship</option>
+                  </select>
+                </div>
+              )}
 
 
-            {creat && (
-              <div className="form-group">
-                <label htmlFor="creat">SubDomain Choice Creatives</label>
-                <select onChange={handleSelect} name="creat" id="creat">
-                  <option value="--">Select</option>
-                  <option value="gd">Graphic Design</option>
-                  <option value="vid">Video Editing</option>
-                  <option value="edi">Editorial</option>
-                </select>
-              </div>
-            )}
-            {tech && (
-              <div className="input-box">
-                <label htmlFor="details">SubDomain Choice Technical</label>
+              {creat && (
+                <div className="form-group">
+                  <label htmlFor="creat">SubDomain Choice Creatives</label>
+                  <select onChange={handleSelect} name="creat" id="creat">
+                    <option value="--">Select</option>
+                    <option value="gd">Graphic Design</option>
+                    <option value="vid">Video Editing</option>
+                    <option value="edi">Editorial</option>
+                  </select>
+                </div>
+              )}
+              {tech && (
+                <div className="input-box">
+                  <label htmlFor="details">SubDomain Choice Technical</label>
                   <select
                     className="custom"
                     onChange={handleSelect}
@@ -303,83 +302,84 @@ const Form = () => {
                     <option value="app">App Dev</option>
                     <option value="cp">CP</option>
                   </select>
+                  <input
+                    className="form-control input-size"
+                    type="text"
+                    name="github"
+                    placeholder="jhondoe"
+                    onChange={(e) => setGith(e.target.value)}
+                    value={gith}
+                    id="github"
+                    required
+                  ></input>
+                </div>
+              )}
+
+
+              <div className="form-group">
+                <label htmlFor="linkedin">LinkedIn</label>
+                <br />
                 <input
                   className="form-control input-size"
                   type="text"
-                  name="github"
-                  placeholder="jhondoe"
-                  onChange={(e) => setGith(e.target.value)}
-                  value={gith}
-                  id="github"
+                  name="linkedin"
+                  placeholder="https://www.linkedin.com/in/jhondoe/"
+                  id="linkedin"
                   required
                 ></input>
               </div>
-            )}
 
-
-            <div className="form-group">
-              <label htmlFor="linkedin">LinkedIn</label>
+              <div className="form-group">
+                <label htmlFor="ques1">Why do you want to join our club?</label>
+                <br />
+                <textarea
+                  className="form-control input-size"
+                  type="text"
+                  name="ques1"
+                  id="ques1"
+                  required
+                ></textarea>
+              </div>
+              {/* <div className="form-group">
+                <label htmlFor="ques2">Why should we choose you?</label>
+                <br />
+                <textarea
+                  className="form-control input-size"
+                  type="text"
+                  name="ques2"
+                  id="ques2"
+                  required
+                ></textarea>
+              </div> */}
               <br />
-              <input
-                className="form-control input-size"
-                type="text"
-                name="linkedin"
-                placeholder="https://www.linkedin.com/in/jhondoe/"
-                id="linkedin"
-                required
-              ></input>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="ques1">Why do you want to join our club?</label>
-              <br />
-              <textarea
-                className="form-control input-size"
-                type="text"
-                name="ques1"
-                id="ques1"
-                required
-              ></textarea>
-            </div>
-            <div className="form-group">
-              <label htmlFor="ques2">Why should we choose you?</label>
-              <br />
-              <textarea
-                className="form-control input-size"
-                type="text"
-                name="ques2"
-                id="ques2"
-                required
-              ></textarea>
-            </div>
-            <br />
-            <div style={{ textAlign: "center", display: "inline-block" }}>
-              {/* <div
+              <div style={{ textAlign: "center", display: "inline-block" }}>
+                {/* <div
             data-sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
             style={{ display: "inline-block" }}
           > */}
-              <ReCAPTCHA
-                sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
-                onChange={onChange}
-              />
-              {/* </div> */}
+                <ReCAPTCHA
+                  sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                  onChange={onChange}
+                />
+                {/* </div> */}
+              </div>
+
+
+              <br />
+              <button class="btn" type="submit" id="form-btn">
+                Submit
+              </button>
             </div>
-
-
-            <br />
-            <button class="btn" type="submit" id="form-btn">
-              Submit
-            </button>
-          </div>
-        </form>
-        {alerts &&
-          alerts.map((alert, index) => {
-            return (
-              <p key={index} className="alert">
-                {alert}
-              </p>
-            );
-          })}
+          </form>
+          {alerts &&
+            alerts.map((alert, index) => {
+              return (
+                <p key={index} className="alert">
+                  {alert}
+                </p>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

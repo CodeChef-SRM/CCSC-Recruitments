@@ -9,7 +9,7 @@ const routes = [
   {
     path: "/getting-started",
     component: Form,
-    private: true,
+    private: true, //temp change
   },
   {
     path: "/forgot",
