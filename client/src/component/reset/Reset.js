@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 function Reset() {
   const [data, setData] = useState({
-    password: "",
+    new_password: "",
   });
 
   const { id } = useParams();
@@ -28,14 +28,16 @@ function Reset() {
 
     // const token = new URLSearchParams(search).get("token");
 
-    if (data.password === pass) {
+
+    if (data.new_password === pass) {
+
       const body = JSON.stringify(data);
 
       // console.log(body);
       // console.log(token);
       const config = {
         method: "post",
-        url: "https://api.codechefsrm.in/apis/new_password",
+        url: "https://api.codechefsrm.in/apis/reset-password",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${id}`,
@@ -74,9 +76,9 @@ function Reset() {
                   </label>
                   <input
                     type="password"
-                    name="password"
+                    name="new_password"
                     onChange={handleChange}
-                    value={data.password}
+                    value={data.new_password}
                     id="form3Example3"
                     class="form-control form-control-lg"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
