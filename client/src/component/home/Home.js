@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./Home.css";
 import image from "./Abc-min-min-min.png";
@@ -243,7 +243,7 @@ function Home() {
           </div>
         </div>
       </section>
-
+      {/* 
       <section className="faq section-padding" id="FAQs" data-scroll-index="4">
         <div className="container">
           <div className="row justify-content-center">
@@ -358,7 +358,9 @@ function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <FAQSection />
 
       <div className="mt-5 pt-5 pb-5 footer" id="Reach" data-scroll-index="5">
         <div className="container">
@@ -378,7 +380,7 @@ function Home() {
                 CCSC, an initiative for the students who are enthusiastic about
                 coding. Our M.O. is to Learn and Teach.
               </p>
-              <p>
+              <p className="socia">
                 <a href="https://www.facebook.com/CodeChefSRM/">
                   <i className="fab fa-facebook-square"></i>
                 </a>
@@ -425,5 +427,88 @@ function Home() {
     </>
   );
 }
+
+const FAQSection = () => {
+  const faq_questions = [
+    {
+      q: "What can a new recruit expect from the club?",
+      a: "You can expect a little work, an amazing bunch of seniors and batchmates, a lot of fun and a zeal to learn a lot of new things.",
+    },
+    {
+      q: "Do we need basic coding knowledge to be a part of the technical domain?",
+      a: "Yes, beginner level knowledge in coding is a must to be a part of the technical domain.",
+    },
+    {
+      q: "Can I apply in the club if I don't know programming?",
+      a: "Yes you can also apply to Non-Tech doamins like Creative and Corporate depending on your interest.",
+    },
+    {
+      q: "Can I work for different domains of the club too, other than my primary domain?",
+      a: "Yes the club is very flexible when it comes to work culture. You can also contribute to other domains depending on your skills, after informing your Domain Leads.",
+    },
+  ];
+
+  return (
+    <div className="faq-main">
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="section-title">
+            <h2>
+              {" "}
+              Frequently <span>asked</span> qureies
+            </h2>
+          </div>
+        </div>
+      </div>
+      {faq_questions.map((ques) => {
+        return <Question question={ques.q} answer={ques.a} />;
+      })}
+    </div>
+  );
+};
+
+const Question = ({ question, answer }) => {
+  const [show, setShow] = useState(false);
+  return (
+    <div className="accordion-item">
+      <div className="question accordion-header collapsed">
+        <div className="accordion-body">
+          <p>{question}</p>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="30px"
+          style={{
+            transform: `${show ? "rotate(45deg)" : "rotate(0deg)"}`,
+            transition: "all 0.3s ease",
+          }}
+          onClick={() => setShow(!show)}
+          fill="#fff"
+        >
+          {" "}
+          <g data-name="Layer 2">
+            <g data-name="plus">
+              <rect
+                width="24"
+                height="24"
+                opacity="0"
+                transform="rotate(180 12 12)"
+              />
+              <path d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2z" />
+            </g>
+          </g>
+        </svg>
+      </div>
+      {show ? (
+        <div className="answer">
+          <p>{answer}</p>
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
+  );
+};
 
 export default Home;

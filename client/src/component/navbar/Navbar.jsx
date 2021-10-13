@@ -110,40 +110,40 @@ function Navbar() {
       <div className="navbar__center">
         <ul className="nav__links">
           <li className="nav-item">
-            <NavLink className="nav-link active" to="home">
+            <Link to="/" className="nav-link active">
               <span style={{ color: "#ffffff" }}>Home</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="Domain">
+              <span style={{ color: "#ffffff" }}>Domains</span>
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="features">
-              <span style={{ color: "#ffffff" }}>Features</span>
+            <NavLink className="nav-link" to="About">
+              <span style={{ color: "#ffffff" }}>About Us</span>
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="feat">
-              <span style={{ color: "#ffffff" }}>Facts</span>
+            <NavLink className="nav-link" to="Phase">
+              <span style={{ color: "#ffffff" }}>Phases</span>
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="Testimonials">
-              <span style={{ color: "#ffffff" }}>Testimonials</span>
+            <NavLink className="nav-link" to="FAQs">
+              <span style={{ color: "#ffffff" }}>FAQs</span>
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="Pricing">
-              <span style={{ color: "#ffffff" }}>Pricing</span>
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="Contact">
-              <span style={{ color: "#ffffff" }}>Contact</span>
+            <NavLink className="nav-link" to="Reach">
+              <span style={{ color: "#ffffff" }}>Reach Us</span>
             </NavLink>
           </li>
         </ul>
       </div>
       <div className="navbar__right">
-        <Link to="/login">
-          <button>Get Started</button>
+        <Link to="/login" className="btn btn-2 ">
+          Get Started
         </Link>
       </div>
     </div>
@@ -192,60 +192,61 @@ function Navbar() {
         </svg>
         <ul className="nav__links nav__links__vert">
           <li className="nav-item">
-            <NavLink
-              className="nav-link active"
-              to="home"
-              onClick={() => setMobileToggle(false)}
-            >
+            <Link to="/" className="nav-link active">
               <span style={{ color: "#ffffff" }}>Home</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              className="nav-link"
+              to="Domain"
+              onClick={() => setMobileToggle(false)}
+            >
+              <span style={{ color: "#ffffff" }}>Domains</span>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
               className="nav-link"
-              to="features"
+              to="About"
               onClick={() => setMobileToggle(false)}
             >
-              <span style={{ color: "#ffffff" }}>Features</span>
+              <span style={{ color: "#ffffff" }}>About Us</span>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
               className="nav-link"
-              to="feat"
+              to="Phase"
               onClick={() => setMobileToggle(false)}
             >
-              <span style={{ color: "#ffffff" }}>Facts</span>
+              <span style={{ color: "#ffffff" }}>Phases</span>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
               className="nav-link"
-              to="Testimonials"
+              to="FAQs"
               onClick={() => setMobileToggle(false)}
             >
-              <span style={{ color: "#ffffff" }}>Testimonials</span>
+              <span style={{ color: "#ffffff" }}>FAQs</span>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
               className="nav-link"
-              to="Pricing"
+              to="Reach"
               onClick={() => setMobileToggle(false)}
             >
-              <span style={{ color: "#ffffff" }}>Pricing</span>
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              className="nav-link"
-              to="Contact"
-              onClick={() => setMobileToggle(false)}
-            >
-              <span style={{ color: "#ffffff" }}>Contact</span>
+              <span style={{ color: "#ffffff" }}>Reach Us</span>
             </NavLink>
           </li>
         </ul>
+        <li style={{ listStyle: "none" }}>
+          <Link to="/login" class="btn btn-2  button-spacing">
+            Get Started <i class="fas fa-share"></i>
+          </Link>
+        </li>
       </div>
     </div>
   );

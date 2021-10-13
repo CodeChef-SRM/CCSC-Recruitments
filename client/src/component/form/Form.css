@@ -16,12 +16,19 @@
   padding: 10px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 } */
-
+.main__container {
+  font-family: SquidFont;
+  background-color: #000000ea;
+  /* background-image: url("./Asset\ 7.svg"); */
+  background-color: black;
+  background-size: contain;
+  height: 100vh;
+  padding-top: 40px;
+}
 .container {
   max-width: 700px;
   width: 100%;
-  color: #ffffff;
-  background-color: #333138;
+  background-color: #fff;
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
@@ -60,6 +67,7 @@ form .user-details .input-box {
 
 form .input-box label.details {
   display: block;
+
   font-weight: 500;
   margin-bottom: 5px;
 }
