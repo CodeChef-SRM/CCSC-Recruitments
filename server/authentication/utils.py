@@ -11,10 +11,6 @@ def check_token(token) -> bool:
     Returns:
         bool
     """
-
-    if os.getenv("CI"):
-        return True
-
     url = "https://www.google.com/recaptcha/api/siteverify"
     secret_key = os.getenv("RECAPTCHA_SECRET_KEY")
     payload = {

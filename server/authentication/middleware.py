@@ -2,6 +2,7 @@ from authentication import keys
 from django.http.response import JsonResponse
 from core.errorfactory import AuthenticationError
 from .utils import check_token
+import os
 
 
 class AuthMiddleWare:
@@ -45,6 +46,10 @@ class ReCaptcha:
         Returns:
             JsonResponse
         """
+
+        if os.getenv("CI"):
+            return self.view(request)
+
         if request.method == "POST" or request.method == "DELETE":
             try:
                 recaptcha = request.META["HTTP_X_RECAPTCHA_TOKEN"]
