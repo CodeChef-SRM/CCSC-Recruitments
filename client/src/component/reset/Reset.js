@@ -28,7 +28,9 @@ function Reset() {
 
     // const token = new URLSearchParams(search).get("token");
 
+
     if (data.new_password === pass) {
+
       const body = JSON.stringify(data);
 
       // console.log(body);
