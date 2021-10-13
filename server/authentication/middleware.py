@@ -2,6 +2,7 @@ from authentication import keys
 from django.http.response import JsonResponse
 from core.errorfactory import AuthenticationError
 from .utils import check_token
+import os
 
 
 class AuthMiddleWare:
@@ -45,6 +46,10 @@ class ReCaptcha:
         Returns:
             JsonResponse
         """
+
+        if os.getenv("CI"):
+            return self.view(request)
+
         if request.method == "POST" or request.method == "DELETE":
             try:
                 recaptcha = request.META["HTTP_X_RECAPTCHA_TOKEN"]
@@ -57,12 +62,4 @@ class ReCaptcha:
                 return self.view(request)
 
             return JsonResponse(data={"error": "invalid recaptcha token"}, status=401)
-        return self.view(request)
-
-
-class ReCaptchaMiddleWare:
-    def __init__(self, view):
-        self.view = view
-
-    def __call__(self, request):
         return self.view(request)
