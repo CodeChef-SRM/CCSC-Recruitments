@@ -1,7 +1,9 @@
 import React from "react";
+
 import "./Home.css";
 import image from "./Abc-min-min-min.png";
 import image1 from "./Doll1.png";
+import CountUp from "react-countup";
 
 import Navbar from "../navbar/Navbar";
 
@@ -24,11 +26,14 @@ function Home() {
                     #Onboard <span>CCSC</span>
                   </h1>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Totam ipsum nulla officiis officia porro accusamus in quia
-                    aperiam omnis eum fugiat velit ratione ducimus ad commodi
-                    neque, hic, esse, suscipit consectetur. At repudiandae iusto
-                    hic, aut vitae cum inventore quidem?
+                    After a long wait, and a ton of excitement, our games have
+                    finally begun. “Stick with the us, the strongest team.
+                    That’s the only way” CodeChef SRM KTR Student Chapter is one
+                    of the strongest and fastest growing club in SRM KTR. So do
+                    not take chances and fill the form ASAP to join a family
+                    which grows and wins together. With CCSC , recruitments can
+                    get a wee bit intense, but it’ll all be worth in the end.
+                    See you at the finish line.
                   </p>
                   <div className="home-btn">
                     <a href="/signup" className="btn btn-1">
@@ -145,26 +150,29 @@ function Home() {
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="fun-facts-item style-1">
-                      <h3>90+</h3>
-                      <span>Chefs</span>
+                      <CountUp end={90} duration={5} />
+                      <span>+ Chefs</span>
                     </div>
                   </div>
                   <div className="col-sm-6">
                     <div className="fun-facts-item style-2">
-                      <h3>200+</h3>
-                      <span>Team Meets</span>
+                      <CountUp end={200} duration={5} />
+
+                      <span>+ Team Meets</span>
                     </div>
                   </div>
                   <div className="col-sm-6">
                     <div className="fun-facts-item style-3">
-                      <h3>5000 +</h3>
-                      <span>Event Registrations</span>
+                      <CountUp end={5000} duration={3} />
+
+                      <span>+ Event Registrations</span>
                     </div>
                   </div>
                   <div className="col-sm-6">
                     <div className="fun-facts-item style-4">
-                      <h3>20+</h3>
-                      <span>Speakers</span>
+                      <CountUp end={20} duration={5} />
+
+                      <span>+ Speakers</span>
                     </div>
                   </div>
                 </div>

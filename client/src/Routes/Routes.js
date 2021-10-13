@@ -17,8 +17,14 @@ const Forgot = React.lazy(() => import("../component/forgot/Forgot"));
 const Reset = React.lazy(() => import("../component/reset/Reset"));
 const Login = React.lazy(() => import("../component/login/Login"));
 const Signup = React.lazy(() => import("../component/register/Register"));
+const Thank = React.lazy(() => import("../component/thank/ThankYou"));
 
 const routes = [
+  {
+    path: "/confirmation",
+    component: Thank,
+    private: true,
+  },
   {
     path: "/getting-started",
     component: Form,
