@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import "./Forgot.css";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Forgot() {
+  const [token, setToken] = useState("");
   const [data, setData] = useState({
     email: "",
   });
+
+  function onChange(value) {
+    setToken(value);
+  }
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -20,37 +26,31 @@ function Forgot() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const body = JSON.stringify(data);
-    // Headers
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
-    console.log(body);
-    const config = {
-      method: "post",
-      url: "https://api.codechefsrm.in/apis/forgot-password",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: body,
-    };
-
-    console.log(body);
-    // Request body
-
-    axios(config)
-      .then((res) => {
-        enqueueSnackbar("Kindly check your mail", { variant: "success" });
-        // const tok = res.data.token;
-        // const decoded = jwt_decode(tok);
-        // dispatch(signup({ token: tok, user: decoded }));
-        // setAuth(true);
-      })
-      .catch((err) => {
-        enqueueSnackbar("mail doesn't exist", { variant: "error" });
+    if (!token) {
+      enqueueSnackbar("verify captcha", {
+        variant: "error",
       });
+    } else {
+      const body = JSON.stringify(data);
+
+      const config = {
+        method: "post",
+        url: "https://api.codechefsrm.in/apis/forgot-password",
+        headers: {
+          "Content-Type": "application/json",
+          "X-RECAPTCHA-TOKEN": `${token}`,
+        },
+        data: body,
+      };
+
+      axios(config)
+        .then((res) => {
+          enqueueSnackbar("Kindly check your mail", { variant: "success" });
+        })
+        .catch((err) => {
+          enqueueSnackbar("mail doesn't exist", { variant: "error" });
+        });
+    }
   };
   return (
     <div>
@@ -78,6 +78,12 @@ function Forgot() {
                 </div>
                 <div class="forgot d-flex justify-content-between align-items-center">
                   <div class="form-check mb-0"></div>
+                </div>
+                <div style={{ textAlign: "center", display: "inline-block" }}>
+                  <ReCAPTCHA
+                    sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                    onChange={onChange}
+                  />
                 </div>
                 <div class="text-center text-lg-start mt-4 pt-2">
                   <button

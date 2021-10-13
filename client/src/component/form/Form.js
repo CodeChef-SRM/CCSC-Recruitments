@@ -15,7 +15,7 @@ const Form = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [alerts, setAlerts] = useState([]);
-  // const [subdomains, setSubdomains] = useState([]);
+
   const [gith, setGith] = useState("");
   const [form, setForm] = useState(false);
   const tokenVal = localStorage.getItem("token");
@@ -28,7 +28,6 @@ const Form = () => {
 
   function onChange(value) {
     setToken(value);
-    console.log(value);
   }
 
   const handleSelect = (e) => {
@@ -37,7 +36,6 @@ const Form = () => {
       ...subdom,
       [name]: [value],
     }));
-    // setSubdomains((subdomains) => [...subdomains, e.target.value]);
   };
 
   const handleSubmit = (e) => {
@@ -84,6 +82,12 @@ const Form = () => {
         ]);
       }
     }
+    if (!token) {
+      setAlerts((alerts) => [...alerts, "Please complete captcha!"]);
+      enqueueSnackbar("verify captcha", {
+        variant: "error",
+      });
+    }
 
     if (alerts.length === 0) {
       const formLoad = {
@@ -97,7 +101,7 @@ const Form = () => {
       };
 
       const body = JSON.stringify(formLoad);
-      console.log(body);
+
       const config = {
         headers: {
           // "":"",
@@ -113,20 +117,14 @@ const Form = () => {
           config
         )
         .then((res) => {
-          // const tok = res.data.access_token;
-          // const decoded = jwt_decode(tok);
-          // console.log(decoded);
           enqueueSnackbar("Kindly check your mail", { variant: "success" });
           setForm(true);
         })
         .catch((err) => {
-          console.log(err);
           enqueueSnackbar("error while registration or already registered", {
             variant: "error",
           });
         });
-
-      console.log(formLoad);
     }
   };
 
@@ -287,17 +285,7 @@ const Form = () => {
             required
           ></textarea>
         </div>
-        <div className="form-group">
-          <label htmlFor="ques2">Why should we choose you?</label>
-          <br />
-          <textarea
-            className="form-control input-size"
-            type="text"
-            name="ques2"
-            id="ques2"
-            required
-          ></textarea>
-        </div>
+
         <br />
         <div style={{ textAlign: "center", display: "inline-block" }}>
           {/* <div

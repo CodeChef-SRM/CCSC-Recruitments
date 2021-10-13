@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import "./Reset.css";
 import axios from "axios";
 import { useSnackbar } from "notistack";
-// import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Reset() {
   const [data, setData] = useState({
     new_password: "",
   });
+  const [token, setToken] = useState("");
+
+  function onChange(value) {
+    setToken(value);
+  }
 
   const { id } = useParams();
-  // console.log(id);
 
   const { enqueueSnackbar } = useSnackbar();
   const [pass, setPass] = useState("");
@@ -22,41 +26,38 @@ function Reset() {
       [name]: value,
     }));
   };
-  // const search = useLocation().search;
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
-    // const token = new URLSearchParams(search).get("token");
-
-    if (data.new_password === pass) {
-      const body = JSON.stringify(data);
-
-      // console.log(body);
-      // console.log(token);
-      const config = {
-        method: "post",
-        url: "https://api.codechefsrm.in/apis/reset-password",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${id}`,
-        },
-        data: body,
-      };
-
-      console.log(body);
-      // Request body
-
-      axios(config)
-        .then((res) => {
-          enqueueSnackbar("Password has been reset", { variant: "success" });
-        })
-        .catch((err) => {
-          enqueueSnackbar("Error while resetting password", {
-            variant: "error",
-          });
-        });
+    if (!token) {
+      enqueueSnackbar("verify captcha", {
+        variant: "error",
+      });
     } else {
-      enqueueSnackbar("Password not matching", { variant: "error" });
+      if (data.new_password === pass) {
+        const body = JSON.stringify(data);
+        const config = {
+          method: "post",
+          url: "https://api.codechefsrm.in/apis/reset-password",
+          headers: {
+            "Content-Type": "application/json",
+            "X-RECAPTCHA-TOKEN": `${token}`,
+            Authorization: `Bearer ${id}`,
+          },
+          data: body,
+        };
+        axios(config)
+          .then((res) => {
+            enqueueSnackbar("Password has been reset", { variant: "success" });
+          })
+          .catch((err) => {
+            enqueueSnackbar("Error while resetting password", {
+              variant: "error",
+            });
+          });
+      } else {
+        enqueueSnackbar("Password not matching", { variant: "error" });
+      }
     }
   };
   return (
@@ -101,6 +102,13 @@ function Reset() {
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     title="Must contain at least one number, one uppercase and one lowercase letter, and at least 8 or more characters"
                     required
+                  />
+                </div>
+
+                <div style={{ textAlign: "center", display: "inline-block" }}>
+                  <ReCAPTCHA
+                    sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                    onChange={onChange}
                   />
                 </div>
 

@@ -6,15 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Login() {
   const dispatch = useDispatch();
   let history = useHistory();
+  const [token, setToken] = useState("");
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-
+  function onChange(value) {
+    setToken(value);
+  }
   const { enqueueSnackbar } = useSnackbar();
 
   const handleChange = (e) => {
@@ -35,36 +39,44 @@ function Login() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const user = { email: data.email, password: data.password };
-    // Attempt to login
-    const body = JSON.stringify(user);
-    // Headers
-    const config = {
-      headers: {
-        // "":"",
-        "Content-Type": "application/json",
-      },
-    };
-    // Request body
-    axios
-      .post("https://api.codechefsrm.in/apis/login", body, config)
-      .then((res) => {
-        const tok = res.data.access_token;
-        const decoded = jwt_decode(tok);
-        localStorage.setItem("token", tok);
-        dispatch(login({ token: tok, user: decoded }));
-        // setAuth(true);
-        enqueueSnackbar("LogIn Successful", { variant: "success" });
-        // history.push("/getting-started");
-      })
-      .catch((err) => {
-        enqueueSnackbar("LogIn Failed", { variant: "error" });
-        // console.log(err);
-        dispatch({
-          type: "REGISTER_FAIL",
-        });
-        // history.push("/login");
+    if (!token) {
+      enqueueSnackbar("verify captcha", {
+        variant: "error",
       });
+    } else {
+      const user = { email: data.email, password: data.password };
+      // Attempt to login
+      const body = JSON.stringify(user);
+      // Headers
+      const config = {
+        headers: {
+          // "":"",
+          "Content-Type": "application/json",
+          "X-RECAPTCHA-TOKEN": `${token}`,
+        },
+      };
+      // Request body
+
+      axios
+        .post("https://api.codechefsrm.in/apis/login", body, config)
+        .then((res) => {
+          const tok = res.data.access_token;
+          const decoded = jwt_decode(tok);
+          localStorage.setItem("token", tok);
+          dispatch(login({ token: tok, user: decoded }));
+          // setAuth(true);
+          enqueueSnackbar("LogIn Successful", { variant: "success" });
+          // history.push("/getting-started");
+        })
+        .catch((err) => {
+          enqueueSnackbar("LogIn Failed", { variant: "error" });
+          // console.log(err);
+          dispatch({
+            type: "REGISTER_FAIL",
+          });
+          // history.push("/login");
+        });
+    }
   };
 
   return (
@@ -129,7 +141,18 @@ function Login() {
                     Forgot password?
                   </a>
                 </div>
+                <div
+                  style={{
+                    textAlign: "center",
 
+                    display: "inline-block",
+                  }}
+                >
+                  <ReCAPTCHA
+                    sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                    onChange={onChange}
+                  />
+                </div>
                 <div class="text-center text-lg-start mt-4 pt-2">
                   <button
                     type="submit"

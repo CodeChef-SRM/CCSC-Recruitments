@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// import jwt_decode from "jwt-decode";
-// import axios from "axios";
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const dispatch = useDispatch();
   const authenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  // const [auth, setAuth] = useState(false);
   const tokenVal = localStorage.getItem("token");
   useEffect(() => {
     if (tokenVal) {

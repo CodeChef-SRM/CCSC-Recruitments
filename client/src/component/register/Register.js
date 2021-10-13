@@ -2,22 +2,28 @@ import React, { useState } from "react";
 // import { signup } from "../../flux/actions/authAction";
 import "./Register.css";
 import axios from "axios";
-import { Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
+// import { Redirect } from "react-router";
 import { useSnackbar } from "notistack";
 import { useSelector, useDispatch } from "react-redux";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Register = () => {
   const dispatch = useDispatch();
+  let history = useHistory();
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const [token, setToken] = useState("");
   const [auth, setAuth] = useState(false);
-  //   const [msg, setMsg] = useState(null);
-  // const handleChangeEmail = (e) => setEmail(e.target.value);
-  // const handleChangePassword = (e) => setPassword(e.target.value);
-  // const handleChangeName = (e) => setName(e.target.value);
+
+  function onChange(value) {
+    setToken(value);
+    console.log(value);
+  }
+
   const { enqueueSnackbar } = useSnackbar();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,46 +35,40 @@ const Register = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    // Attempt to login
-    const body = JSON.stringify(data);
-    // Headers
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
-    console.log(body);
-    const config = {
-      method: "post",
-      url: "https://api.codechefsrm.in/apis/register",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: body,
-    };
-
-    console.log(body);
-    // Request body
-
-    axios(config)
-      .then((res) => {
-        // console.log(res);
-        // const tok = res.data.token;
-        // const decoded = jwt_decode(tok);
-        // dispatch(signup({ token: tok, user: decoded }));
-        setAuth(true);
-        enqueueSnackbar("Registered Successfully", { variant: "success" });
-      })
-      .catch((err) => {
-        enqueueSnackbar("Registeration Failed", { variant: "error" });
-        dispatch({
-          type: "REGISTER_FAIL",
-        });
+    if (!token) {
+      enqueueSnackbar("verify captcha", {
+        variant: "error",
       });
+    } else {
+      // Attempt to login
+      const body = JSON.stringify(data);
+
+      const config = {
+        method: "post",
+        url: "https://api.codechefsrm.in/apis/register",
+        headers: {
+          "Content-Type": "application/json",
+          "X-RECAPTCHA-TOKEN": `${token}`,
+        },
+        data: body,
+      };
+
+      axios(config)
+        .then((res) => {
+          setAuth(true);
+          enqueueSnackbar("Registered Successfully", { variant: "success" });
+        })
+        .catch((err) => {
+          enqueueSnackbar("Registeration Failed", { variant: "error" });
+          dispatch({
+            type: "REGISTER_FAIL",
+          });
+        });
+    }
   };
   const authenticated = useSelector((state) => state.auth.isAuthenticated);
   if (auth || authenticated) {
-    return <Redirect to="/login" />;
+    history.push("/login");
   }
 
   return (
@@ -127,7 +127,12 @@ const Register = () => {
                 <div class="forgot d-flex justify-content-between align-items-center">
                   <div class="form-check mb-0"></div>
                 </div>
-
+                <div style={{ textAlign: "center", display: "inline-block" }}>
+                  <ReCAPTCHA
+                    sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                    onChange={onChange}
+                  />
+                </div>
                 <div class="text-center text-lg-start mt-4 pt-2">
                   <button
                     type="submit"
@@ -144,7 +149,7 @@ const Register = () => {
                   <p class="small fw-bold mt-2 pt-1 mb-0">
                     Already have an account?{" "}
                     <a href="/login" class="link">
-                      Register
+                      Login
                     </a>
                   </p>
                 </div>
