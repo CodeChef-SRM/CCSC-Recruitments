@@ -3,6 +3,7 @@ import { useState } from "react";
 // import jwt_decode from "jwt-decode";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import NavAfter from "../navAfter/NavAfter";
 import { useSnackbar } from "notistack";
 import "./Form.css";
@@ -12,6 +13,9 @@ const Form = () => {
   const [corp, corpSet] = useState(false);
   const [creat, creatSet] = useState(false);
   const [token, setToken] = useState("");
+  const key = process.env.REACT_APP_KEY;
+
+  let history = useHistory();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -118,6 +122,7 @@ const Form = () => {
           // console.log(decoded);
           enqueueSnackbar("Kindly check your mail", { variant: "success" });
           setForm(true);
+          history.push("/confirmation");
         })
         .catch((err) => {
           console.log(err);
@@ -298,6 +303,7 @@ const Form = () => {
                 {tech && (
                   <div className="input-box">
                     <label htmlFor="details">SubDomain Choice Technical</label>
+                    <br />
                     <select
                       className="custom"
                       onChange={handleSelect}
@@ -309,12 +315,16 @@ const Form = () => {
                       <option value="app">App Dev</option>
                       <option value="cp">CP</option>
                     </select>
+                    <br />
+                    <br />
+                    <label htmlFor="github">Github username</label>
                     <input
                       className="form-control input-size"
                       type="text"
                       name="github"
-                      placeholder="jhondoe"
+                      placeholder="github username"
                       onChange={(e) => setGith(e.target.value)}
+                      style={{ border: "none" }}
                       value={gith}
                       id="github"
                       required
@@ -322,11 +332,12 @@ const Form = () => {
                   </div>
                 )}
 
-                <div className="form-group">
+                <div className="input-box">
                   <label htmlFor="linkedin">LinkedIn</label>
                   <br />
                   <input
                     className="form-control input-size"
+                    style={{ border: "none" }}
                     type="text"
                     name="linkedin"
                     placeholder="https://www.linkedin.com/in/jhondoe/"
@@ -335,7 +346,7 @@ const Form = () => {
                   ></input>
                 </div>
 
-                <div className="form-group">
+                <div className="input-box">
                   <label htmlFor="ques1">
                     Why do you want to join our club?
                   </label>
@@ -366,7 +377,8 @@ const Form = () => {
             style={{ display: "inline-block" }}
           > */}
                   <ReCAPTCHA
-                    sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                    sitekey={key}
+                    size="invisible"
                     onChange={onChange}
                   />
                   {/* </div> */}
@@ -375,7 +387,7 @@ const Form = () => {
                 <br />
                 <button
                   class="btn"
-                  style={{ backgroundColor: "#16e4e4" }}
+                  style={{ backgroundColor: "#037a76" }}
                   type="submit"
                   id="form-btn"
                 >

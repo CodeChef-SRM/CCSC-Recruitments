@@ -10,6 +10,7 @@ function Reset() {
     new_password: "",
   });
   const [token, setToken] = useState("");
+  const key = process.env.REACT_APP_KEY;
 
   function onChange(value) {
     setToken(value);
@@ -107,7 +108,8 @@ function Reset() {
 
                 <div style={{ textAlign: "center", display: "inline-block" }}>
                   <ReCAPTCHA
-                    sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                    sitekey={key}
+                    size="invisible"
                     onChange={onChange}
                   />
                 </div>

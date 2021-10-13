@@ -16,6 +16,7 @@
   padding: 10px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 } */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap");
 .main__container {
   font-family: SquidFont;
   background-color: #000000ea;
@@ -27,8 +28,9 @@
 }
 .container {
   max-width: 700px;
+  color: #037a76;
   width: 100%;
-  background-color: #fff;
+  background-color: transparent;
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
@@ -49,13 +51,19 @@
   border-radius: 5px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
-
+.custom {
+  border-radius: 5px;
+  padding: 5px;
+  width: 40%;
+  background-color: #037a76;
+}
 .content form .user-details {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
 }
+
 form .user-details .input-box-1 {
   margin-bottom: 15px;
   width: 100%;
@@ -64,7 +72,22 @@ form .user-details .input-box {
   margin-bottom: 15px;
   width: 100%;
 }
+.form-control {
+  font-family: "Poppins", sans-serif;
+}
+.form-control {
+  background: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid #000000;
+}
 
+.form-control:focus {
+  background: black;
+  color: white;
+  border-color: #4e1818;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px #4e1818;
+}
 form .input-box label.details {
   display: block;
 

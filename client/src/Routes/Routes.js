@@ -28,7 +28,7 @@ const routes = [
   {
     path: "/getting-started",
     component: Form,
-    private: true,
+    private: false,
   },
   {
     path: "/forgot",

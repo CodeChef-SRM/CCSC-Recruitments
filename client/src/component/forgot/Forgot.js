@@ -6,6 +6,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 function Forgot() {
   const [token, setToken] = useState("");
+  const key = process.env.REACT_APP_KEY;
   const [data, setData] = useState({
     email: "",
   });
@@ -81,7 +82,8 @@ function Forgot() {
                 </div>
                 <div style={{ textAlign: "center", display: "inline-block" }}>
                   <ReCAPTCHA
-                    sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                    sitekey={key}
+                    size="invisible"
                     onChange={onChange}
                   />
                 </div>

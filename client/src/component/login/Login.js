@@ -9,6 +9,7 @@ import jwt_decode from "jwt-decode";
 import ReCAPTCHA from "react-google-recaptcha";
 
 function Login() {
+  const key = process.env.REACT_APP_KEY;
   const dispatch = useDispatch();
   let history = useHistory();
   const [token, setToken] = useState("");
@@ -110,8 +111,8 @@ function Login() {
                     onChange={handleChange}
                     value={data.email}
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                    class="form-control form-control-lg"
-                    placeholder="Enter a valid email address"
+                    class="no-control form-control form-control-lg"
+                    placeholder="Enter a valid srmist email address"
                     required
                   />
                 </div>
@@ -126,7 +127,7 @@ function Login() {
                     id="form3Example4"
                     onChange={handleChange}
                     value={data.password}
-                    class="form-control form-control-lg"
+                    className="no-outline form-control form-control-lg"
                     placeholder="Enter password"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     title="Must contain at least one number, one uppercase and one lowercase letter, and at least 8 or more characters"
@@ -142,18 +143,21 @@ function Login() {
                   </a>
                 </div>
                 <div
+                  className="recapt"
                   style={{
                     textAlign: "center",
-
+                    marginLeft: "auto",
+                    marginRight: "auto",
                     display: "inline-block",
                   }}
                 >
                   <ReCAPTCHA
-                    sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
+                    sitekey={key}
+                    size="invisible"
                     onChange={onChange}
                   />
                 </div>
-                <div class="text-center text-lg-start mt-4 pt-2">
+                <div className="text-center text-lg-start mt-4 pt-2">
                   <button
                     type="submit"
                     onClick={handleOnSubmit}

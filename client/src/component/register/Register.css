@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap");
 .divider:after,
 .divider:before {
   content: "";
@@ -9,15 +10,20 @@
 .main {
   font-family: SquidFont;
   background-color: #000000ea;
-  background-image: url("../home/pattern.svg");
-  background-size: contain;
+  /* background-image: url("../home/pattern.svg");
+  background-size: contain; */
 }
 .h-custom {
   height: calc(100% - 73px);
 }
-
+.form-control {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+}
 .form {
-  border-radius: 25px;
+  padding: 50px;
+  border: 2px solid #e93e7d;
 }
 .btn {
   background-color: #037a76;
@@ -39,11 +45,22 @@
 .small {
   color: white;
 }
+.form-control {
+  font-family: "Poppins", sans-serif;
+}
+
+.form-control {
+  background: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid #000000;
+}
 
 .form-control:focus {
-  border-color: #037a76;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset,
-    0px 0px 8px rgba(17, 115, 128, 0.692);
+  background: black;
+  color: white;
+  border-color: #4e1818;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px #4e1818;
 }
 
 @media (max-width: 450px) {
