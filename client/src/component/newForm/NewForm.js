@@ -1,40 +1,40 @@
 import { withRouter } from "react-router";
-import { useState, useRef } from "react";
-// import jwt_decode from "jwt-decode";
+import React, { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useSnackbar } from "notistack";
-import "./Form.css";
+import { useDispatch } from "react-redux";
+import "./NewForm.css";
+import axios from "axios";
 
-const Form = () => {
+import img from "./Asset8.png";
+
+function NewForm() {
   const [tech, techSet] = useState(false);
   const [corp, corpSet] = useState(false);
+  const tokenVal = localStorage.getItem("token");
   const [creat, creatSet] = useState(false);
-  // const [token, setToken] = useState("");
-  const key = process.env.REACT_APP_KEY;
-  const reRef = useRef(null);
-
-  let history = useHistory();
-
-  const { enqueueSnackbar } = useSnackbar();
-
-  const [alerts, setAlerts] = useState([]);
-  // const [subdomains, setSubdomains] = useState([]);
   const [gith, setGith] = useState("");
   const [form, setForm] = useState(false);
-  const tokenVal = localStorage.getItem("token");
+  const reRef = useRef(null);
+  const dispatch = useDispatch();
+  let history = useHistory();
+
+  const [alerts, setAlerts] = useState([]);
+  const key = process.env.REACT_APP_KEY;
   const [subdom, setSubdom] = useState({
     tech: [],
     corp: [],
     creat: [],
   });
+  function logout() {
+    dispatch({
+      type: "LOGOUT_SUCCESS",
+    });
+    history.push("/login");
+  }
 
-  // function onChange(value) {
-  //   setToken(value);
-  //   console.log(value);
-  // }
-
+  const { enqueueSnackbar } = useSnackbar();
   const handleSelect = (e) => {
     const { name, value } = e.target;
     setSubdom((subdom) => ({
@@ -117,6 +117,7 @@ const Form = () => {
           Authorization: `Bearer ${tokenVal}`,
         },
       };
+      console.log(config);
       axios
         .post(
           "https://api.codechefsrm.in/apis/registration-details",
@@ -143,34 +144,26 @@ const Form = () => {
   };
 
   return (
-    <>
-      <div className="main__container">
-        <div className="container form-outline mb-4">
-          <div className="title">Enter your details in this form</div>
-          <div className="content">
+    <div>
+      <section id="contact">
+        <div class="inner">
+          <section className="left-cons" style={{ paddingLeft: "50px" }}>
             <form onSubmit={handleSubmit}>
-              <div className="user-details">
-                <div className="input-box-1">
-                  <label htmlFor="details">Registration Number </label>
+              <div class="fields">
+                <div class="field half">
+                  <label for="name">Registration Number</label>
                   <input
-                    style={{ backgroundColor: "#171506" }}
-                    className="form-control input-size"
                     type="text"
                     name="regno"
-                    placeholder="RA21XXXXXXXXX"
                     id="regno"
+                    placeholder="RA21XXXXXXXXX"
                     required
-                  ></input>
+                  />
                 </div>
-
-                <div className="input-box">
-                  <label htmlFor="details">Choose Branch </label>
-                  <br />
-                  <select
-                    className="form-control input-size"
-                    name="branch"
-                    id="branch"
-                  >
+                <div class="field half">
+                  <label for="details">Choose Branch</label>
+                  {/* <input type="text" name="email" id="email" /> */}
+                  <select name="branch" id="details">
                     <option value="--">Select</option>
                     <option value="cse">CSE</option>
                     <option value="ece">ECE</option>
@@ -180,16 +173,15 @@ const Form = () => {
                     <option value="civil">Civil</option>
                   </select>
                 </div>
-                <div className="input-box">
-                  <label htmlFor="details">Year </label>
-                  <br />
-                  <select className="form-control" name="year" id="year">
+                <div class="field">
+                  <label for="details">Year</label>
+                  <select name="year" id="details">
                     <option value="--">Select</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                   </select>
                 </div>
-                <div className="input-box">
+                {/* <div className="field input-box">
                   <div className="gender-details">
                     <input
                       type="radio"
@@ -221,7 +213,15 @@ const Form = () => {
                     <span class="gender-title">Domains</span>
                     <div class="category">
                       <label htmlFor="domain1">
-                        <span className={tech ? "dot one" : "dot"}></span>
+                        <input
+                          type="radio"
+                          id="domain1"
+                          value="domain1"
+                          name="domain1"
+                          onClick={() => {
+                            techSet(!tech);
+                          }}
+                        />
                         <span className="gender">Technical Domain</span>
                       </label>
                       <label htmlFor="domain2">
@@ -234,67 +234,52 @@ const Form = () => {
                       </label>
                     </div>
                   </div>
-                </div>
-                {/* <div className="checkbox-inline">
-              <label htmlFor="domain">Domain Choice </label>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <div>
+                </div> */}
+                <div class="field">
+                  <label>Domain Details</label>
                   <input
                     type="checkbox"
-                    onClick={() => techSet(!tech)}
-                    id="domain1"
                     value="domain1"
-                    name="domain1"
-                  ></input>
-                  <label className="spacing" htmlFor="domain1">
-                    {" "}
+                    checked={tech}
+                    onClick={() => {
+                      techSet(!tech);
+                    }}
+                    id="flexCheckDefault1"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault1">
                     Technical Domain
                   </label>
-                </div>
-                <div>
                   <input
                     type="checkbox"
-                    onClick={() => corpSet(!corp)}
-                    id="domain2"
                     value="domain2"
-                    name="domain2"
-                  ></input>
-                  <label className="spacing" htmlFor="domain2">
-                    {" "}
+                    checked={corp}
+                    onClick={() => {
+                      corpSet(!corp);
+                    }}
+                    id="flexCheckDefault2"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault2">
                     Corporate Domain
                   </label>
-                </div>
-                <div>
                   <input
                     type="checkbox"
-                    onClick={() => creatSet(!creat)}
-                    id="domain3"
+                    checked={creat}
+                    onClick={() => {
+                      creatSet(!creat);
+                    }}
                     value="domain3"
-                    name="domain3"
-                  ></input>
-                  <label className="spacing" htmlFor="domain3">
-                    {" "}
+                    id="flexCheckDefault3"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault3">
                     Creatives Domain
                   </label>
                 </div>
-              </div>
-            </div> */}
+
                 {corp && (
-                  <div className="input-box">
-                    <label htmlFor="details">SubDomain Choice Corporate</label>
+                  <div className="field">
+                    <label htmlFor="corp">SubDomain Choice Corporate</label>
                     <br />
-                    <select
-                      className="custom"
-                      onChange={handleSelect}
-                      name="corp"
-                      id="corp"
-                    >
+                    <select onChange={handleSelect} name="corp" id="corp">
                       <option value="--">Select</option>
                       <option value="manage">Management</option>
                       <option value="spon">Sponsorship</option>
@@ -303,15 +288,10 @@ const Form = () => {
                 )}
 
                 {creat && (
-                  <div className="form-group">
+                  <div className="field">
                     <label htmlFor="creat">SubDomain Choice Creatives</label>
                     <br />
-                    <select
-                      className="custom"
-                      onChange={handleSelect}
-                      name="creat"
-                      id="creat"
-                    >
+                    <select onChange={handleSelect} name="creat" id="creat">
                       <option value="--">Select</option>
                       <option value="gd">Graphic Design</option>
                       <option value="vid">Video Editing</option>
@@ -320,15 +300,10 @@ const Form = () => {
                   </div>
                 )}
                 {tech && (
-                  <div className="input-box">
-                    <label htmlFor="details">SubDomain Choice Technical</label>
+                  <div className="field">
+                    <label htmlFor="tech">SubDomain Choice Technical</label>
                     <br />
-                    <select
-                      className="custom"
-                      onChange={handleSelect}
-                      name="tech"
-                      id="tech"
-                    >
+                    <select onChange={handleSelect} name="tech" id="tech">
                       <option value="--">Select</option>
                       <option value="web">Web Dev</option>
                       <option value="app">App Dev</option>
@@ -338,7 +313,6 @@ const Form = () => {
                     <br />
                     <label htmlFor="github">Github username</label>
                     <input
-                      className="form-control input-size"
                       type="text"
                       name="github"
                       placeholder="github username"
@@ -351,12 +325,9 @@ const Form = () => {
                   </div>
                 )}
 
-                <div className="input-box">
-                  <label htmlFor="linkedin">LinkedIn</label>
-                  <br />
+                <div class="field">
+                  <label for="linkedin">LinkedIn</label>
                   <input
-                    className="form-control input-size"
-                    style={{ border: "none" }}
                     type="text"
                     name="linkedin"
                     placeholder="https://www.linkedin.com/in/jhondoe/"
@@ -365,51 +336,27 @@ const Form = () => {
                   ></input>
                 </div>
 
-                <div className="input-box">
-                  <label htmlFor="ques1">
-                    Why do you want to join our club?
-                  </label>
-                  <br />
+                <div class="field">
+                  <label for="ques1">Why do you want to join our club?</label>
                   <textarea
-                    className="form-control input-size"
+                    name="message"
                     type="text"
                     placeholder="mention in atleast 30 words"
+                    // eslint-disable-next-line
                     name="ques1"
                     id="ques1"
                     required
                   ></textarea>
                 </div>
-                {/* <div className="form-group">
-                <label htmlFor="ques2">Why should we choose you?</label>
-                <br />
-                <textarea
-                  className="form-control input-size"
-                  type="text"
-                  name="ques2"
-                  id="ques2"
-                  required
-                ></textarea>
-              </div> */}
-                <br />
-                <div style={{ textAlign: "center", display: "inline-block" }}>
-                  {/* <div
-            data-sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
-            style={{ display: "inline-block" }}
-          > */}
-                  <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" />
-                  {/* </div> */}
-                </div>
-
-                <br />
-                <button
-                  class="btn"
-                  style={{ backgroundColor: "#037a76" }}
-                  type="submit"
-                  id="form-btn"
-                >
-                  Submit
-                </button>
               </div>
+              <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" />
+              <ul class="actions">
+                <li>
+                  <button type="submit" class="primary">
+                    Submit
+                  </button>
+                </li>
+              </ul>
             </form>
             {alerts &&
               alerts.map((alert, index) => {
@@ -419,11 +366,36 @@ const Form = () => {
                   </p>
                 );
               })}
-          </div>
+          </section>
+          <section
+            class="split"
+            style={{
+              backgroundColor: "black",
+              textAlign: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              style={{
+                zIndex: "2",
+                textAlign: "center",
+                justifyContent: "center",
+              }}
+              src={img}
+              width="auto"
+              height="auto"
+              alt="box"
+            />
+            <section>
+              <button onClick={logout} type="button" class="primary">
+                logout
+              </button>
+            </section>
+          </section>
         </div>
-      </div>
-    </>
+      </section>
+    </div>
   );
-};
+}
 
-export default withRouter(Form);
+export default withRouter(NewForm);

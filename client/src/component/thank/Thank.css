@@ -28,3 +28,11 @@
   color: white;
   padding-top: 2rem;
 }
+
+.primary {
+  background-color: #ffffff;
+  border: none;
+  padding: 5px;
+  box-shadow: none;
+  color: #242943;
+}
