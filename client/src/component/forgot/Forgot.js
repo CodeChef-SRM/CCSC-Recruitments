@@ -3,6 +3,7 @@ import "./Forgot.css";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import ReCAPTCHA from "react-google-recaptcha";
+import errorHandler from "../../errors/error";
 
 function Forgot() {
   // const [token, setToken] = useState("");
@@ -28,7 +29,7 @@ function Forgot() {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const toker = await reRef.current.executeAsync();
-    console.log("toker", toker);
+    // console.log("toker", toker);
     if (toker === "") {
       enqueueSnackbar("verify captcha", {
         variant: "error",
@@ -51,7 +52,8 @@ function Forgot() {
           enqueueSnackbar("Kindly check your mail", { variant: "success" });
         })
         .catch((err) => {
-          enqueueSnackbar("mail doesn't exist", { variant: "error" });
+          const error = errorHandler(err);
+          enqueueSnackbar(error, { variant: "error" });
         });
     }
   };

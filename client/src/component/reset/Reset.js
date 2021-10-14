@@ -4,6 +4,7 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import errorHandler from "../../errors/error";
 
 function Reset() {
   const [data, setData] = useState({
@@ -53,7 +54,8 @@ function Reset() {
             enqueueSnackbar("Password has been reset", { variant: "success" });
           })
           .catch((err) => {
-            enqueueSnackbar("Error while resetting password", {
+            const error = errorHandler(err);
+            enqueueSnackbar(error, {
               variant: "error",
             });
           });
