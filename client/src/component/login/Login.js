@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Login.css";
+import { Link } from "react-router-dom";
 import { login } from "../../flux/actions/authAction";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -63,6 +64,8 @@ function Login() {
       };
       // Request body
 
+      // https://1d86-136-185-162-39.ngrok.io/
+      console.log(config);
       axios
         .post("https://api.codechefsrm.in/apis/login", body, config)
         .then((res) => {
@@ -75,7 +78,9 @@ function Login() {
           // history.push("/getting-started");
         })
         .catch((err) => {
-          enqueueSnackbar("LogIn Failed", { variant: "error" });
+          enqueueSnackbar("LogIn Failed reload and check again", {
+            variant: "error",
+          });
           // console.log(err);
           dispatch({
             type: "REGISTER_FAIL",
@@ -172,10 +177,11 @@ function Login() {
                     Login
                   </button>
                   <p class="small fw-bold mt-2 pt-1 mb-0">
-                    Don't have an account?{" "}
-                    <a href="/signup" class="link">
+                    Don't have an account?
+                    <br />
+                    <Link to="/signup" className="link" style={{ zIndex: "2" }}>
                       Register
-                    </a>
+                    </Link>
                   </p>
                 </div>
                 <div

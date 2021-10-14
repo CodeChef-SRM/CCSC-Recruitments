@@ -12,12 +12,13 @@ const Home = React.lazy(() => {
   );
 });
 
-const Form = React.lazy(() => import("../component/form/Form"));
+// const Form = React.lazy(() => import("../component/form/Form"));
 const Forgot = React.lazy(() => import("../component/forgot/Forgot"));
 const Reset = React.lazy(() => import("../component/reset/Reset"));
 const Login = React.lazy(() => import("../component/login/Login"));
 const Signup = React.lazy(() => import("../component/register/Register"));
 const Thank = React.lazy(() => import("../component/thank/ThankYou"));
+const NewForm = React.lazy(() => import("../component/newForm/NewForm"));
 
 const routes = [
   {
@@ -27,7 +28,7 @@ const routes = [
   },
   {
     path: "/getting-started",
-    component: Form,
+    component: NewForm,
     private: true,
   },
   {

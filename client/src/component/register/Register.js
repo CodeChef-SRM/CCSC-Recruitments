@@ -66,7 +66,9 @@ const Register = () => {
           enqueueSnackbar("Registered Successfully", { variant: "success" });
         })
         .catch((err) => {
-          enqueueSnackbar("Registeration Failed", { variant: "error" });
+          enqueueSnackbar("Registeration Failed", {
+            variant: "error",
+          });
           dispatch({
             type: "REGISTER_FAIL",
           });
@@ -151,7 +153,7 @@ const Register = () => {
                     Register
                   </button>
                   <p class="small fw-bold mt-2 pt-1 mb-0">
-                    Already have an account?{" "}
+                    Already have an account? <br />
                     <a href="/login" class="link">
                       Login
                     </a>
