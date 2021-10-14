@@ -110,9 +110,13 @@ function Navbar() {
       <div className="navbar__center">
         <ul className="nav__links">
           <li className="nav-item">
-            <Link to="/" className="nav-link active">
+            <NavLink
+              className="nav-link"
+              to="Home"
+              onClick={() => setMobileToggle(false)}
+            >
               <span style={{ color: "#ffffff" }}>Home</span>
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="Domain">
@@ -149,7 +153,10 @@ function Navbar() {
     </div>
   ) : (
     <div>
-      <div className={back ? "navbar__mobile back__change" : "navbar__mobile"}>
+      <div
+        className={back ? "navbar__mobile back__change" : "navbar__mobile"}
+        style={{ width: "100vw", position: "sticky" }}
+      >
         <div className="navbar__mobile__left">
           <img src={image1} width="50" alt="squid" height="50" />
         </div>
@@ -157,7 +164,21 @@ function Navbar() {
           <div
             className="burger"
             onClick={() => setMobileToggle(!mobileToggle)}
-          ></div>
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-list"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+              />
+            </svg>
+          </div>
         </div>
       </div>
       <div
@@ -192,10 +213,15 @@ function Navbar() {
         </svg>
         <ul className="nav__links nav__links__vert">
           <li className="nav-item">
-            <Link to="/" className="nav-link active">
+            <NavLink
+              className="nav-link"
+              to="Home"
+              onClick={() => setMobileToggle(false)}
+            >
               <span style={{ color: "#ffffff" }}>Home</span>
-            </Link>
+            </NavLink>
           </li>
+
           <li className="nav-item">
             <NavLink
               className="nav-link"

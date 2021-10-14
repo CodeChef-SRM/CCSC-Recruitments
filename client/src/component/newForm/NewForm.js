@@ -147,7 +147,10 @@ function NewForm() {
     <div>
       <section id="contact">
         <div class="inner">
-          <section className="left-cons" style={{ paddingLeft: "50px" }}>
+          <section
+            className="left-cons"
+            style={{ paddingLeft: "50px", paddingRight: "50px" }}
+          >
             <form onSubmit={handleSubmit}>
               <div class="fields">
                 <div class="field half">

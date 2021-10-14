@@ -28,9 +28,10 @@ body {
   font-size: 17px;
   font-weight: 400;
   font-family: "Poppins", sans-serif;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   background-color: #030303;
-  padding: 10px;
+
+  /* padding: 10px; */
 }
 img {
   max-width: 100%;
@@ -49,6 +50,7 @@ ul {
   border-radius: 0 0 200px 0;
   position: relative;
   z-index: 1;
+  width: 100vw;
 }
 /* Navbar CSS */
 .navbar,
@@ -646,6 +648,7 @@ ul {
     padding-top: 10px;
     margin-bottom: 10px;
   }
+
   .section-title h2 {
     font-size: 30px;
   }
