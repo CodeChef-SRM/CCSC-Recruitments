@@ -10,6 +10,10 @@ url_regex = re.compile(
 )
 
 
+def check_linkedin_link(url):
+    return url_regex.fullmatch(url) and "linkedin" in url.lower()
+
+
 def check_github_id(github_id: str):
     """Checks GitHub ID
     Args:
@@ -28,7 +32,7 @@ def user_registration(data: Dict[str, str]):
     details = {
         "reg_number": And(str, lambda reg: len(reg.strip()) == 15),
         "github_id": And(str, lambda id: check_github_id(github_id=id)),
-        "linkedin": And(str, lambda url: url_regex.fullmatch(url)),
+        "linkedin": And(str, lambda url: check_linkedin_link(url)),
         "joining_details": And(str, lambda joining: len(joining.strip()) > 30),
         "domain_details": And(dict, lambda domain: len(domain) > 0),
         "year": And(str, lambda year: year in ["1", "2"]),
