@@ -6,7 +6,9 @@ import image from "./Abc-min-min-min.png";
 import image1 from "./Doll1.png";
 import CountUp from "react-countup";
 
-import Navbar from "../navbar/Navbar";
+// import Navbar from "../navbar/Navbar";
+
+import NavAfterBar from "../newNav/NavAfter";
 
 function Home() {
   useEffect(() => {
@@ -16,7 +18,7 @@ function Home() {
   return (
     <>
       <div id="home-link" className="wrap">
-        <Navbar />
+        <NavAfterBar />
 
         <section
           className="home d-flex align-items-center"

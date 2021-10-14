@@ -31,7 +31,7 @@ function NewForm() {
     dispatch({
       type: "LOGOUT_SUCCESS",
     });
-    history.push("/login");
+    history.push("/");
   }
 
   const { enqueueSnackbar } = useSnackbar();
