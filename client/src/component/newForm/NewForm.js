@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import "./NewForm.css";
 import axios from "axios";
 
-import img from "./Asset8.png";
+// import img from "./Abc-min-min-min.png";
 
 function NewForm() {
   const [tech, techSet] = useState(false);
@@ -378,17 +378,32 @@ function NewForm() {
               alignItems: "center",
             }}
           >
-            <img
+            {/* <img
               style={{
                 zIndex: "2",
                 textAlign: "center",
                 justifyContent: "center",
               }}
               src={img}
+              className="home-img"
               width="auto"
-              height="auto"
+              height="30%"
               alt="box"
-            />
+            /> */}
+            <lottie-player
+              src="https://assets7.lottiefiles.com/packages/lf20_qzgzwpo9.json"
+              background="transparent"
+              speed="1"
+              style={{
+                width: "400px",
+                height: "400px",
+                textAlign: "center",
+                alignItems: "center",
+                marginLeft: "10%",
+              }}
+              loop
+              autoplay
+            ></lottie-player>
             <section>
               <button onClick={logout} type="button" class="primary">
                 logout

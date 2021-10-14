@@ -1984,7 +1984,20 @@ form > .fields > .field.quarter {
     width: calc(100% - 1.5em);
   }
 }
-
+.home-img {
+  max-width: 400px;
+  width: 100%;
+  animation: bounce1 3s ease infinite;
+}
+@keyframes bounce1 {
+  0%,
+  100% {
+    transform: translateY(-30px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+}
 label {
   color: #037a76;
   display: block;
@@ -3693,6 +3706,12 @@ body.is-preload #banner > .inner {
   margin: 0 auto;
   max-width: 65em;
   width: calc(100% - 6em);
+}
+
+@media screen and (max-width: 1024px) {
+  .split {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 736px) {
