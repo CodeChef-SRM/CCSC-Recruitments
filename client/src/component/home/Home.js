@@ -6,7 +6,9 @@ import image from "./Abc-min-min-min.png";
 import image1 from "./Doll1.png";
 import CountUp from "react-countup";
 
-import Navbar from "../navbar/Navbar";
+// import Navbar from "../navbar/Navbar";
+
+import NavAfterBar from "../newNav/NavAfter";
 
 function Home() {
   useEffect(() => {
@@ -16,12 +18,12 @@ function Home() {
   return (
     <>
       <div id="home-link" className="wrap">
-        <Navbar />
+        <NavAfterBar />
 
         <section
           className="home d-flex align-items-center"
           data-scroll-index="0"
-          id="home"
+          id="Home"
         >
           <div className="container">
             <div className="row align-items-center flex-md-row flex-column-reverse">
@@ -457,7 +459,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <div className="faq-main">
+    <div className="faq-main" id="FAQs">
       <div className="row justify-content-center" data-aos="zoom-in">
         <div className="col-lg-8">
           <div className="section-title">
@@ -479,7 +481,10 @@ const Question = ({ question, answer }) => {
   const [show, setShow] = useState(false);
   return (
     <div className="accordion-item">
-      <div className="question accordion-header collapsed">
+      <div
+        className="question accordion-header collapsed"
+        style={{ width: "80vw" }}
+      >
         <div className="accordion-body">
           <p>{question}</p>
         </div>
@@ -509,7 +514,7 @@ const Question = ({ question, answer }) => {
         </svg>
       </div>
       {show ? (
-        <div className="answer">
+        <div className="answer" style={{ width: "80vw" }}>
           <p>{answer}</p>
         </div>
       ) : (

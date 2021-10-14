@@ -11,7 +11,7 @@ function ThankYou() {
     dispatch({
       type: "LOGOUT_SUCCESS",
     });
-    history.push("/login");
+    history.push("/");
   }
   return (
     <>

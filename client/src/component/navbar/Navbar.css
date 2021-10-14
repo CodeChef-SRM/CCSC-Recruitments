@@ -28,9 +28,8 @@ body {
   font-size: 17px;
   font-weight: 400;
   font-family: "Poppins", sans-serif;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   background-color: #030303;
-  padding: 10px;
 }
 img {
   max-width: 100%;
@@ -40,7 +39,7 @@ img {
 ul {
   list-style: none;
 }
-.wrap {
+/* .wrap {
   background-color: #000000ea;
   background-image: url("./pattern.svg");
   background-attachment: fixed;
@@ -49,11 +48,13 @@ ul {
   border-radius: 0 0 200px 0;
   position: relative;
   z-index: 1;
-}
+} */
 /* Navbar CSS */
 .navbar,
 .navbar__mobile {
-  padding: px;
+  margin: 0;
+  position: sticky;
+  padding: 10px;
   transition: all 0.5 ease;
   display: flex;
   align-items: center;
@@ -64,7 +65,9 @@ ul {
   position: fixed;
   z-index: 3;
   top: 0px;
-  width: 100%;
+  left: 0px;
+  right: 0px;
+  width: 100vw;
 }
 .nav__links {
   display: flex;
@@ -122,7 +125,10 @@ ul {
   position: relative;
 }
 .burger {
-  background: #e93e7d;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 40px;
   width: 40px;
   z-index: 5;
