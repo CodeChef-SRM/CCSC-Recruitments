@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Login.css";
 import { login } from "../../flux/actions/authAction";
 import { useHistory } from "react-router-dom";
@@ -10,16 +10,18 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 function Login() {
   const key = process.env.REACT_APP_KEY;
+  const reRef = useRef(null);
   const dispatch = useDispatch();
   let history = useHistory();
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-  function onChange(value) {
-    setToken(value);
-  }
+  // function onChange(value) {
+  //   setToken(value);
+  //   console.log(value);
+  // }
   const { enqueueSnackbar } = useSnackbar();
 
   const handleChange = (e) => {
@@ -38,9 +40,12 @@ function Login() {
     //eslint-disable-next-line
   }, [authenticated]);
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (!token) {
+
+    const toker = await reRef.current.executeAsync();
+    console.log("toker", toker);
+    if (toker === "") {
       enqueueSnackbar("verify captcha", {
         variant: "error",
       });
@@ -53,7 +58,7 @@ function Login() {
         headers: {
           // "":"",
           "Content-Type": "application/json",
-          "X-RECAPTCHA-TOKEN": `${token}`,
+          "X-RECAPTCHA-TOKEN": `${toker}`,
         },
       };
       // Request body
@@ -151,11 +156,7 @@ function Login() {
                     display: "inline-block",
                   }}
                 >
-                  <ReCAPTCHA
-                    sitekey={key}
-                    size="invisible"
-                    onChange={onChange}
-                  />
+                  <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" />
                 </div>
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button
@@ -177,6 +178,50 @@ function Login() {
                     </a>
                   </p>
                 </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    borderTop: "2px solid #e93e7d",
+                    borderLeft: "2px solid #e93e7d",
+                    width: "10rem",
+                    height: "10rem",
+                    top: 0,
+                    left: 0,
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "absolute",
+                    borderTop: "2px solid #e93e7d",
+                    borderRight: "2px solid #e93e7d",
+                    width: "10rem",
+                    height: "10rem",
+                    top: 0,
+                    right: 0,
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "absolute",
+                    borderBottom: "2px solid #e93e7d",
+                    borderLeft: "2px solid #e93e7d",
+                    width: "10rem",
+                    height: "10rem",
+                    bottom: 0,
+                    left: 0,
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "absolute",
+                    borderBottom: "2px solid #e93e7d",
+                    borderRight: "2px solid #e93e7d",
+                    width: "10rem",
+                    height: "10rem",
+                    bottom: 0,
+                    right: 0,
+                  }}
+                ></div>
               </form>
             </div>
           </div>

@@ -18,8 +18,8 @@
 }
 
 .form {
+  position: relative;
   padding: 50px;
-  border: 2px solid #e93e7d;
 }
 .btn {
   background-color: #037a76;

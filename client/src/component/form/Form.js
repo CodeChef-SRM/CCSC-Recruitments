@@ -1,5 +1,5 @@
 import { withRouter } from "react-router";
-import { useState } from "react";
+import { useState, useRef } from "react";
 // import jwt_decode from "jwt-decode";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
@@ -12,8 +12,9 @@ const Form = () => {
   const [tech, techSet] = useState(false);
   const [corp, corpSet] = useState(false);
   const [creat, creatSet] = useState(false);
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const key = process.env.REACT_APP_KEY;
+  const reRef = useRef(null);
 
   let history = useHistory();
 
@@ -30,10 +31,10 @@ const Form = () => {
     creat: [],
   });
 
-  function onChange(value) {
-    setToken(value);
-    console.log(value);
-  }
+  // function onChange(value) {
+  //   setToken(value);
+  //   console.log(value);
+  // }
 
   const handleSelect = (e) => {
     const { name, value } = e.target;
@@ -44,9 +45,10 @@ const Form = () => {
     // setSubdomains((subdomains) => [...subdomains, e.target.value]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setAlerts([]);
+    const toker = await reRef.current.executeAsync();
     // setSubdomains([]);
     const target = e.target.elements;
 
@@ -88,6 +90,12 @@ const Form = () => {
         ]);
       }
     }
+    if (toker === "") {
+      setAlerts((alerts) => [...alerts, "Captcha"]);
+      enqueueSnackbar("Invalid captcha", {
+        variant: "error",
+      });
+    }
 
     if (alerts.length === 0) {
       const formLoad = {
@@ -106,7 +114,7 @@ const Form = () => {
         headers: {
           // "":"",
           "Content-Type": "application/json",
-          "X-RECAPTCHA-TOKEN": `${token}`,
+          "X-RECAPTCHA-TOKEN": `${toker}`,
           Authorization: `Bearer ${tokenVal}`,
         },
       };
@@ -131,7 +139,7 @@ const Form = () => {
           });
         });
 
-      console.log(formLoad);
+      // console.log(formLoad);
     }
   };
 
@@ -376,11 +384,7 @@ const Form = () => {
             data-sitekey="6LeEtHgaAAAAAJxL0UVKar6Yy_KdwtO16xirpkyx"
             style={{ display: "inline-block" }}
           > */}
-                  <ReCAPTCHA
-                    sitekey={key}
-                    size="invisible"
-                    onChange={onChange}
-                  />
+                  <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" />
                   {/* </div> */}
                 </div>
 

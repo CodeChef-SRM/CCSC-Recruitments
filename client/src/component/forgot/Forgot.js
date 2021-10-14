@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Forgot.css";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import ReCAPTCHA from "react-google-recaptcha";
 
 function Forgot() {
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const key = process.env.REACT_APP_KEY;
   const [data, setData] = useState({
     email: "",
   });
-
-  function onChange(value) {
-    setToken(value);
-  }
+  const reRef = useRef(null);
+  // function onChange(value) {
+  //   setToken(value);
+  // }
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -25,9 +25,11 @@ function Forgot() {
     }));
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (!token) {
+    const toker = await reRef.current.executeAsync();
+    console.log("toker", toker);
+    if (toker === "") {
       enqueueSnackbar("verify captcha", {
         variant: "error",
       });
@@ -39,7 +41,7 @@ function Forgot() {
         url: "https://api.codechefsrm.in/apis/forgot-password",
         headers: {
           "Content-Type": "application/json",
-          "X-RECAPTCHA-TOKEN": `${token}`,
+          "X-RECAPTCHA-TOKEN": `${toker}`,
         },
         data: body,
       };
@@ -81,11 +83,7 @@ function Forgot() {
                   <div class="form-check mb-0"></div>
                 </div>
                 <div style={{ textAlign: "center", display: "inline-block" }}>
-                  <ReCAPTCHA
-                    sitekey={key}
-                    size="invisible"
-                    onChange={onChange}
-                  />
+                  <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" />
                 </div>
                 <div class="text-center text-lg-start mt-4 pt-2">
                   <button
