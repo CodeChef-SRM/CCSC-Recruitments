@@ -108,7 +108,7 @@ const Form = () => {
       };
 
       const body = JSON.stringify(formLoad);
-      console.log(body);
+      // console.log(body);
       const config = {
         headers: {
           // "":"",
@@ -132,7 +132,7 @@ const Form = () => {
           history.push("/confirmation");
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           enqueueSnackbar("error while registration or already registered", {
             variant: "error",
           });

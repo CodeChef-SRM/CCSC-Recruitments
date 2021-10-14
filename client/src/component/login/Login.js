@@ -8,6 +8,7 @@ import { useSnackbar } from "notistack";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import ReCAPTCHA from "react-google-recaptcha";
+import errorHandler from "../../errors/error";
 
 function Login() {
   const key = process.env.REACT_APP_KEY;
@@ -45,7 +46,7 @@ function Login() {
     e.preventDefault();
 
     const toker = await reRef.current.executeAsync();
-    console.log("toker", toker);
+    // console.log("toker", toker);
     if (toker === "") {
       enqueueSnackbar("verify captcha", {
         variant: "error",
@@ -64,8 +65,7 @@ function Login() {
       };
       // Request body
 
-      // https://1d86-136-185-162-39.ngrok.io/
-      console.log(config);
+      // console.log(config);
       axios
         .post("https://api.codechefsrm.in/apis/login", body, config)
         .then((res) => {
@@ -78,13 +78,20 @@ function Login() {
           // history.push("/getting-started");
         })
         .catch((err) => {
-          enqueueSnackbar("LogIn Failed reload and check again", {
+          // console.log(err);
+          const error = errorHandler(err);
+          // console.log(error);
+          enqueueSnackbar(error, {
             variant: "error",
           });
           // console.log(err);
           dispatch({
             type: "REGISTER_FAIL",
           });
+          setTimeout(function () {
+            window.location.reload();
+          }, 1000);
+
           // history.push("/login");
         });
     }
@@ -166,7 +173,7 @@ function Login() {
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button
                     type="submit"
-                    onClick={handleOnSubmit}
+                    onClick={(e) => handleOnSubmit(e)}
                     class="btn btn btn-lg"
                     style={{
                       color: "white",

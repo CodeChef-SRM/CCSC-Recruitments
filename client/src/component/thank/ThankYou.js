@@ -1,22 +1,23 @@
 import React from "react";
 import "./Thank.css";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 // import NavAfter from "../navAfter/NavAfter";
 function ThankYou() {
   const dispatch = useDispatch();
-  let history = useHistory();
+  // let history = useHistory();
 
   function logout() {
     dispatch({
       type: "LOGOUT_SUCCESS",
     });
-    history.push("/");
+    // history.push("/");
+    // return <Redirect to="/" />;
   }
   return (
     <>
       <div className="thankyou-main">
-        <h6 className="thankyou-heading">THANKYOU FOR REGISTERING</h6>
+        <h5 className="thankyou-heading">THANKYOU FOR REGISTERING</h5>
         <lottie-player
           src="https://assets8.lottiefiles.com/packages/lf20_846siclb.json"
           background="transparent"
@@ -34,9 +35,15 @@ function ThankYou() {
           check your email for conformation mail
         </h3>
         <section>
-          <button onClick={logout} type="button" class="primary">
+          <a
+            href="/"
+            style={{ textDecoration: "none" }}
+            onClick={logout}
+            type="button"
+            class="primary"
+          >
             logout
-          </button>
+          </a>
         </section>
       </div>
     </>

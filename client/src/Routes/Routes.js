@@ -24,7 +24,7 @@ const routes = [
   {
     path: "/confirmation",
     component: Thank,
-    private: true,
+    private: false,
   },
   {
     path: "/getting-started",

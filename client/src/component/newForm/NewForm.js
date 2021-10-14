@@ -6,6 +6,7 @@ import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
 import "./NewForm.css";
 import axios from "axios";
+import errorHandler from "../../errors/error";
 
 // import img from "./Abc-min-min-min.png";
 
@@ -31,7 +32,8 @@ function NewForm() {
     dispatch({
       type: "LOGOUT_SUCCESS",
     });
-    history.push("/");
+    window.location.href = "/";
+    // history.push("/");
   }
 
   const { enqueueSnackbar } = useSnackbar();
@@ -108,7 +110,7 @@ function NewForm() {
       };
 
       const body = JSON.stringify(formLoad);
-      console.log(body);
+      //   console.log(body);
       const config = {
         headers: {
           // "":"",
@@ -117,7 +119,7 @@ function NewForm() {
           Authorization: `Bearer ${tokenVal}`,
         },
       };
-      console.log(config);
+      //   console.log(config);
       axios
         .post(
           "https://api.codechefsrm.in/apis/registration-details",
@@ -133,8 +135,8 @@ function NewForm() {
           history.push("/confirmation");
         })
         .catch((err) => {
-          console.log(err);
-          enqueueSnackbar("error while registration or already registered", {
+          const error = errorHandler(err);
+          enqueueSnackbar(error, {
             variant: "error",
           });
         });
@@ -359,6 +361,17 @@ function NewForm() {
                     Submit
                   </button>
                 </li>
+                <li>
+                  {" "}
+                  <button
+                    style={{ textDecoration: "none" }}
+                    onClick={logout}
+                    type="button"
+                    class="primary"
+                  >
+                    logout
+                  </button>
+                </li>
               </ul>
             </form>
             {alerts &&
@@ -404,11 +417,6 @@ function NewForm() {
               loop
               autoplay
             ></lottie-player>
-            <section>
-              <button onClick={logout} type="button" class="primary">
-                logout
-              </button>
-            </section>
           </section>
         </div>
       </section>

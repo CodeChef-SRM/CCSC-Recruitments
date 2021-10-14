@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { useSelector, useDispatch } from "react-redux";
 import ReCAPTCHA from "react-google-recaptcha";
+import errorHandler from "../../errors/error";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -66,12 +67,20 @@ const Register = () => {
           enqueueSnackbar("Registered Successfully", { variant: "success" });
         })
         .catch((err) => {
-          enqueueSnackbar("Registeration Failed", {
+          // console.log(err);
+          const error = errorHandler(err);
+          enqueueSnackbar(error, {
             variant: "error",
           });
+          // setTimeout(function () {}, 5000);
+
           dispatch({
             type: "REGISTER_FAIL",
           });
+          setTimeout(function () {
+            window.location.reload();
+          }, 1000);
+          // window.location.reload();
         });
     }
   };
@@ -114,7 +123,7 @@ const Register = () => {
                     onChange={handleChange}
                     value={data.email}
                     class="form-control form-control-lg"
-                    placeholder="Enter a valid email address"
+                    placeholder="Enter your srmist email address"
                   />
                 </div>
 
@@ -142,7 +151,7 @@ const Register = () => {
                 <div class="text-center text-lg-start mt-4 pt-2">
                   <button
                     type="submit"
-                    onClick={handleOnSubmit}
+                    onClick={(e) => handleOnSubmit(e)}
                     class="btn btn btn-lg"
                     style={{
                       color: "white",
