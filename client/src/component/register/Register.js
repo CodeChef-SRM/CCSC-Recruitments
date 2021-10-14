@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 // import { signup } from "../../flux/actions/authAction";
 import "./Register.css";
 import axios from "axios";
@@ -10,6 +10,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const reRef = useRef(null);
   const key = process.env.REACT_APP_KEY;
   let history = useHistory();
   const [data, setData] = useState({
@@ -17,13 +18,13 @@ const Register = () => {
     email: "",
     password: "",
   });
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const [auth, setAuth] = useState(false);
 
-  function onChange(value) {
-    setToken(value);
-    console.log(value);
-  }
+  // function onChange(value) {
+  //   setToken(value);
+
+  // }
 
   const { enqueueSnackbar } = useSnackbar();
   const handleChange = (e) => {
@@ -34,9 +35,14 @@ const Register = () => {
     }));
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (!token) {
+
+    const toker = await reRef.current.executeAsync();
+    // console.log(reRef.current.getValue());
+    // console.log(token);
+
+    if (toker === "") {
       enqueueSnackbar("verify captcha", {
         variant: "error",
       });
@@ -49,7 +55,7 @@ const Register = () => {
         url: "https://api.codechefsrm.in/apis/register",
         headers: {
           "Content-Type": "application/json",
-          "X-RECAPTCHA-TOKEN": `${token}`,
+          "X-RECAPTCHA-TOKEN": `${toker}`,
         },
         data: body,
       };
@@ -129,11 +135,7 @@ const Register = () => {
                   <div class="form-check mb-0"></div>
                 </div>
                 <div style={{ textAlign: "center", display: "inline-block" }}>
-                  <ReCAPTCHA
-                    sitekey={key}
-                    size="invisible"
-                    onChange={onChange}
-                  />
+                  <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" />
                 </div>
                 <div class="text-center text-lg-start mt-4 pt-2">
                   <button
@@ -155,6 +157,50 @@ const Register = () => {
                     </a>
                   </p>
                 </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    borderTop: "2px solid #e93e7d",
+                    borderLeft: "2px solid #e93e7d",
+                    width: "10rem",
+                    height: "10rem",
+                    top: 0,
+                    left: 0,
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "absolute",
+                    borderTop: "2px solid #e93e7d",
+                    borderRight: "2px solid #e93e7d",
+                    width: "10rem",
+                    height: "10rem",
+                    top: 0,
+                    right: 0,
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "absolute",
+                    borderBottom: "2px solid #e93e7d",
+                    borderLeft: "2px solid #e93e7d",
+                    width: "10rem",
+                    height: "10rem",
+                    bottom: 0,
+                    left: 0,
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "absolute",
+                    borderBottom: "2px solid #e93e7d",
+                    borderRight: "2px solid #e93e7d",
+                    width: "10rem",
+                    height: "10rem",
+                    bottom: 0,
+                    right: 0,
+                  }}
+                ></div>
               </form>
             </div>
           </div>

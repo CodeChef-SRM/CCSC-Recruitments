@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 import "./Home.css";
 import image from "./Abc-min-min-min.png";
 import image1 from "./Doll1.png";
@@ -8,6 +9,10 @@ import CountUp from "react-countup";
 import Navbar from "../navbar/Navbar";
 
 function Home() {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+
   return (
     <>
       <div id="home-link" className="wrap">
@@ -21,7 +26,7 @@ function Home() {
           <div className="container">
             <div className="row align-items-center flex-md-row flex-column-reverse">
               <div className="col-md-7">
-                <div className="home-text">
+                <div data-aos="zoom-in-up" className="home-text">
                   <h1>
                     #Onboard <span>CCSC</span>
                   </h1>
@@ -129,7 +134,10 @@ function Home() {
       >
         <div className="container">
           <div className="row">
-            <div className="col-lg-6 col-md-5 d-flex align-items-center justify-content-center">
+            <div
+              className="col-lg-6 col-md-5 d-flex align-items-center justify-content-center"
+              data-aos="zoom-in"
+            >
               <div className="fun-facts-img">
                 <img src={image1} alt="fun fact img" />
               </div>
@@ -140,7 +148,7 @@ function Home() {
                   About<span>&nbsp;Us</span>
                 </h2>
               </div>
-              <div className="fun-fact-text">
+              <div className="fun-fact-text" data-aos="zoom-in">
                 <p>
                   CodeChef SRM KTR Chapter is officially the Star College
                   Chapter of CodeChef, a non-profit educational initiative of
@@ -149,27 +157,27 @@ function Home() {
                 </p>
                 <div className="row">
                   <div className="col-sm-6">
-                    <div className="fun-facts-item style-1">
+                    <div className="fun-facts-item style-1" data-aos="zoom-in">
                       <CountUp end={90} duration={5} />
                       <span>+ Chefs</span>
                     </div>
                   </div>
                   <div className="col-sm-6">
-                    <div className="fun-facts-item style-2">
+                    <div className="fun-facts-item style-2" data-aos="zoom-in">
                       <CountUp end={200} duration={5} />
 
                       <span>+ Team Meets</span>
                     </div>
                   </div>
                   <div className="col-sm-6">
-                    <div className="fun-facts-item style-3">
+                    <div className="fun-facts-item style-3" data-aos="zoom-in">
                       <CountUp end={5000} duration={3} />
 
                       <span>+ Event Registrations</span>
                     </div>
                   </div>
                   <div className="col-sm-6">
-                    <div className="fun-facts-item style-4">
+                    <div className="fun-facts-item style-4" data-aos="zoom-in">
                       <CountUp end={20} duration={5} />
 
                       <span>+ Speakers</span>
@@ -190,7 +198,7 @@ function Home() {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8">
-              <div className="section-title">
+              <div className="section-title" data-aos="zoom-in">
                 <h2>
                   How it <span>works</span>
                 </h2>
@@ -199,7 +207,7 @@ function Home() {
           </div>
           <div className="row">
             <div className="col-lg-3 col-md-6">
-              <div className="how-it-work-item line-right">
+              <div className="how-it-work-item line-right" data-aos="zoom-in">
                 <div className="step">1</div>
                 <h3>Registration</h3>
                 <p>
@@ -209,7 +217,7 @@ function Home() {
                 </p>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-6" data-aos="zoom-in">
               <div className="how-it-work-item line-right">
                 <div className="step">2</div>
                 <h3>Task Submission</h3>
@@ -219,7 +227,7 @@ function Home() {
                 </p>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-6" data-aos="zoom-in">
               <div className="how-it-work-item line-right">
                 <div className="step">3</div>
                 <h3>Interview</h3>
@@ -230,7 +238,7 @@ function Home() {
                 </p>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-6" data-aos="zoom-in">
               <div className="how-it-work-item">
                 <div className="step">4</div>
                 <h3>Results</h3>
@@ -365,7 +373,7 @@ function Home() {
       <div className="mt-5 pt-5 pb-5 footer" id="Reach" data-scroll-index="5">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-8">
+            <div className="col-lg-8" data-aos="zoom-in">
               <div className="section-title">
                 <h2>
                   Reach<span>Out</span>
@@ -373,7 +381,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="row justify-content-center">
+          <div className="row justify-content-center" data-aos="zoom-in">
             <div className="col-lg-7 col-xs-12 about-company">
               <h3>CodeChef SRM KTR Chapter</h3>
               <p className="pr-5 text-white-50">
@@ -396,7 +404,7 @@ function Home() {
               </p>
             </div>
 
-            <div className="col-lg-5 col-xs-12 location">
+            <div className="col-lg-5 col-xs-12 location" data-aos="zoom-in">
               <h4 className="mt-lg-0 mt-sm-4">Location</h4>
               <p>SRMIST Kattankulathur, Chennai</p>
               <p className="mb-1">
@@ -450,7 +458,7 @@ const FAQSection = () => {
 
   return (
     <div className="faq-main">
-      <div className="row justify-content-center">
+      <div className="row justify-content-center" data-aos="zoom-in">
         <div className="col-lg-8">
           <div className="section-title">
             <h2>

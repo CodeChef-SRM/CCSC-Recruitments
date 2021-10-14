@@ -22,8 +22,9 @@
   border-bottom: 1px solid #000000;
 }
 .form {
+  position: relative;
   padding: 50px;
-  border: 2px solid #e93e7d;
+  /* border: 2px solid #e93e7d; */
 }
 .btn {
   background-color: #037a76;

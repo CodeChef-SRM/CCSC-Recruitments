@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Reset.css";
 import axios from "axios";
 import { useSnackbar } from "notistack";
@@ -9,12 +9,12 @@ function Reset() {
   const [data, setData] = useState({
     new_password: "",
   });
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const key = process.env.REACT_APP_KEY;
-
-  function onChange(value) {
-    setToken(value);
-  }
+  const reRef = useRef(null);
+  // function onChange(value) {
+  //   setToken(value);
+  // }
 
   const { id } = useParams();
 
@@ -28,9 +28,10 @@ function Reset() {
     }));
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (!token) {
+    const toker = await reRef.current.executeAsync();
+    if (toker === "") {
       enqueueSnackbar("verify captcha", {
         variant: "error",
       });
@@ -42,7 +43,7 @@ function Reset() {
           url: "https://api.codechefsrm.in/apis/reset-password",
           headers: {
             "Content-Type": "application/json",
-            "X-RECAPTCHA-TOKEN": `${token}`,
+            "X-RECAPTCHA-TOKEN": `${toker}`,
             Authorization: `Bearer ${id}`,
           },
           data: body,
@@ -107,11 +108,7 @@ function Reset() {
                 </div>
 
                 <div style={{ textAlign: "center", display: "inline-block" }}>
-                  <ReCAPTCHA
-                    sitekey={key}
-                    size="invisible"
-                    onChange={onChange}
-                  />
+                  <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" />
                 </div>
 
                 <div class="forgot d-flex justify-content-between align-items-center">
