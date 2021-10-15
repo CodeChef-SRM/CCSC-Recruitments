@@ -32,3 +32,6 @@ class UserModel:
         if details:
             raise EntryExists("Details for user already exist!")
         self.db.RegistrationDetails.insert_one(doc)
+
+    def get_all_registered(self):
+        return list(self.db.RegistrationDetails.find({}))
