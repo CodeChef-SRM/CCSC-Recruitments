@@ -73,7 +73,7 @@ class ForgotPassword(APIView):
                     "email_id": user["email"],
                     "email_type": "forgot-password",
                     "token": token,
-                    "user_name": user["name"]
+                    "user_name": user["name"],
                 },
             ).start()
             return JsonResponse(data={"success": True}, status=200)
