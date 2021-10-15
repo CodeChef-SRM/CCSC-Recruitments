@@ -30,7 +30,9 @@ def check_github_id(github_id: str):
 
 def user_registration(data: Dict[str, str]):
     details = {
-        "reg_number": And(str, lambda reg: len(reg.strip()) == 15),
+        "reg_number": And(
+            str, lambda reg: len(reg.strip()) == 15 and reg.lower().startswith("ra")
+        ),
         "github_id": And(str, lambda id: check_github_id(github_id=id)),
         "linkedin": And(str, lambda url: check_linkedin_link(url)),
         "joining_details": And(str, lambda joining: len(joining.strip()) > 30),
