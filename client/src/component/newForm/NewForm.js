@@ -23,11 +23,7 @@ function NewForm() {
 
   const [alerts, setAlerts] = useState([]);
   const key = process.env.REACT_APP_KEY;
-  const [subdom, setSubdom] = useState({
-    tech: [],
-    corp: [],
-    creat: [],
-  });
+  const [subdom, setSubdom] = useState({});
   function logout() {
     dispatch({
       type: "LOGOUT_SUCCESS",
@@ -50,8 +46,12 @@ function NewForm() {
     e.preventDefault();
     setAlerts([]);
     const toker = await reRef.current.executeAsync();
+    reRef.current.reset();
+
+    // console.log(toker);
     // setSubdomains([]);
     const target = e.target.elements;
+    // console.log(target);
 
     if (target.branch.value === "--") {
       setAlerts((alerts) => [...alerts, "Please enter your branch!"]);
