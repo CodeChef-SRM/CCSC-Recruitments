@@ -33,14 +33,14 @@ function Home() {
                     #Onboard <span>CCSC</span>
                   </h1>
                   <p>
-                    After a long wait, and a ton of excitement, our games have
-                    finally begun. “Stick with the us, the strongest team.
-                    That’s the only way” CodeChef SRM KTR Student Chapter is one
-                    of the strongest and fastest growing club in SRM KTR. So do
-                    not take chances and fill the form ASAP to join a family
-                    which grows and wins together. With CCSC , recruitments can
-                    get a wee bit intense, but it’ll all be worth in the end.
-                    See you at the finish line.
+                    After a long wait and suspense, the game has finally begun.
+                    "Stick with us and feel as if you own the entire world."
+                    CodeChef SRM KTR Student Chapter is one of the strongest and
+                    fastest growing club so do not let this chance go in vain
+                    and register yourself to join a family which grows and wins
+                    together. With CCSC , recruitments can get a wee bit
+                    intense, but it’ll all be worth in the end. See you at the
+                    finish line.
                   </p>
                   <div className="home-btn">
                     <a href="/signup" className="btn btn-1">
@@ -465,7 +465,7 @@ const FAQSection = () => {
           <div className="section-title">
             <h2>
               {" "}
-              Frequently <span>asked</span> qureies
+              Frequently <span>asked</span> queries
             </h2>
           </div>
         </div>

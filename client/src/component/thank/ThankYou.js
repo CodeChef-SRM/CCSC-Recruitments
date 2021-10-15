@@ -17,7 +17,7 @@ function ThankYou() {
   return (
     <>
       <div className="thankyou-main">
-        <h5 className="thankyou-heading">THANKYOU FOR REGISTERING</h5>
+        <h5 className="thankyou-heading">THANK YOU FOR REGISTERING</h5>
         <lottie-player
           src="https://assets8.lottiefiles.com/packages/lf20_846siclb.json"
           background="transparent"
