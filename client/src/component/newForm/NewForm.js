@@ -139,6 +139,10 @@ function NewForm() {
           enqueueSnackbar(error, {
             variant: "error",
           });
+
+          setTimeout(function () {
+            window.location.reload();
+          }, 1000);
         });
 
       // console.log(formLoad);
@@ -176,6 +180,8 @@ function NewForm() {
                     <option value="biotech">Biotech</option>
                     <option value="mech">Mechanical</option>
                     <option value="civil">Civil</option>
+                    <option value="automobile">Automobile</option>
+                    <option value="eee">EEE</option>
                   </select>
                 </div>
                 <div class="field">
@@ -241,7 +247,7 @@ function NewForm() {
                   </div>
                 </div> */}
                 <div class="field">
-                  <label>Domain Details</label>
+                  <label>Domain Details (Select upto 2 domains)*</label>
                   <input
                     type="checkbox"
                     value="domain1"
@@ -301,6 +307,7 @@ function NewForm() {
                       <option value="gd">Graphic Design</option>
                       <option value="vid">Video Editing</option>
                       <option value="edi">Editorial</option>
+                      <option value="ui">UI/UX</option>
                     </select>
                   </div>
                 )}
