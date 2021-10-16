@@ -19,11 +19,10 @@ def check_github_id(github_id: str):
     Args:
         github_id (str) user entred value
     """
-    if len(github_id.strip()):
-        _url = f"https://github.com/{github_id}"
-
+    _id = github_id.strip()
+    if len(_id):
+        _url = f"https://github.com/{_id}"
         response = session.get(_url)
-
         return response.status_code == 200
     return True
 
