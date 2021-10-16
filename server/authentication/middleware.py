@@ -72,6 +72,8 @@ class ReCaptcha:
             return self.view(request)
 
         if request.method == "POST" or request.method == "DELETE":
+            if request.path == "/apis/registration-details":
+                return self.view(request)
             try:
                 recaptcha = request.META["HTTP_X_RECAPTCHA_TOKEN"]
             except KeyError as e:
