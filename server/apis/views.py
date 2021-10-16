@@ -31,7 +31,10 @@ class UserRegistration(APIView):
         validated = user_registration(self.request.data)
 
         if "error" in validated:
-            validated["attempted"] = self.request.auth_user["user"]
+            validated["attempted"] = {
+                "email": self.request.auth_user["user"],
+                "name": self.request.auth_user["user_name"],
+            }
             enter_registration_error(validated)
             return JsonResponse(data={"error": validated["error"]}, status=400)
 
