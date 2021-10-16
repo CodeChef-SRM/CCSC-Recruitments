@@ -41,9 +41,7 @@ def user_registration(data: Dict[str, str]):
         "branch": And(str, lambda branch: len(branch.strip()) > 0),
     }
     try:
-        return Schema(
-            schema=details, error="Invalid data entry check inputs!"
-        ).validate(data)
+        return Schema(schema=details).validate(data)
     except SchemaError as e:
         return {"error": str(e)}
 

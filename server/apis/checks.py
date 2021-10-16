@@ -8,3 +8,7 @@ def accept_entry(doc: Dict[str, str]):
         user_details.enter_user_details(doc)
     except EntryExists as e:
         return str(e)
+
+
+def enter_registration_error(error_doc: Dict[str, str]):
+    user_details.log_registration_error(error=error_doc)

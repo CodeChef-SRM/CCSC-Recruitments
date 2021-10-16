@@ -35,3 +35,6 @@ class UserModel:
 
     def get_all_registered(self):
         return list(self.db.RegistrationDetails.find({}))
+
+    def log_registration_error(self, error):
+        self.db.ErrorLog.insert_one(error)
