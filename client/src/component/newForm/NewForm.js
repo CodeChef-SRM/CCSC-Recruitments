@@ -1,6 +1,6 @@
 import { withRouter } from "react-router";
-import React, { useState, useRef } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import React, { useState } from "react";
+// import ReCAPTCHA from "react-google-recaptcha";
 import { useHistory } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
@@ -17,12 +17,12 @@ function NewForm() {
   const [creat, creatSet] = useState(false);
   const [gith, setGith] = useState("");
   const [form, setForm] = useState(false);
-  const reRef = useRef(null);
+  // const reRef = useRef(null);
   const dispatch = useDispatch();
   let history = useHistory();
 
   const [alerts, setAlerts] = useState([]);
-  const key = process.env.REACT_APP_KEY;
+  // const key = process.env.REACT_APP_KEY;
   const [subdom, setSubdom] = useState({});
   function logout() {
     dispatch({
@@ -45,8 +45,8 @@ function NewForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setAlerts([]);
-    const toker = await reRef.current.executeAsync();
-    reRef.current.reset();
+    // const toker = await reRef.current.executeAsync();
+    // reRef.current.reset();
 
     // console.log(toker);
     // setSubdomains([]);
@@ -91,12 +91,12 @@ function NewForm() {
         ]);
       }
     }
-    if (toker === "") {
-      setAlerts((alerts) => [...alerts, "Captcha"]);
-      enqueueSnackbar("Invalid captcha", {
-        variant: "error",
-      });
-    }
+    // if (toker === "") {
+      // setAlerts((alerts) => [...alerts, "Captcha"]);
+      // enqueueSnackbar("Invalid captcha", {
+        // variant: "error",
+      // });
+    // }
 
     if (alerts.length === 0) {
       const formLoad = {
@@ -115,7 +115,7 @@ function NewForm() {
         headers: {
           // "":"",
           "Content-Type": "application/json",
-          "X-RECAPTCHA-TOKEN": `${toker}`,
+          // "X-RECAPTCHA-TOKEN": `${toker}`,
           Authorization: `Bearer ${tokenVal}`,
         },
       };
@@ -361,7 +361,7 @@ function NewForm() {
                   ></textarea>
                 </div>
               </div>
-              <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" />
+              {/* <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" /> */}
               <ul class="actions">
                 <li>
                   <button type="submit" class="primary">
