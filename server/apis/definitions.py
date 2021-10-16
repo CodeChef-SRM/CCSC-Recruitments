@@ -21,9 +21,15 @@ def check_github_id(github_id: str):
     """
     _id = github_id.strip()
     if len(_id):
-        _url = f"https://github.com/{_id}"
-        response = session.get(_url)
-        return response.status_code == 200
+        #! Check if smart kids entered full url if yes then validate :)
+        if url_regex.fullmatch(_id):
+            response = session.get(_id)
+            return response.status_code == 200
+        #! Check if people entered what's asked for :)
+        else:
+            _url = f"https://github.com/{_id}"
+            response = session.get(_url)
+            return response.status_code == 200
     return True
 
 

@@ -36,7 +36,7 @@ class TestRegistration(unittest.TestCase):
         access_token = response.json()["access_token"]
 
         registration_data = {
-            "github_id": "Aradhya-Tripathi",
+            "github_id": "https://github.com/Aradhya-Tripathi",
             "linkedin": "https://www.linkedin.com/in/aradhya-tripathi51/",
             "joining_details": "asssssssssssssssssssssssssssssssssslasmd;lmd;lamsd;malmsd;asmd",
             "reg_number": "RA1911004010185",
