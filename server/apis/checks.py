@@ -16,7 +16,7 @@ def enter_error(error_doc: Dict[str, str]):
 
 def validate_task_number(task_number):
     if task_number not in ["1", "2", "3"]:
-        raise InvalidTaskNumber()
+        raise InvalidTaskNumber(task_number)
 
 
 def enter_task(doc):
