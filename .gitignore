@@ -13,6 +13,8 @@ __pycache__/
 .vscode
 # Distribution / packaging
 .Python
+backups
+backups.py
 build/
 develop-eggs/
 dist/

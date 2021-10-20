@@ -8,7 +8,12 @@ import os
 class AuthMiddleWare:
     def __init__(self, view):
         self.view = view
-        self._protected = ["/apis/reset-password", "/me", "/apis/registration-details"]
+        self._protected = [
+            "/apis/reset-password",
+            "/me",
+            "/apis/registration-details",
+            "/apis/task-submission",
+        ]
         self._internal = "/review"
 
     @staticmethod

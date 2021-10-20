@@ -52,8 +52,13 @@ def user_registration(data: Dict[str, str]):
 
 
 def task_submission(data: Dict[str, str]):
-    submission = {"task_link": And(str, lambda url: url_regex.fullmatch(url))}
+    domains = ["tech", "creat", "corp"]
+    submission = {
+        "task_link": And(str, lambda url: url_regex.fullmatch(url)),
+        "domain": And(str, lambda domain: domain in domains),
+        "sub_domain": And(str, lambda sub_domain: len(sub_domain.strip()) > 0),
+    }
     try:
-        return Schema(schema=submission, error="Invalid url").validate(data)
+        return Schema(schema=submission).validate(data)
     except SchemaError as e:
         return {"error": str(e)}
