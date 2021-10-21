@@ -39,6 +39,16 @@ class UserModel:
         entered_sub_domain: str,
         domain_details: Dict[str, List[str]],
     ):
+        """Check for corresponding domain details entered while registering.
+
+        Args:
+            entered_domain (str): entered domain
+            entered_sub_domain (str): sub-domain
+            domain_details (Dict[str, List[str]]): domain details filled while registering
+
+        Raises:
+            NotEligile: Raised when details entered while registering don't match
+        """
         if (
             entered_domain not in domain_details
             or entered_sub_domain not in domain_details[entered_domain]
@@ -46,6 +56,14 @@ class UserModel:
             raise NotEligile()
 
     def enter_task_submission(self, doc: Dict[str, Any]):
+        """Enter task submission
+
+        Args:
+            doc (Dict[str, Any]): task submission details
+
+        Raises:
+            EntryExists: Raised when conflicting entries are attempted
+        """
         domain_details = self.get_domains(doc["email"])
         sub_domain = doc["sub_domain"]
         entered_domain = doc["domain"]
@@ -54,18 +72,13 @@ class UserModel:
             entered_sub_domain=sub_domain,
             domain_details=domain_details,
         )
-        submission = self.db.TaskSubmission.find_one({"email": doc["email"]})
+        submission = self.db.TaskSubmissions.find_one({"email": doc["email"]})
         if submission:
-            if (
-                entered_domain in submission["domain"]
-                and sub_domain in submission["domain"][entered_domain]
+            if doc["task_number"] in submission["domain"].get(entered_domain, {}).get(
+                sub_domain, {}
             ):
-                if (
-                    doc["task_number"]
-                    in submission["domain"][entered_domain][sub_domain]
-                ):
-                    raise EntryExists()
-        self.db.TaskSubmission.find_one_and_update(
+                raise EntryExists()
+        self.db.TaskSubmissions.find_one_and_update(
             {"email": doc["email"]},
             update={
                 "$set": {
