@@ -56,6 +56,8 @@ class UserRegistration(APIView):
 
 
 class Tasks(APIView):
+    throttle_classes = [throttle]
+
     def post(self, *args, **kwargs):
         validated = task_submission(self.request.data)
 
