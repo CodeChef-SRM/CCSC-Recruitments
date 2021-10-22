@@ -28,6 +28,7 @@ class UserRegistration(APIView):
     throttle_classes = [throttle]
 
     def post(self, *args, **kwargs):
+        #! Closed View
         validated = user_registration(self.request.data)
 
         if "error" in validated:
