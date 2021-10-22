@@ -15,6 +15,7 @@ class Register(APIView):
     throttle_classes = [throttle]
 
     def post(self, *args, **kwargs):
+        #! Closed View
         validated = authentication_schema(self.request.data, register=True)
 
         if "error" in validated:

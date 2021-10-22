@@ -1,5 +1,4 @@
 import unittest
-from unittest.loader import makeSuite
 from tests import (
     test_authentication,
     test_resetpassword,
