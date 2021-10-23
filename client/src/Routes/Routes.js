@@ -19,12 +19,18 @@ const Login = React.lazy(() => import("../component/login/Login"));
 const Signup = React.lazy(() => import("../component/register/Register"));
 const Thank = React.lazy(() => import("../component/thank/ThankYou"));
 const NewForm = React.lazy(() => import("../component/newForm/NewForm"));
+const Phase = React.lazy(() => import("../component/phase/Phase"));
 
 const routes = [
   {
+    path: "/phasetwo",
+    component: Phase,
+    private: false,
+  },
+  {
     path: "/confirmation",
     component: Thank,
-    private: false,
+    private: true,
   },
   {
     path: "/getting-started",
