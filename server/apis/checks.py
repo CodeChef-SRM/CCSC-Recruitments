@@ -1,6 +1,13 @@
 from typing import Dict
 from apis import user_details
-from core.errorfactory import EntryExists, InvalidTaskNumber
+from core.errorfactory import EntryExists, InvalidTaskNumber, NotEligile
+
+
+def domain_details(email: str):
+    try:
+        return user_details.get_domains(email=email)
+    except NotEligile as e:
+        return str(e)
 
 
 def accept_entry(doc: Dict[str, str]):

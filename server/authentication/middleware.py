@@ -13,6 +13,7 @@ class AuthMiddleWare:
             "/me",
             "/apis/registration-details",
             "/apis/task-submission",
+            "/apis/domain-details",
         ]
         self._internal = "/review"
 

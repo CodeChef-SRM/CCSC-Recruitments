@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UserRegistration, Tasks
+from .views import UserRegistration, Tasks, DomainDetails
 from authentication.views import Login, Register, ForgotPassword, ResetPassword
 import os
 
@@ -10,6 +10,7 @@ urlpatterns = [
     path("reset-password", ResetPassword.as_view()),
     # path("registration-details", UserRegistration.as_view()),
     path("task-submission", Tasks.as_view()),
+    path("domain-details", DomainDetails.as_view()),
 ]
 
 #! Closing registration and registration details routes for production
