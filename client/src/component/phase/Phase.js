@@ -25,8 +25,8 @@ function Phase() {
     <div className="App">
       {/* <h1>Sample</h1> */}
 
-      <Tabs>
-        <TabList>
+      <Tabs className="tabs-element">
+        <TabList className="left-tab-div">
           {Object.keys(dom).map(function (key, index) {
             return (
               <Tab>
@@ -46,14 +46,30 @@ function Phase() {
                         <div class="fields">
                           <div class="field">
                             <ul
+                              className="mb-0 mt-3 px-4"
                               style={{
                                 borderRadius: "5px",
                                 backgroundColor: "#222327",
                                 padding: "10px",
                               }}
                             >
-                              <li>adwadadawdadada</li>
-                              <li>adwadadawdadada</li>
+                              <h3 className="instructions mb-0">
+                                Instructions for candidates
+                              </h3>
+                              <div className="list-items-div mt-4">
+                                <li className="list-indiv-item text-left">
+                                  1. Lorem ipsum dolor sit.
+                                </li>
+                                <li className="list-indiv-item text-left">
+                                  2. Lorem ipsum dolor sit.
+                                </li>
+                                <li className="list-indiv-item text-left">
+                                  3. Lorem ipsum dolor sit.
+                                </li>
+                                <li className="list-indiv-item text-left">
+                                  4. Lorem ipsum dolor sit.
+                                </li>
+                              </div>
                             </ul>
                           </div>
                           <div class="field">
@@ -61,7 +77,7 @@ function Phase() {
                             <input
                               type="text"
                               name="linkedin"
-                              placeholder="https://www.linkedin.com/in/jhondoe/"
+                              placeholder="https://www.linkedin.com/in/janedoe/"
                               id="linkedin"
                               required
                             ></input>
@@ -69,23 +85,30 @@ function Phase() {
                         </div>
 
                         {/* <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" /> */}
-                        <ul class="actions">
-                          <li>
-                            <button type="submit" class="primary">
-                              Submit
-                            </button>
-                          </li>
-                          <li>
-                            {" "}
-                            <button
-                              style={{ textDecoration: "none" }}
-                              type="button"
-                              class="primary"
-                            >
-                              logout
-                            </button>
-                          </li>
-                        </ul>
+                        <div className="btn-div">
+                          <ul class="actions">
+                            <li className="li-btn">
+                              <button
+                                type="submit"
+                                class="primary-btn"
+                                id="submit"
+                              >
+                                Submit
+                              </button>
+                            </li>
+                            <li>
+                              {" "}
+                              <button
+                                style={{ textDecoration: "none" }}
+                                type="button"
+                                class="primary-btn"
+                                id="logout"
+                              >
+                                logout
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
                       </form>
                     </section>
                   </section>
