@@ -48,7 +48,7 @@ class Login(APIView):
             get_refresh=True,
         )
 
-        return JsonResponse(token, status=200)
+        return JsonResponse(token, status=200, safe=False)
 
 
 class ForgotPassword(APIView):
