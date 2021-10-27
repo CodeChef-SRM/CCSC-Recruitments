@@ -92,6 +92,7 @@ video {
   padding: 0;
   border: 0;
   overflow-x: hidden;
+  overflow-y: hidden;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
@@ -2786,6 +2787,28 @@ button.primary,
   color: #242943;
 }
 
+button.primary-btn{
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 7px;
+}
+#logout:hover{
+  color: #ffffff;
+  border: 1px solid red;
+  background-color: rgb(245, 5, 5);
+}
+#submit:hover{
+  color: #ffffff;
+  border: 1px solid rgb(5, 245, 57);
+  background-color: rgb(5, 245, 57);
+}
+
+button.danger{
+  background-color: rgb(245, 5, 5);
+  box-shadow: none;
+  color: #242943;
+}
+
 input[type="submit"].primary:hover,
 input[type="submit"].primary:active,
 input[type="reset"].primary:hover,
@@ -3698,9 +3721,15 @@ body.is-preload #banner > .inner {
   border-top: 0;
 }
 .left-cons {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 0 50px;
 }
+
+@media only screen and (max-width: 450px){
+  .left-cons{
+    padding: 0 15px;
+  }
+}
+
 #main > * > .inner {
   padding: 4em 0 2em 0;
   margin: 0 auto;

@@ -9,7 +9,7 @@ const errorHandler = (err) => {
         errMessage = "Invalid Credentials.";
         break;
       case 409:
-        errMessage = "Already exists.";
+        errMessage = "Already submitted.";
         break;
       case 500:
         errMessage = "Internal server error.";

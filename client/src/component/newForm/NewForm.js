@@ -92,10 +92,11 @@ function NewForm() {
       }
     }
     // if (toker === "") {
-      // setAlerts((alerts) => [...alerts, "Captcha"]);
-      // enqueueSnackbar("Invalid captcha", {
-        // variant: "error",
-      // });
+
+    //   setAlerts((alerts) => [...alerts, "Captcha"]);
+    //   enqueueSnackbar("Invalid captcha", {
+    //     variant: "error",
+    //   });
     // }
 
     if (alerts.length === 0) {
@@ -115,7 +116,6 @@ function NewForm() {
         headers: {
           // "":"",
           "Content-Type": "application/json",
-          // "X-RECAPTCHA-TOKEN": `${toker}`,
           Authorization: `Bearer ${tokenVal}`,
         },
       };
@@ -151,7 +151,7 @@ function NewForm() {
 
   return (
     <div>
-      <section id="contact">
+      <section id="contact" style={{ overflowX: "hidden", overflowY: "auto" }}>
         <div class="inner">
           <section
             className="left-cons"

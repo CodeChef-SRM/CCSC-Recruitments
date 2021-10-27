@@ -50,7 +50,8 @@ const Register = () => {
     } else {
       // Attempt to login
       const body = JSON.stringify(data);
-
+      // https://c998-103-121-204-234.ngrok.io
+      // https://api.codechefsrm.in
       const config = {
         method: "post",
         url: "https://api.codechefsrm.in/apis/register",
