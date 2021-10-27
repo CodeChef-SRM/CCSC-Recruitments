@@ -65,3 +65,9 @@ class AuthenticationModel:
             {"email": email}, update={"$set": {"password": password}}
         )
         return user
+
+    def check_webhook(self, webhook: str):
+        webhook = self.db.WebHook.find_one({"token": webhook})
+        if webhook:
+            return True
+        raise AuthenticationError

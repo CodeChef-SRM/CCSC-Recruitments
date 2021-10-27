@@ -92,6 +92,7 @@ function NewForm() {
       }
     }
     // if (toker === "") {
+
     //   setAlerts((alerts) => [...alerts, "Captcha"]);
     //   enqueueSnackbar("Invalid captcha", {
     //     variant: "error",

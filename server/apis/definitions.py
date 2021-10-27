@@ -19,12 +19,17 @@ def check_github_id(github_id: str):
     Args:
         github_id (str) user entred value
     """
-    if len(github_id.strip()):
-        _url = f"https://github.com/{github_id}"
-
-        response = session.get(_url)
-
-        return response.status_code == 200
+    _id = github_id.strip()
+    if len(_id):
+        #! Check if smart kids entered full url if yes then validate :)
+        if url_regex.fullmatch(_id):
+            response = session.get(_id)
+            return response.status_code == 200
+        #! Check if people entered what's asked for :)
+        else:
+            _url = f"https://github.com/{_id}"
+            response = session.get(_url)
+            return response.status_code == 200
     return True
 
 
@@ -41,16 +46,19 @@ def user_registration(data: Dict[str, str]):
         "branch": And(str, lambda branch: len(branch.strip()) > 0),
     }
     try:
-        return Schema(
-            schema=details, error="Invalid data entry check inputs!"
-        ).validate(data)
+        return Schema(schema=details).validate(data)
     except SchemaError as e:
         return {"error": str(e)}
 
 
 def task_submission(data: Dict[str, str]):
-    submission = {"task_link": And(str, lambda url: url_regex.fullmatch(url))}
+    domains = ["tech", "creat", "corp"]
+    submission = {
+        "task_link": And(str, lambda url: url_regex.fullmatch(url)),
+        "domain": And(str, lambda domain: domain in domains),
+        "sub_domain": And(str, lambda sub_domain: len(sub_domain.strip()) > 0),
+    }
     try:
-        return Schema(schema=submission, error="Invalid url").validate(data)
+        return Schema(schema=submission).validate(data)
     except SchemaError as e:
         return {"error": str(e)}

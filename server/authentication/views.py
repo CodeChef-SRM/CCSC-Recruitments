@@ -15,6 +15,7 @@ class Register(APIView):
     throttle_classes = [throttle]
 
     def post(self, *args, **kwargs):
+        #! Closed View
         validated = authentication_schema(self.request.data, register=True)
 
         if "error" in validated:
@@ -73,7 +74,7 @@ class ForgotPassword(APIView):
                     "email_id": user["email"],
                     "email_type": "forgot-password",
                     "token": token,
-                    "user_name": user["name"]
+                    "user_name": user["name"],
                 },
             ).start()
             return JsonResponse(data={"success": True}, status=200)
