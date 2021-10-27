@@ -65,7 +65,8 @@ class TestSubmissions(unittest.TestCase):
             params={"task": 3},
         )
         self.assertEqual(submission_response_1.status_code, 201)
-        self.assertEqual(submission_response_2.status_code, 201)
+        # Test invalid task number
+        self.assertEqual(submission_response_2.status_code, 400)
 
         submission_response = self.client.post(
             self.base_url + "/apis/task-submission",
@@ -73,11 +74,8 @@ class TestSubmissions(unittest.TestCase):
             headers=headers,
             params={"task": 1},
         )
-
-        self.assertEqual(submission_response.status_code, 400)
-        self.assertEqual(
-            "Submissions exists for user", submission_response.json()["error"]
-        )
+        # Test conflict
+        self.assertEqual(submission_response.status_code, 409)
 
     def test_invalid_task_submission(self):
         data = {
@@ -93,6 +91,7 @@ class TestSubmissions(unittest.TestCase):
             headers=headers,
             params={"task": 1},
         )
+        # Test not eligible
         self.assertEqual(submission_response.status_code, 400)
         self.assertEqual(
             "User ins't eligible for this task", submission_response.json()["error"]

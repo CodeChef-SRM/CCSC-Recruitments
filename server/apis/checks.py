@@ -22,7 +22,7 @@ def enter_error(error_doc: Dict[str, str]):
 
 
 def validate_task_number(task_number):
-    if task_number not in ["1", "2", "3"]:
+    if task_number != "1":
         raise InvalidTaskNumber(task_number)
 
 

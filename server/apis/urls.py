@@ -5,10 +5,8 @@ import os
 
 urlpatterns = [
     path("login", Login.as_view()),
-    # path("register", Register.as_view()),
     path("forgot-password", ForgotPassword.as_view()),
     path("reset-password", ResetPassword.as_view()),
-    # path("registration-details", UserRegistration.as_view()),
     path("task-submission", Tasks.as_view()),
     path("domain-details", DomainDetails.as_view()),
 ]

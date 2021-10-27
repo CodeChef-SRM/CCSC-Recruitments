@@ -81,6 +81,8 @@ class Tasks(APIView):
                 },
             }
             enter_error(error_doc)
+            if str(error) == "Submissions exists for user":
+                return JsonResponse(data={"error": str(error)}, status=409)
             return JsonResponse(data={"error": str(error)}, status=400)
 
         return JsonResponse(data={"success": True}, status=201)
