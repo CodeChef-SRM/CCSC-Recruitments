@@ -43,8 +43,8 @@ function Home() {
                     finish line.
                   </p>
                   <div className="home-btn">
-                    <a href="/signup" className="btn btn-1">
-                      Register Now
+                    <a href="/login" className="btn btn-1">
+                      Get Started
                     </a>
                   </div>
                 </div>

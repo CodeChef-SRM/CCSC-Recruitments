@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { login } from "../../flux/actions/authAction";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +37,7 @@ function Login() {
   const authenticated = useSelector((state) => state.auth.isAuthenticated);
   useEffect(() => {
     if (authenticated) {
-      history.push("/getting-started");
+      history.push("/phasetwo");
     }
     //eslint-disable-next-line
   }, [authenticated]);
@@ -67,6 +67,8 @@ function Login() {
       // https://d897-136-185-162-39.ngrok.io
       // console.log(config);
       // https://api.codechefsrm.in/
+      // https://c998-103-121-204-234.ngrok.io
+      // https://api.codechefsrm.in/apis/login
       axios
         .post("https://api.codechefsrm.in/apis/login", body, config)
         .then((res) => {
@@ -76,7 +78,7 @@ function Login() {
           dispatch(login({ token: tok, user: decoded }));
           // setAuth(true);
           enqueueSnackbar("LogIn Successful", { variant: "success" });
-          // history.push("/getting-started");
+          history.push("/phasetwo");
         })
         .catch((err) => {
           // console.log(err);
@@ -184,13 +186,6 @@ function Login() {
                   >
                     Login
                   </button>
-                  <p class="small fw-bold mt-2 pt-1 mb-0">
-                    Don't have an account?
-                    <br />
-                    <Link to="/signup" className="link" style={{ zIndex: "2" }}>
-                      Register
-                    </Link>
-                  </p>
                 </div>
                 <div
                   style={{

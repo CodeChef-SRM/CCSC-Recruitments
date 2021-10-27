@@ -16,25 +16,15 @@ const Home = React.lazy(() => {
 const Forgot = React.lazy(() => import("../component/forgot/Forgot"));
 const Reset = React.lazy(() => import("../component/reset/Reset"));
 const Login = React.lazy(() => import("../component/login/Login"));
-const Signup = React.lazy(() => import("../component/register/Register"));
-const Thank = React.lazy(() => import("../component/thank/ThankYou"));
-const NewForm = React.lazy(() => import("../component/newForm/NewForm"));
+// const Signup = React.lazy(() => import("../component/register/Register"));
+// const Thank = React.lazy(() => import("../component/thank/ThankYou"));
+// const NewForm = React.lazy(() => import("../component/newForm/NewForm"));
 const Phase = React.lazy(() => import("../component/phase/Phase"));
 
 const routes = [
   {
     path: "/phasetwo",
     component: Phase,
-    private: false,
-  },
-  {
-    path: "/confirmation",
-    component: Thank,
-    private: true,
-  },
-  {
-    path: "/getting-started",
-    component: NewForm,
     private: true,
   },
   {
@@ -42,6 +32,11 @@ const routes = [
     component: Forgot,
     private: false,
   },
+  // {
+  //   path: "/getting-started",
+  //   component: NewForm,
+  //   private: false,
+  // },
   {
     path: "/reset/:id",
     component: Reset,
@@ -52,11 +47,11 @@ const routes = [
     component: Login,
     private: false,
   },
-  {
-    path: "/signup",
-    component: Signup,
-    private: false,
-  },
+  // {
+  //   path: "/signup",
+  //   component: Signup,
+  //   private: false,
+  // },
   {
     path: "/",
     component: Home,
