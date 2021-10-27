@@ -63,6 +63,15 @@ class TestRegistration(unittest.TestCase):
             data=json.dumps(registration_data),
         )
         self.assertEqual(invalid_register_response.status_code, 409)
+        domain_response = self.client.get(
+            self.base_url + "/apis/domain-details", headers=headers
+        )
+        self.assertEqual(domain_response.json(), registration_data["domain_details"])
+        attempt_domains = self.client.get(
+            self.base_url + "/apis/domain-details",
+            headers={"Content-Type": "application/json"},
+        )
+        self.assertEqual(attempt_domains.status_code, 403)
 
     def test_non_tech_register(self):
         user = get_user()
