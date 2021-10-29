@@ -73,13 +73,23 @@ function Login() {
       axios
         .post(url + "/apis/login", body, config)
         .then((res) => {
-          const tok = res.data.access_token;
-          const decoded = jwt_decode(tok);
-          localStorage.setItem("token", tok);
-          dispatch(login({ token: tok, user: decoded }));
-          // setAuth(true);
-          enqueueSnackbar("LogIn Successful", { variant: "success" });
-          history.push("/phasetwo");
+          try {
+            const tok = res.data.access_token;
+            const decoded = jwt_decode(tok);
+            localStorage.setItem("token", tok);
+            dispatch(login({ token: tok, user: decoded }));
+            // setAuth(true);
+            enqueueSnackbar("LogIn Successful", { variant: "success" });
+            history.push("/phasetwo");
+          } catch (e) {
+            dispatch({
+              type: "AUTH_ERROR",
+            });
+
+            setTimeout(function () {
+              window.location.reload();
+            }, 1000);
+          }
         })
         .catch((err) => {
           // console.log(err);
