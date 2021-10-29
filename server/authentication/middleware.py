@@ -78,7 +78,10 @@ class ReCaptcha:
             return self.view(request)
 
         if request.method == "POST" or request.method == "DELETE":
-            if request.path == "/apis/registration-details":
+            if (
+                request.path == "/apis/registration-details"
+                or request.path == "/apis/task-submission"
+            ):
                 return self.view(request)
             try:
                 recaptcha = request.META["HTTP_X_RECAPTCHA_TOKEN"]

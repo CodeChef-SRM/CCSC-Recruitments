@@ -89,7 +89,7 @@ function Phase() {
     };
     console.log(body);
     axios
-      .post(url + "/apis/task-submission?task=1", body, config)
+      .post("https://api.codechefsrm.in" + "/apis/task-submission?task=1", body, config)
       .then((res) => {
         enqueueSnackbar("Submitted successfully", { variant: "success" });
         // history.push("/getting-started");
