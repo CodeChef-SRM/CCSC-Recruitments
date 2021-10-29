@@ -45,7 +45,7 @@ function Phase() {
         .get(url + "/apis/domain-details", config)
         .then((res) => {
           console.log(res.data);
-          setDom(res.data);
+          setDom({ instruct: ["instructions"], ...res.data });
           // alert(res.data);
           // enqueueSnackbar("Submitted successfully", { variant: "success" });
         })

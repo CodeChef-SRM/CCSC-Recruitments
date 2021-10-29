@@ -1,7 +1,8 @@
-from typing import Dict
-from dotenv import load_dotenv
-import pymongo
 import os
+from typing import Dict
+
+import pymongo
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -17,9 +18,16 @@ def get_user(
     return {"name": name, "password": password, "email": email}
 
 
-def clear_all():
+def clear_all(**kwargs):
+    if kwargs.get("TaskSubmissions") and kwargs.get("RegistrationDetails"):
+        db.drop_collection("RegistrationDetails")
+        db.drop_collection("TaskSubmissions")
+        return
+
     db.drop_collection("users")
     db.drop_collection("RegistrationDetails")
+    db.drop_collection("ErrorLog")
+    db.drop_collection("TaskSubmissions")
 
 
 DATABASE = {
