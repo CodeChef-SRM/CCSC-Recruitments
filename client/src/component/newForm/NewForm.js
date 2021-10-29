@@ -150,13 +150,16 @@ function NewForm() {
 
   return (
     <div>
-      <section id="contact" style={{ overflowX: "hidden", overflowY: "auto" }}>
+      <section id="contact">
         <div class="inner">
           <section
             className="left-cons"
             style={{ paddingLeft: "50px", paddingRight: "50px" }}
           >
-            <form onSubmit={handleSubmit}>
+            <form
+              onSubmit={handleSubmit}
+              style={{ overflowX: "hidden", overflowY: "auto" }}
+            >
               <div class="fields">
                 <div class="field half">
                   <label for="name">Registration Number</label>

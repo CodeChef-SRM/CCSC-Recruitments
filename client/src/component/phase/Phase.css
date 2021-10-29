@@ -75,7 +75,7 @@
 .react-tabs__tab--selected {
   background: #1c1d1f;
   border-color: #1c1d1f;
-  border-right: 4px solid #e93e7d;
+  border-left: 4px solid #e93e7d;
   color: white;
 }
 
