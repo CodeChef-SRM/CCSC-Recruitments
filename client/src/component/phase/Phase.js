@@ -1124,7 +1124,6 @@ function Phase() {
                                 </ul>
                               </li>
                               <li className="list-indiv-item text-left">
-                                3. Competitive Programming :
                               </li>
                             </div>
                           </ul>
