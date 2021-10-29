@@ -44,8 +44,8 @@ function Phase() {
       axios
         .get(url + "/apis/domain-details", config)
         .then((res) => {
-          console.log(res.data);
-          setDom({ instruct: ["instructions"], ...res.data });
+          // console.log(res.data);
+          setDom(res.data);
           // alert(res.data);
           // enqueueSnackbar("Submitted successfully", { variant: "success" });
         })
@@ -63,7 +63,7 @@ function Phase() {
     }
     getResults();
 
-    console.log(dom);
+    // console.log(dom);
     // eslint-disable-next-line
   }, []);
 
