@@ -373,40 +373,72 @@ function Phase() {
                 <div className="panel-content">
                   <section id="contact">
                     <section className="left-cons">
-                      <div class="fields">
-                        <div class="field">
-                          <ul
-                            className="mb-0 mt-3 px-4"
-                            style={{
-                              borderRadius: "5px",
-                              backgroundColor: "#222327",
-                              padding: "25px",
-                            }}
-                          >
+                      <form>
+                        <div class="fields">
+                          <div class="field">
                             <h3 className="instructions mb-0">
-                              Tasks to be updated soon.
+                              Task for Competitive Programming
                             </h3>
+                            <ul
+                              className="mb-0 mt-3 px-4"
+                              style={{
+                                borderRadius: "5px",
+                                backgroundColor: "#222327",
+                                padding: "25px",
+                              }}
+                            >
+                              <a
+                                href="https://drive.google.com/file/d/1LxZN7GaXLDDlAOUl0AYp3wLG77dP5V97/view?usp=sharing"
+                                className="list-indiv-item mb-0"
+                              >
+                                https://drive.google.com/file/d/1LxZN7GaXLDDlAOUl0AYp3wLG77dP5V97/view?usp=sharing
+                              </a>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="field">
+                          <label for="url">Link</label>
+                          <input
+                            type="text"
+                            name="url"
+                            placeholder="Link"
+                            id="url"
+                            onChange={(e) => setTech(e.target.value)}
+                            value={creat}
+                            required
+                          ></input>
+                        </div>
+                        <br></br>
+                        {/* <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" /> */}
+                        <div className="btn-div">
+                          <ul class="actions">
+                            <li className="li-btn">
+                              <button
+                                type="submit"
+                                class="primary-btn"
+                                id="submit"
+                                onClick={(e) =>
+                                  handleOnSubmit(e, "tech", "cp", tech)
+                                }
+                              >
+                                Submit
+                              </button>
+                            </li>
+                            <li>
+                              {" "}
+                              <button
+                                style={{ textDecoration: "none" }}
+                                type="button"
+                                class="primary-btn"
+                                onClick={logout}
+                                id="logout"
+                              >
+                                logout
+                              </button>
+                            </li>
                           </ul>
                         </div>
-                      </div>
-                      <br></br>
-                      {/* <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" /> */}
-                      <div className="btn-div">
-                        <ul class="actions">
-                          <li>
-                            {" "}
-                            <button
-                              style={{ textDecoration: "none" }}
-                              type="button"
-                              class="primary-btn"
-                              onClick={logout}
-                              id="logout"
-                            >
-                              logout
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
+                      </form>
                     </section>
                   </section>
                 </div>
