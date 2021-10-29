@@ -16,6 +16,7 @@ function Phase() {
     // history.push("/");
   }
   // eslint-disable-next-line
+  const url = process.env.REACT_APP_URL;
 
   // const [dom, setDom] = useState({});
   const dispatch = useDispatch();
@@ -41,10 +42,10 @@ function Phase() {
       // https://c998-103-121-204-234.ngrok.io
       //api.codechefsrm.in/apis/task-submission?task=2
       axios
-        .get("https://api.codechefsrm.in/apis/domain-details", config)
+        .get(url + "/apis/domain-details", config)
         .then((res) => {
           console.log(res.data);
-          setDom({ instruct: ["instructions"], ...res.data });
+          setDom(res.data);
           // alert(res.data);
           // enqueueSnackbar("Submitted successfully", { variant: "success" });
         })
@@ -88,11 +89,7 @@ function Phase() {
     };
     console.log(body);
     axios
-      .post(
-        "https://api.codechefsrm.in/apis/task-submission?task=1",
-        body,
-        config
-      )
+      .post(url + "/apis/task-submission?task=1", body, config)
       .then((res) => {
         enqueueSnackbar("Submitted successfully", { variant: "success" });
         // history.push("/getting-started");
@@ -1027,7 +1024,7 @@ function Phase() {
               </TabPanel>
             );
           }
-          if (dom[key][0] === "instructions") {
+          if (dom[key][0] === "Instructions") {
             return (
               <TabPanel style={{ overflowX: "hidden", overflowY: "auto" }}>
                 <div className="panel-content">

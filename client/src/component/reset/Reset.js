@@ -12,6 +12,7 @@ function Reset() {
   });
   // const [token, setToken] = useState("");
   const key = process.env.REACT_APP_KEY;
+  const url = process.env.REACT_APP_URL;
   const reRef = useRef(null);
   // function onChange(value) {
   //   setToken(value);
@@ -41,7 +42,7 @@ function Reset() {
         const body = JSON.stringify(data);
         const config = {
           method: "post",
-          url: "https://api.codechefsrm.in/apis/reset-password",
+          url: url + "/apis/reset-password",
           headers: {
             "Content-Type": "application/json",
             "X-RECAPTCHA-TOKEN": `${toker}`,

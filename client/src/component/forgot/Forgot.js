@@ -8,6 +8,7 @@ import errorHandler from "../../errors/error";
 function Forgot() {
   // const [token, setToken] = useState("");
   const key = process.env.REACT_APP_KEY;
+  const url = process.env.REACT_APP_URL;
   const [data, setData] = useState({
     email: "",
   });
@@ -39,7 +40,7 @@ function Forgot() {
 
       const config = {
         method: "post",
-        url: "https://api.codechefsrm.in/apis/forgot-password",
+        url: url + "/apis/forgot-password",
         headers: {
           "Content-Type": "application/json",
           "X-RECAPTCHA-TOKEN": `${toker}`,
