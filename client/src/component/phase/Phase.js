@@ -55,10 +55,10 @@ function Phase() {
           enqueueSnackbar(error, {
             variant: "error",
           })
-          logout()
+          localStorage.removeItem("token");
           setTimeout(function () {
-            window.location.href = "/";
-          }, 2000);
+            window.location.href = "/login";
+          }, 1000);
         });
     }
     getResults();
@@ -369,80 +369,40 @@ function Phase() {
                 <div className="panel-content">
                   <section id="contact">
                     <section className="left-cons">
-                      <form>
-                        <div class="fields">
-                          <div class="field">
-                            <ul
-                              className="mb-0 mt-3 px-4"
-                              style={{
-                                borderRadius: "5px",
-                                backgroundColor: "#222327",
-                                padding: "25px",
-                              }}
-                            >
-                              <h3 className="instructions mb-0">
-                                Instructions for candidates
-                              </h3>
-                              <div className="list-items-div mt-4">
-                                <li className="list-indiv-item text-left">
-                                  1. Lorem ipsum dolor sit.
-                                </li>
-                                <li className="list-indiv-item text-left">
-                                  2. Lorem ipsum dolor sit.
-                                </li>
-                                <li className="list-indiv-item text-left">
-                                  3. Lorem ipsum dolor sit.
-                                </li>
-                                <li className="list-indiv-item text-left">
-                                  4. Lorem ipsum dolor sit.
-                                </li>
-                              </div>
-                            </ul>
-                          </div>
-                          <div class="field">
-                            <label for="github">Github url</label>
-                            <input
-                              type="text"
-                              name="github"
-                              placeholder="https://www.github.com/sorting-visualizer"
-                              id="github"
-                              onChange={(e) => setTech(e.target.value)}
-                              value={tech}
-                              required
-                            ></input>
-                          </div>
-                        </div>
-
-                        {/* <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" /> */}
-                        <div className="btn-div">
-                          <ul class="actions">
-                            <li className="li-btn">
-                              <button
-                                type="submit"
-                                class="primary-btn"
-                                id="submit"
-                                onClick={(e) =>
-                                  handleOnSubmit(e, "tech", "cp", tech)
-                                }
-                              >
-                                Submit
-                              </button>
-                            </li>
-                            <li>
-                              {" "}
-                              <button
-                                style={{ textDecoration: "none" }}
-                                type="button"
-                                class="primary-btn"
-                                onClick={logout}
-                                id="logout"
-                              >
-                                logout
-                              </button>
-                            </li>
+                      <div class="fields">
+                        <div class="field">
+                          <ul
+                            className="mb-0 mt-3 px-4"
+                            style={{
+                              borderRadius: "5px",
+                              backgroundColor: "#222327",
+                              padding: "25px",
+                            }}
+                          >
+                            <h3 className="instructions mb-0">
+                              Tasks to be updated soon.
+                            </h3>
                           </ul>
                         </div>
-                      </form>
+                      </div>
+                      <br></br>
+                      {/* <ReCAPTCHA ref={reRef} sitekey={key} size="invisible" /> */}
+                      <div className="btn-div">
+                        <ul class="actions">
+                          <li>
+                            {" "}
+                            <button
+                              style={{ textDecoration: "none" }}
+                              type="button"
+                              class="primary-btn"
+                              onClick={logout}
+                              id="logout"
+                            >
+                              logout
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
                     </section>
                   </section>
                 </div>
