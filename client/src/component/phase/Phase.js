@@ -16,12 +16,8 @@ function Phase() {
     // history.push("/");
   }
   // eslint-disable-next-line
-  // const [dom, setDom] = useState({
-  //   tech: "app",
-  //   corp: "manage",
-  //   creat: "ui",
-  // });
-  const [dom, setDom] = useState({});
+
+  // const [dom, setDom] = useState({});
   const dispatch = useDispatch();
   const [tech, setTech] = useState("");
   const [creat, setCreat] = useState("");
@@ -29,6 +25,12 @@ function Phase() {
   const { enqueueSnackbar } = useSnackbar();
 
   // let [posts, setPosts] = useState({});
+
+  // const [pp, setPP] = useState({
+  //   tech: ["app"],
+  //   corp: ["manage"],
+  // });
+  const [dom, setDom] = useState({});
   useEffect(() => {
     function getResults() {
       const config = {
@@ -42,20 +44,20 @@ function Phase() {
         .get("https://api.codechefsrm.in/apis/domain-details", config)
         .then((res) => {
           console.log(res.data);
-          setDom(res.data);
+          setDom({ instruct: ["instructions"], ...res.data });
           // alert(res.data);
           // enqueueSnackbar("Submitted successfully", { variant: "success" });
         })
         .catch((err) => {
-          const error = errorHandler(err);
+          // const error = errorHandler(err);
 
-          enqueueSnackbar(error, {
+          enqueueSnackbar("It seem u haven't completed phase 1", {
             variant: "error",
           });
 
-          // setTimeout(function () {
-          //   window.location.reload();
-          // }, 1000);
+          setTimeout(function () {
+            window.location.href = "/";
+          }, 2000);
         });
     }
     getResults();
@@ -109,7 +111,10 @@ function Phase() {
   return (
     <div className="App">
       <Tabs scrollButtons="auto" className="tabs-element">
-        <TabList className="left-tab-div">
+        <TabList
+          className="left-tab-div"
+          style={{ overflowX: "hidden", overflowY: "auto" }}
+        >
           {Object.keys(dom).map(function (key, index) {
             return (
               <Tab>
@@ -118,7 +123,9 @@ function Phase() {
                     ? "Technical"
                     : key === "corp"
                     ? "Corporate"
-                    : "Creatives"}
+                    : key === "creat"
+                    ? "Creatives"
+                    : "Instructions"}
                 </p>
               </Tab>
             );
@@ -1019,20 +1026,155 @@ function Phase() {
                 </div>
               </TabPanel>
             );
-          } else {
+          }
+          if (dom[key][0] === "instructions") {
             return (
-              <div className="panel-content">
-                <section id="contact">
-                  <section className="left-cons">
-                    <form>
+              <TabPanel style={{ overflowX: "hidden", overflowY: "auto" }}>
+                <div className="panel-content">
+                  <section id="contact">
+                    <section className="left-cons">
                       <div class="fields">
-                        You haven't filled the phase 1 form
+                        <div class="field">
+                          <ul
+                            className="mb-0 mt-3 px-4"
+                            style={{
+                              borderRadius: "5px",
+                              backgroundColor: "#222327",
+                              padding: "25px",
+                            }}
+                          >
+                            <h3
+                              className="instructions mb-0"
+                              style={{ textDecoration: "underline" }}
+                            >
+                              General Instructions:
+                            </h3>
+                            <div className="list-items-div mt-4">
+                              <li className="list-indiv-item text-left">
+                                1. Only one link to be provided for each task in
+                                the respective domain .
+                                <ul>
+                                  <li>Technical - GitHub link</li>
+                                  <li>Corporate - GoogleDocument Link</li>
+                                  <li>Creative - Google Drive Link</li>
+                                </ul>
+                              </li>
+                              <li className="list-indiv-item text-left">
+                                2. Ensure that the links provided is public
+                                .Access should be given . Any document with the
+                                private link ,will be rejected automatically
+                              </li>
+                              <li className="list-indiv-item text-left">
+                                3. Make sure the name of the google document and
+                                the google drive provided is named after your
+                                name and make sure to include your registration
+                                number.
+                              </li>
+                              <li className="list-indiv-item text-left">
+                                4. The link of the document is to be put in the
+                                input box provided.
+                              </li>
+                              <li className="list-indiv-item text-left">
+                                5. Plagiarism is strictly prohibited.If any kind
+                                of plagiarized content is found in the submitted
+                                work it will lead to disqualification
+                              </li>
+                              <li className="list-indiv-item text-left">
+                                6. Make sure all the tasks are completed before
+                                the deadline .
+                              </li>
+                            </div>
+                          </ul>
+
+                          <ul
+                            className="mb-0 mt-3 px-4"
+                            style={{
+                              borderRadius: "5px",
+                              backgroundColor: "#222327",
+                              padding: "25px",
+                            }}
+                          >
+                            <h3
+                              className="instructions mb-0"
+                              style={{ textDecoration: "underline" }}
+                            >
+                              Technical Instructions
+                            </h3>
+                            <div className="list-items-div mt-4">
+                              <li className="list-indiv-item text-left">
+                                1. Web Development :
+                                <ul>
+                                  <li>
+                                    1st Year : Out of the three given tasks, 1
+                                    has to be completed.
+                                  </li>
+                                  <li>
+                                    2nd Year : Out of the two given tasks at
+                                    least 1 task completion is mandatory.{" "}
+                                  </li>
+                                </ul>
+                              </li>
+                              <li className="list-indiv-item text-left">
+                                2. App Development : For the first and second
+                                year , only one task has been assigned and it is
+                                mandatory to complete it
+                                <ul>
+                                  <li>
+                                    Make sure all the specifications mentioned
+                                    under the task are present in your
+                                    submission
+                                  </li>
+                                </ul>
+                              </li>
+                              <li className="list-indiv-item text-left">
+                                3. Competitive Programming :
+                              </li>
+                            </div>
+                          </ul>
+                          <ul
+                            className="mb-0 mt-3 px-4"
+                            style={{
+                              borderRadius: "5px",
+                              backgroundColor: "#222327",
+                              padding: "25px",
+                            }}
+                          >
+                            <h3
+                              className="instructions mb-0"
+                              style={{ textDecoration: "underline" }}
+                            >
+                              Non-Tech Instructions:
+                            </h3>
+                            <div className="list-items-div mt-4">
+                              <li className="list-indiv-item text-left">
+                                1. Corporate
+                                <ul>
+                                  <li>
+                                    4 tasks are given in total to each sub
+                                    domain applicant . 2 tasks are compulsory 2
+                                    are optional
+                                  </li>
+                                  <li>
+                                    Both the task need to be done in the same
+                                    document.{" "}
+                                  </li>
+                                </ul>
+                              </li>
+                              <li className="list-indiv-item text-left">
+                                2. Creatives : Complete at least one of the
+                                given tasks for each subdomain.
+                              </li>
+                            </div>
+                          </ul>
+                        </div>
                       </div>
-                    </form>
+                    </section>
                   </section>
-                </section>
-              </div>
+                </div>
+              </TabPanel>
             );
+          } else {
+            return <div>nothing</div>;
           }
         })}
       </Tabs>
