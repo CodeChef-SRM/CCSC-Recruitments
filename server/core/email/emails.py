@@ -2,6 +2,7 @@ import os
 import json
 import requests
 from jinja2 import Template
+from typing import Union, List
 
 
 class Service:
@@ -10,7 +11,7 @@ class Service:
         self.base_url = os.getenv("MAILGUN_BASE_URL")
         self.auth = ("api", os.getenv("MAILGUN_API_KEY"))
 
-    def send_mail(self, email_id: str, email_type: str, **kwargs):
+    def send_mail(self, email_id: Union[str, List[str]], email_type: str, **kwargs):
         """Send email to users with appropriate templates
            using smtp.
 
@@ -28,10 +29,15 @@ class Service:
         if os.getenv("CI"):
             print("NOT SENDING EMAILS...")
             return
+
+        if isinstance(email_id, str):
+            email_id = [email_id]
+
         data = {
             "from": "CodeChefSRM <codechefsrm@gmail.com>",
-            "to": [email_id],
+            "to": email_id,
             "subject": f[email_type]["subject"],
             "html": html,
         }
-        self.client.post(url=self.base_url, auth=self.auth, data=data)
+        response = self.client.post(url=self.base_url, auth=self.auth, data=data)
+        return response
