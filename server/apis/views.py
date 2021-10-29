@@ -93,6 +93,9 @@ class DomainDetails(APIView):
 
     def get(self, *args, **kwargs):
         domains = domain_details(self.request.auth_user["user"])
+
         if isinstance(domains, str):
             domains = {"error": domains}
+
+        domains["instruction"] = ["Instructions"]
         return JsonResponse(data=domains, status=200)
