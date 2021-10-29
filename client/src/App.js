@@ -22,9 +22,15 @@ function App() {
 
   function onLoad() {
     if (token) {
-      const decoded = jwt_decode(token);
-      localStorage.setItem("token", token);
-      dispatch(loadUser({ token: token, user: decoded }));
+      try {
+        const decoded = jwt_decode(token);
+        localStorage.setItem("token", token);
+        dispatch(loadUser({ token: token, user: decoded }));
+      } catch (e) {
+        dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
     } else {
       dispatch({
         type: "AUTH_ERROR",

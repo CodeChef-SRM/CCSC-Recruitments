@@ -54,7 +54,7 @@ function Phase() {
 
           enqueueSnackbar(error, {
             variant: "error",
-          })
+          });
           localStorage.removeItem("token");
           setTimeout(function () {
             window.location.href = "/login";
@@ -89,7 +89,11 @@ function Phase() {
     };
     console.log(body);
     axios
-      .post("https://api.codechefsrm.in" + "/apis/task-submission?task=1", body, config)
+      .post(
+        "https://api.codechefsrm.in/apis/task-submission?task=1",
+        body,
+        config
+      )
       .then((res) => {
         enqueueSnackbar("Submitted successfully", { variant: "success" });
         // history.push("/getting-started");
@@ -1083,8 +1087,7 @@ function Phase() {
                                   </li>
                                 </ul>
                               </li>
-                              <li className="list-indiv-item text-left">
-                              </li>
+                              <li className="list-indiv-item text-left"></li>
                             </div>
                           </ul>
                           <ul
