@@ -33,6 +33,14 @@ def check_github_id(github_id: str):
     return True
 
 
+def check_domain(domain):
+    check = True
+    for d in domain:
+        if not len(domain[d]) == 1:
+            check = False
+    return check
+
+
 def user_registration(data: Dict[str, str]):
     details = {
         "reg_number": And(
@@ -41,7 +49,10 @@ def user_registration(data: Dict[str, str]):
         "github_id": And(str, lambda id: check_github_id(github_id=id)),
         "linkedin": And(str, lambda url: check_linkedin_link(url)),
         "joining_details": And(str, lambda joining: len(joining.strip()) > 30),
-        "domain_details": And(dict, lambda domain: len(domain) > 0 and len(domain) < 3),
+        "domain_details": And(
+            dict,
+            lambda domain: len(domain) > 0 and len(domain) < 3 and check_domain(domain),
+        ),
         "year": And(str, lambda year: year in ["1", "2"]),
         "branch": And(str, lambda branch: len(branch.strip()) > 0),
     }

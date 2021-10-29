@@ -41,7 +41,7 @@ class TestRegistration(unittest.TestCase):
             "joining_details": "asssssssssssssssssssssssssssssssssslasmd;lmd;lamsd;malmsd;asmd",
             "reg_number": "RA1911004010185",
             "domain_details": {
-                "tech": ["web", "app"],
+                "tech": ["web"],
                 "non-tech": ["content", "design"],
             },
             "year": "2",
@@ -100,7 +100,7 @@ class TestRegistration(unittest.TestCase):
             "joining_details": "asssssssssssssssssssssssssssssssssslasmd;lmd;lamsd;malmsd;asmd",
             "reg_number": "RA1911004010185",
             "domain_details": {
-                "tech": ["web", "app"],
+                "tech": ["web"],
                 "non-tech": ["content", "design"],
             },
             "year": "1",
@@ -140,7 +140,7 @@ class TestRegistration(unittest.TestCase):
             "joining_details": "asssssssssssssssssssssssssssssssssslasmd;lmd;lamsd;malmsd;asmd",
             "reg_number": "RA1911004010185",
             "domain_details": {
-                "tech": ["web", "app"],
+                "tech": ["web"],
                 "non-tech": ["content", "design"],
             },
             "year": "2",
