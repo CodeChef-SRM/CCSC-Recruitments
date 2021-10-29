@@ -20,7 +20,7 @@ function NewForm() {
   // const reRef = useRef(null);
   const dispatch = useDispatch();
   let history = useHistory();
-
+  const url = process.env.REACT_APP_URL;
   const [alerts, setAlerts] = useState([]);
   // const key = process.env.REACT_APP_KEY;
   const [subdom, setSubdom] = useState({});
@@ -121,11 +121,7 @@ function NewForm() {
       };
       //   console.log(config);
       axios
-        .post(
-          "https://api.codechefsrm.in/apis/registration-details",
-          body,
-          config
-        )
+        .post(url + "/apis/registration-details", body, config)
         .then((res) => {
           // const tok = res.data.access_token;
           // const decoded = jwt_decode(tok);

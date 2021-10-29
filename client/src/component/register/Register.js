@@ -13,6 +13,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const reRef = useRef(null);
   const key = process.env.REACT_APP_KEY;
+  const url = process.env.REACT_APP_URL;
   let history = useHistory();
   const [data, setData] = useState({
     name: "",
@@ -54,7 +55,7 @@ const Register = () => {
       // https://api.codechefsrm.in
       const config = {
         method: "post",
-        url: "https://api.codechefsrm.in/apis/register",
+        url: url + "/apis/register",
         headers: {
           "Content-Type": "application/json",
           "X-RECAPTCHA-TOKEN": `${toker}`,

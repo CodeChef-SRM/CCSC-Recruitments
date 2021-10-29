@@ -24,6 +24,7 @@ function Login() {
   //   setToken(value);
   //   console.log(value);
   // }
+  const url = process.env.REACT_APP_URL;
   const { enqueueSnackbar } = useSnackbar();
 
   const handleChange = (e) => {
@@ -70,7 +71,7 @@ function Login() {
       // https://c998-103-121-204-234.ngrok.io
       // https://api.codechefsrm.in/apis/login
       axios
-        .post("https://api.codechefsrm.in/apis/login", body, config)
+        .post(url + "/apis/login", body, config)
         .then((res) => {
           const tok = res.data.access_token;
           const decoded = jwt_decode(tok);
