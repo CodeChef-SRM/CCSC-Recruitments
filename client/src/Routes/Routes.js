@@ -25,7 +25,7 @@ const routes = [
   {
     path: "/phasetwo",
     component: Phase,
-    private: false,
+    private: true,
   },
   {
     path: "/forgot",
