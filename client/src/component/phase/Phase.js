@@ -50,12 +50,12 @@ function Phase() {
           // enqueueSnackbar("Submitted successfully", { variant: "success" });
         })
         .catch((err) => {
-          // const error = errorHandler(err);
+          const error = errorHandler(err);
 
-          enqueueSnackbar("It seem u haven't completed phase 1", {
+          enqueueSnackbar(error, {
             variant: "error",
-          });
-
+          })
+          logout()
           setTimeout(function () {
             window.location.href = "/";
           }, 2000);
