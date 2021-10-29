@@ -410,16 +410,16 @@ function Home() {
               <h4 className="mt-lg-0 mt-sm-4">Location</h4>
               <p>SRMIST Kattankulathur, Chennai</p>
               <p className="mb-1">
-                <a href="tel:+91 7668467906">
+                {/* <a href="tel:+91 7668467906">
                   <i className="fas fa-phone"></i>Harshita Mathur&nbsp; (Team
                   President)
-                </a>
+                </a> */}
               </p>
               <p className="mb-1">
-                <a href="tel:+91 80829 27210">
+                {/* <a href="tel:+91 80829 27210">
                   <i className="fas fa-phone"></i>Mimansa Sharma&nbsp; (Team
                   Secretary)
-                </a>
+                </a> */}
               </p>
             </div>
           </div>
