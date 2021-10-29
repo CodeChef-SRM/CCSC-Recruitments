@@ -31,7 +31,7 @@ class TestSubmissions(unittest.TestCase):
             "joining_details": "asssssssssssssssssssssssssssssssssslasmd;lmd;lamsd;malmsd;asmd",
             "linkedin": "https://linkedin.com",
             "reg_number": "RA1911004010187",
-            "domain_details": {"tech": ["web", "app"], "corp": ["manage"]},
+            "domain_details": {"tech": ["web"], "corp": ["manage"]},
             "year": "2",
             "branch": "ECE",
         }

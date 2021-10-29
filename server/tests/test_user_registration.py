@@ -42,7 +42,7 @@ class TestRegistration(unittest.TestCase):
             "reg_number": "RA1911004010185",
             "domain_details": {
                 "tech": ["web"],
-                "non-tech": ["content", "design"],
+                "non-tech": ["content"],
             },
             "year": "2",
             "branch": "ECE",
@@ -101,7 +101,7 @@ class TestRegistration(unittest.TestCase):
             "reg_number": "RA1911004010185",
             "domain_details": {
                 "tech": ["web"],
-                "non-tech": ["content", "design"],
+                "non-tech": ["content"],
             },
             "year": "1",
             "branch": "ECE",
@@ -141,7 +141,7 @@ class TestRegistration(unittest.TestCase):
             "reg_number": "RA1911004010185",
             "domain_details": {
                 "tech": ["web"],
-                "non-tech": ["content", "design"],
+                "non-tech": ["content"],
             },
             "year": "2",
             "branch": "ECE",
