@@ -66,7 +66,11 @@ class TestRegistration(unittest.TestCase):
         domain_response = self.client.get(
             self.base_url + "/apis/domain-details", headers=headers
         )
-        self.assertEqual(domain_response.json(), registration_data["domain_details"])
+        expected_response = {
+            **registration_data["domain_details"],
+            **{"instruction": ["Instructions"]},
+        }
+        self.assertEqual(domain_response.json(), expected_response)
         attempt_domains = self.client.get(
             self.base_url + "/apis/domain-details",
             headers={"Content-Type": "application/json"},
