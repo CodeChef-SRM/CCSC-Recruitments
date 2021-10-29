@@ -54,8 +54,8 @@ function Phase() {
 
           enqueueSnackbar("It seem u haven't completed phase 1", {
             variant: "error",
-          });
-
+          })
+          logout()
           setTimeout(function () {
             window.location.href = "/";
           }, 2000);
