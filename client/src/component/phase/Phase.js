@@ -404,7 +404,7 @@ function Phase() {
                             placeholder="Link"
                             id="url"
                             onChange={(e) => setTech(e.target.value)}
-                            value={creat}
+                            value={tech}
                             required
                           ></input>
                         </div>
