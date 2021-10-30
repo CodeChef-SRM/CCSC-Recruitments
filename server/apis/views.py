@@ -96,6 +96,7 @@ class DomainDetails(APIView):
 
         if isinstance(domains, str):
             domains = {"error": domains}
+            return JsonResponse(data=domains, status=400)
 
         domains["instruction"] = ["Instructions"]
         return JsonResponse(data=domains, status=200)
