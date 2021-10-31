@@ -1,6 +1,14 @@
+from re import M
 from typing import Dict
 from apis import user_details
 from core.errorfactory import EntryExists, InvalidTaskNumber, NotEligile
+
+
+domain_mapper = {
+    "creat": "Creative Domain",
+    "tech": "Technical Domain",
+    "corp": "Corporate Domain",
+}
 
 
 def domain_details(email: str):

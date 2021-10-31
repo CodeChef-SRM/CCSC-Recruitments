@@ -6,5 +6,9 @@
     "Registration Confirmation": {
         "html": "./core/email/template/RegistrationConfirmation.html",
         "subject": "Details Submitted"
+    },
+    "Task Submission": {
+        "html": "./core/email/template/TaskConfirmation.html",
+        "subject": "Submission Confirmation"
     }
 }
