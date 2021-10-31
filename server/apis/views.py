@@ -4,7 +4,7 @@ import os
 import time
 from core.throttle import throttle
 from django.http.response import JsonResponse
-from .checks import accept_entry, enter_error, enter_task, domain_details
+from .checks import accept_entry, enter_error, enter_task, domain_details, domain_mapper
 from .definitions import user_registration, task_submission
 from threading import Thread
 from core.email import service
@@ -84,6 +84,17 @@ class Tasks(APIView):
             if str(error) == "Submissions exists for user":
                 return JsonResponse(data={"error": str(error)}, status=409)
             return JsonResponse(data={"error": str(error)}, status=400)
+
+        Thread(
+            target=service.send_mail,
+            kwargs={
+                "email_id": self.request.auth_user["user"],
+                "email_type": "Task Submission",
+                "user_name": self.request.auth_user["user_name"],
+                "domain_info": domain_mapper[validated["domain"]],
+                "task_link": validated["task_link"],
+            },
+        ).start()
 
         return JsonResponse(data={"success": True}, status=201)
 
