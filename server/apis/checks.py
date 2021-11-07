@@ -1,4 +1,3 @@
-from re import M
 from typing import Dict
 from apis import user_details
 from core.errorfactory import EntryExists, InvalidTaskNumber, NotEligile
