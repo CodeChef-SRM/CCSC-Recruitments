@@ -8,6 +8,7 @@ from .checks import accept_entry, enter_error, enter_task, domain_details, domai
 from .definitions import user_registration, task_submission
 from threading import Thread
 from core.email import service
+from datetime import date, datetime
 
 
 class HealthCheck(APIView):
@@ -60,6 +61,9 @@ class Tasks(APIView):
     throttle_classes = [throttle]
 
     def post(self, *args, **kwargs):
+        if datetime.strftime(datetime.now(), "%d-%m-%Y") == "08-11-2021":
+            return JsonResponse(data={"error": "Time's Up!"}, status=400)
+
         validated = task_submission(self.request.data)
 
         if "error" in validated:
