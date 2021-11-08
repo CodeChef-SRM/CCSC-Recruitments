@@ -61,8 +61,9 @@ class Tasks(APIView):
     throttle_classes = [throttle]
 
     def post(self, *args, **kwargs):
-        if datetime.strftime(datetime.now(), "%d-%m-%Y") == "08-11-2021":
-            return JsonResponse(data={"error": "Time's Up!"}, status=400)
+        if not os.getenv("CI"):
+            if datetime.strftime(datetime.now(), "%d-%m-%Y") == "08-11-2021":
+                return JsonResponse(data={"error": "Time's Up!"}, status=400)
 
         validated = task_submission(self.request.data)
 
